@@ -1,5 +1,5 @@
 const http = require('http'),
-  fs = require('fs'), // to log both the request URL and timestap to the log.txt file
+  fs = require('fs'),
   url = require('url');
 
 http.createServer((request, response) => {
@@ -18,7 +18,19 @@ http.createServer((request, response) => {
       throw err;
     }
 
-    response.writeHead(200, { 'Content-Type': 'text/html' });
+    // to log both the request URL and timestap to the log.txt file
+    fs.appendFile('log.txt', 'URL: ' + addr + '\nTimestamp: ' + new Date() + '\n\n', function(err) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('Added to log.');
+      }
+    });
+
+
+    response.writeHead(200, {
+      'Content-Type': 'text/html'
+    });
     response.write(data);
     response.end();
 
