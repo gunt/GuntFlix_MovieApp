@@ -1,5 +1,5 @@
 const http = require('http'),
-  fs = require('fs'),
+  fs = require('fs'), // to log both the request URL and timestap to the log.txt file
   url = require('url');
 
 http.createServer((request, response) => {
