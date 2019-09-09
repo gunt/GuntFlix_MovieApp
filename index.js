@@ -1,28 +1,33 @@
 const express = require('express');
 const app = express();
 
-var myLogger = function (req, res, next) {
-  console.log(req.url);
-  next();
-};
+let topBooks = [ {
+    title : 'Harry Potter and the Sorcerer\'s Stone',
+    author : 'J.K. Rowling'
+},
+{
+    title : 'Lord of the Rings',
+    author : 'J.R.R. Tolkien'
+},
+{
+    title : 'Twilight',
+    author : 'Stephanie Meyer'
+}
+]
 
-var requestTime = function (req, res, next) {
-  req.requestTime = Date.now();
-  next();
-};
-
-app.use(myLogger);
-app.use(requestTime);
-
-app.get('/', function (req, res) {
-  var responseText = 'Welcome to my app!';
-  responseText += '<small>Requested at: ' + req.requestTime + '</small>';
-  res.send(responseText);
+// GET requests
+app.get('/', function(req, res) {
+  res.send('Welcome to my book club!')
 });
-app.get('/secreturl', function (req, res) {
-  var responseText = 'This is a secret url with super top-secret content.';
-  responseText += '<small>Requested at: ' + req.requestTime + '</small>';
-  res.send(responseText);
-
+app.get('/documentation', function(req, res) {
+  res.sendFile('public/documentation.html', { root : __dirname }
+}));
+app.get('/books', function(req, res) {
+  res.json(topBooks)
 });
-app.listen(3000);
+
+
+// listen for requests
+app.listen(8080, () =>
+  console.log('Your app is listening on port 8080.')
+);
