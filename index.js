@@ -1,6 +1,6 @@
 
 //Importing express
-const express = require('express'),
+const express = require('express');
 
 //Importing morgan middleware
 const morgan = require('morgan');
@@ -9,53 +9,61 @@ const app = express();
 
 
 //JSON object containing data about your top 10 movies.
+//movies, directors, and genres.
 let topTenMovies = [ {
-    title : 'Harry Potter and the Sorcerer\'s Stone',
-    author : 'J.K. Rowling'
+    title : 'The Passion of the Christ (2004)',
+    director : 'Mel Gibson',
+    genres : 'Drama',
 },
 {
-    title : 'Lord of the Rings',
-    author : 'J.R.R. Tolkien'
+  title : 'Hackers (1995)',
+  director : 'Iain Softley',
+  genres : 'Comedy, Crime, Drama',
 },
 {
-    title : 'Twilight',
-    author : 'Stephanie Meyer'
+  title : 'The Social Network (2010)',
+  director : 'David Fincher',
+  genres : 'Biography, Drama ',
 },
 {
-    title : 'Twilight',
-    author : 'Stephanie Meyer'
+  title : 'TPB AFK: The Pirate Bay Away from Keyboard (2013)',
+  director : 'Simon Klose',
+  genres : 'Documentary ',
 },
 {
-    title : 'Twilight',
-    author : 'Stephanie Meyer'
+  title : 'The Matrix (1999)',
+  director : 'Lana Wachowski',
+  genres : 'Action, Sci-Fi ',
 },
 {
-    title : 'Twilight',
-    author : 'Stephanie Meyer'
+  title : 'The Godfather (1972)',
+  director : 'Francis Ford Coppola',
+  genres : 'Crime, Drama',
 },
 {
-    title : 'Twilight',
-    author : 'Stephanie Meyer'
+  title : 'Gladiator (2000)',
+  director : 'Ridley Scott',
+  genres : ' Action, Adventure, Drama',
 },
 {
-    title : 'Twilight',
-    author : 'Stephanie Meyer'
+  title : 'Raiders of the Lost Ark (1981)',
+  director : 'Steven Spielberg',
+  genres : 'Action, Adventure ',
 },
 {
-    title : 'Twilight',
-    author : 'Stephanie Meyer'
+  title : 'The Dark Knight (2008)',
+  director : 'Christopher Nolan',
+  genres : 'Action, Crime, Drama ',
 },
 {
-    title : 'Twilight',
-    author : 'Stephanie Meyer'
-},
+  title : 'War Room (2015)',
+  director : 'Alex Kendrick',
+  genres : 'Drama',
+}
 ]
-
-
 
 // This function automatically routes all requests for static files // documentation
 app.use(express.static('public'));
-
 
 //Morgan middleware library to log all requests
 app.use(morgan('common'));
@@ -70,8 +78,11 @@ app.get('/', function(req, res) {
   res.send('Welcome to GuntFlix movie app!')
 });
 
-
-
+//error-handling middleware function
+app.use(function (err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
 
 
 // listen for requests
