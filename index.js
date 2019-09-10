@@ -7,7 +7,7 @@ const morgan = require('morgan');
 const app = express();
 
 
-//JSON object containing data about your top 10 movies.
+//JSON object containing data about top 10 movies.
 //movies, directors, and genres.
 let topTenMovies = [{
     title: 'The Passion of the Christ (2004)',
