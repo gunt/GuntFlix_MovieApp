@@ -8,10 +8,29 @@ const morgan = require('morgan');
 const app = express();
 
 
+//JSON object containing data about your top 10 movies.
+let topBooks = [ {
+    title : 'Harry Potter and the Sorcerer\'s Stone',
+    author : 'J.K. Rowling'
+},
+{
+    title : 'Lord of the Rings',
+    author : 'J.R.R. Tolkien'
+},
+{
+    title : 'Twilight',
+    author : 'Stephanie Meyer'
+}
+]
+
 
 
 // This function automatically routes all requests for static files // documentation
 app.use(express.static('public'));
+
+
+//Morgan middleware library to log all requests
+app.use(morgan('common'));
 
 
 //GET requests
