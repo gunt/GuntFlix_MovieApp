@@ -9,7 +9,7 @@ const app = express();
 
 
 //JSON object containing data about your top 10 movies.
-let topBooks = [ {
+let topTenMovies = [ {
     title : 'Harry Potter and the Sorcerer\'s Stone',
     author : 'J.K. Rowling'
 },
@@ -20,7 +20,35 @@ let topBooks = [ {
 {
     title : 'Twilight',
     author : 'Stephanie Meyer'
-}
+},
+{
+    title : 'Twilight',
+    author : 'Stephanie Meyer'
+},
+{
+    title : 'Twilight',
+    author : 'Stephanie Meyer'
+},
+{
+    title : 'Twilight',
+    author : 'Stephanie Meyer'
+},
+{
+    title : 'Twilight',
+    author : 'Stephanie Meyer'
+},
+{
+    title : 'Twilight',
+    author : 'Stephanie Meyer'
+},
+{
+    title : 'Twilight',
+    author : 'Stephanie Meyer'
+},
+{
+    title : 'Twilight',
+    author : 'Stephanie Meyer'
+},
 ]
 
 
