@@ -10,16 +10,21 @@ const app = express();
 
 
 
+// This function automatically routes all requests for static files // documentation
+app.use(express.static('public'));
 
-// GET requests
 
+//GET requests
 app.get('/movies', function(req, res) {
   res.json(topTenMovies)
 });
 
 app.get('/', function(req, res) {
-  res.send('Welcome to my book club!')
+  res.send('Welcome to GuntFlix movie app!')
 });
+
+
+
 
 
 // listen for requests
