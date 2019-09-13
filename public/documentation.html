@@ -5,11 +5,11 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <title>Movie_API</title>
-      <link rel="stylesheet" href="https://bootswatch.com/4/superhero/bootstrap.min.css">
+      <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
   </head>
   <body>
 
-    <nav class="navbar">
+    <nav class="navbar navbar-dark bg-primary" >
         <div class="container">
             <div class="navbar-brand">
                 <h1>GuntFlix Movie_App</h1>
@@ -17,23 +17,26 @@
         </div>
     </nav>
 
-    <div class="py-4 bg-primary">
+    <div class="py-4 bg-info">
     <div class="container">
          <div id="movie" class="well">
-        <h2>REST API for an application called “GuntFlix MovieApp” that interacts
-          with a database that stores data about different movies.</h2>
+        <h4>REST API for “GuntFlix MovieApp” that interacts with a database that stores data about different movies.
+          Will provide users with access to information about different movies,
+          directors, and genres. Users will be able to sign up, update their personal information,
+          and create a list of their favorite movies.</h4>
          </div>
      </div>
   </div>
 
 
-  <table class="table table-bordered">
+  <table class="table table-bordered table-light">
     <thead>
-      <tr>
+        <tr class="table-primary">
         <th scope="col">#</th>
         <th scope="col">First</th>
         <th scope="col">Last</th>
         <th scope="col">Handle</th>
+        <th scope="col">Response body dataformat</th>
       </tr>
     </thead>
     <tbody>
@@ -54,6 +57,12 @@
         <td colspan="2">Larry the Bird</td>
         <td>@twitter</td>
       </tr>
+      <tr>
+        <th scope="row">4</th>
+        <td colspan="2">Larry the Bird</td>
+        <td>@twitter</td>
+      </tr>
+
     </tbody>
   </table>
 
