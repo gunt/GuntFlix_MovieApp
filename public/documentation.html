@@ -47,28 +47,28 @@
         <td>/movies</td>
         <td>GET</td>
         <td>None</td>
-        <td>JSON object holding data about all movies</td>
+        <td>JSON object holding data about all movies.</td>
       </tr>
       <tr>
         <th scope="row">Get data about a single movie by title to the user</th>
         <td>/movies/[title]</td>
         <td>Get</td>
         <td>None</td>
-        <td>JSON object holding data about the description, genre, director, image URL of a movie</td>
+        <td>JSON object holding data about the description, genre, director, image URL of a movie.</td>
       </tr>
       <tr>
         <th scope="row">Get data data about a movie by genre (description)</th>
         <td>/movies/genres/[genre]</td>
-        <td>Get</td>
+        <td>GET</td>
         <td>None</td>
         <td>JSON object holding data about a movie genre, containing name and description.</td>
       </tr>
       <tr>
         <th scope="row">Get data about a director by name</th>
         <td>/movies/directors/[name]</td>
-        <td>Get</td>
+        <td>GET</td>
         <td>None</td>
-        <td>JSON object holding data about a director by name</td>
+        <td>JSON object holding data about a director by name.</td>
       </tr>
       <tr>
         <th scope="row">Create a new User</th>
@@ -90,32 +90,32 @@
           }</td>
       </tr>
       <tr>
-        <th scope="row">Get data about a director by name</th>
-        <td>/movies/directors/[name]</td>
-        <td>Get</td>
+        <th scope="row">Update their user info (username, password, email, date of birth)</th>
+        <td>/users/[username]/[password]/[email]/[date of birth]</td>
+        <td>PUT</td>
         <td>None</td>
-        <td>JSON object holding data about a director by name</td>
+        <td>A text message showing the user's information was updated.</td>
       </tr>
       <tr>
-        <th scope="row">Get data about a director by name</th>
-        <td>/movies/directors/[name]</td>
-        <td>Get</td>
+        <th scope="row">Add a movie to the User's favorites list</th>
+        <td>/favorites/[username]/[title]</td>
+        <td>POST</td>
         <td>None</td>
-        <td>JSON object holding data about a director by name</td>
+        <td>A text message indicating the movie title was added to the user's favorites list.</td>
       </tr>
       <tr>
-        <th scope="row">Get data about a director by name</th>
-        <td>/movies/directors/[name]</td>
-        <td>Get</td>
+        <th scope="row">Remove a movie from user's favorites list.</th>
+        <td>/favorites/[username]/[title]</td>
+        <td>DELETE</td>
         <td>None</td>
-        <td>JSON object holding data about a director by name</td>
+        <td>A text message indicating the movie title was deleted from the user's favorites list.</td>
       </tr>
       <tr>
-        <th scope="row">Get data about a director by name</th>
-        <td>/movies/directors/[name]</td>
-        <td>Get</td>
+        <th scope="row">Allow existing users to deregister/th>
+        <td>/users/[username]</td>
+        <td>DELETE</td>
         <td>None</td>
-        <td>JSON object holding data about a director by name</td>
+        <td>A text message was showing that user was deregistered successfully.</td>
       </tr>
     </tbody>
   </table>
