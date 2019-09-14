@@ -1,72 +1,125 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>Movie_API</title>
-      <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
-  </head>
-  <body>
 
-    <nav class="navbar navbar-dark bg-primary" >
-        <div class="container">
-            <div class="navbar-brand">
-                <h1>GuntFlix Movie_App</h1>
-            </div>
-        </div>
-    </nav>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Movie_API</title>
+  <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
+</head>
 
-    <div class="py-4 bg-info">
+<body>
+
+  <nav class="navbar navbar-dark bg-primary">
     <div class="container">
-         <div id="movie" class="well">
-        <h4>REST API for “GuntFlix MovieApp” that interacts with a database that stores data about different movies.
+      <div class="navbar-brand">
+        <h3>GuntFlix Movie API - Documentation</h3>
+      </div>
+    </div>
+  </nav>
+
+  <div class="py-4 bg-secondary">
+    <div class="container">
+      <div id="movie" class="well">
+        <h5>REST API for “GuntFlix MovieApp” that interacts with a database that stores data about different movies.
           Will provide users with access to information about different movies,
           directors, and genres. Users will be able to sign up, update their personal information,
-          and create a list of their favorite movies.</h4>
-         </div>
-     </div>
+          and create a list of their favorite movies.</h5>
+      </div>
+    </div>
   </div>
 
-
+  <button type="button" class="btn btn-primary btn-lg btn-block">Movies & Users Requests</button>
   <table class="table table-bordered table-light">
     <thead>
-        <tr class="table-primary">
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-        <th scope="col">Response body dataformat</th>
+      <tr class="table-primary">
+        <th scope="col">Business Logic</th>
+        <th scope="col">URL</th>
+        <th scope="col">HTTP METHOD</th>
+        <th scope="col">Request body data format</th>
+        <th scope="col">Response body data format</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
+        <th scope="row">Get a list of ALL movies to the user</th>
+        <td>/movies</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>JSON object holding data about all movies</td>
       </tr>
       <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
+        <th scope="row">Get data about a single movie by title to the user</th>
+        <td>/movies/[title]</td>
+        <td>Get</td>
+        <td>None</td>
+        <td>JSON object holding data about the description, genre, director, image URL of a movie</td>
       </tr>
       <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
+        <th scope="row">Get data data about a movie by genre (description)</th>
+        <td>/movies/genres/[genre]</td>
+        <td>Get</td>
+        <td>None</td>
+        <td>JSON object holding data about a movie genre, containing name and description.</td>
       </tr>
       <tr>
-        <th scope="row">4</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
+        <th scope="row">Get data about a director by name</th>
+        <td>/movies/directors/[name]</td>
+        <td>Get</td>
+        <td>None</td>
+        <td>JSON object holding data about a director by name</td>
       </tr>
-
+      <tr>
+        <th scope="row">Create a new User</th>
+        <td>/users</td>
+        <td>POST</td>
+        <td>A JSON object holding data about the user to add - structured:
+          {
+          username: paulinaGomez
+          password: paulina007
+          email: paulinagom_007@gmail.com
+          date of birth: 11.11.1983
+          }</td>
+        <td>A JSON object holding data about the user created - structured:
+          {
+          username: paulinaGomez
+          password: paulina007
+          email: paulinagom_007@gmail.com
+          date of birth: 11.11.1983
+          }</td>
+      </tr>
+      <tr>
+        <th scope="row">Get data about a director by name</th>
+        <td>/movies/directors/[name]</td>
+        <td>Get</td>
+        <td>None</td>
+        <td>JSON object holding data about a director by name</td>
+      </tr>
+      <tr>
+        <th scope="row">Get data about a director by name</th>
+        <td>/movies/directors/[name]</td>
+        <td>Get</td>
+        <td>None</td>
+        <td>JSON object holding data about a director by name</td>
+      </tr>
+      <tr>
+        <th scope="row">Get data about a director by name</th>
+        <td>/movies/directors/[name]</td>
+        <td>Get</td>
+        <td>None</td>
+        <td>JSON object holding data about a director by name</td>
+      </tr>
+      <tr>
+        <th scope="row">Get data about a director by name</th>
+        <td>/movies/directors/[name]</td>
+        <td>Get</td>
+        <td>None</td>
+        <td>JSON object holding data about a director by name</td>
+      </tr>
     </tbody>
   </table>
 
+</body>
 
-
-  </body>
 </html>
