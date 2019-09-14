@@ -145,24 +145,64 @@ app.get('/movies', function(req, res) {
   res.json(topTenMovies)
 });
 
-// Gets the data about a single movie by title.
+// Gets the data about a single movie by title
 app.get("/movies/:title", (req, res) => {
   res.json(topTenMovies.find( (movie) =>
     { return movie.title === req.params.title }));
 });
 
-// Get data data about a movie by genre (description).
-app.get("/movies/:title", (req, res) => {
+// Get data data about a movie by genre (description) // /movies/genres/[genre]
+app.get("/movies/genres/:genre", (req, res) => {
   res.json(topTenMovies.find( (movie) =>
-    { return movie.title === req.params.title }));
+    { return movie.genre === req.params.genre }));
 });
 
-//Get data about a director by name
+//Get data about a director by name // /movies/directors/[name]
+app.get("/movies/directors/:name", (req, res) => {
+  res.send('Successful GET request returning data about director by name');
+});
 
-//Create a new User
+//Create a new User // /users
+app.get("/users", (req, res) => {
+  res.send('Successful GET request returning data about director by name');
+});
+
+// Adds data for a new student to our list of students.
+app.post("/students", (req, res) => {
+  let newStudent = req.body;
+
+  if (!newStudent.name) {
+    const message = "Missing name in request body";
+    res.status(400).send(message);
+  } else {
+    newStudent.id = uuid.v4();
+    Students.push(newStudent);
+    res.status(201).send(newStudent);
+  }
+});
+
+
+
 
 //Update their user info (username, password, email, date of birth)
+app.get("/movies/directors/:name", (req, res) => {
+  res.send('Successful GET request returning data about director by name');
+});
 
+//Add a movie to the User's favorites list
+app.get("/movies/directors/:name", (req, res) => {
+  res.send('Successful GET request returning data about director by name');
+});
+
+//Remove a movie from user's favorites list
+app.get("/movies/directors/:name", (req, res) => {
+  res.send('Successful GET request returning data about director by name');
+});
+
+//Allow existing users to deregister
+app.get("/movies/directors/:name", (req, res) => {
+  res.send('Successful GET request returning data about director by name');
+});
 
 
 //error-handling middleware function
