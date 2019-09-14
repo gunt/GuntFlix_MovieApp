@@ -6,6 +6,10 @@ bodyParser = require("body-parser"),
   uuid = require("uuid");
 const app = express();
 
+
+app.use(bodyParser.json());
+
+
 //Importing morgan middleware
 const morgan = require('morgan');
 
