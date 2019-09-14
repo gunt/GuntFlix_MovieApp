@@ -1,63 +1,127 @@
 //Importing express
 const express = require('express');
 
+//Importing body-parser & uuid
+bodyParser = require("body-parser"),
+  uuid = require("uuid");
+const app = express();
+
 //Importing morgan middleware
 const morgan = require('morgan');
 
-const app = express();
-
-
 //JSON object containing data about top 10 movies.
-//movies, directors, and genres.
+//Return data (Movie title, description, genre, director, image URL,  about a single movie by title to the user
+//director (bio, birth year, death year) by name
 let topTenMovies = [{
     title: 'The Passion of the Christ (2004)',
-    director: 'Mel Gibson',
+    description: 'Depicts the final twelve hours in the life of Jesus of Nazareth, on the day of his crucifixion in Jerusalem.',
     genres: 'Drama',
+    director: {
+      name: 'Mel Gibson',
+      bio: 'Mel Columcille Gerard Gibson was born January 3, 1956 in Peekskill, New York, USA, as the sixth of eleven children of Hutton Gibson, a railroad brakeman, and Anne Patricia (Reilly) Gibson (who died in December of 1990). His mother was Irish, from County Longford, while his American-born father is of mostly Irish descent.',
+      birthYear: '1956'
+    },
+    imageURL: 'https://www.imdb.com/title/tt0335345/mediaviewer/rm1588566272'
+
   },
   {
     title: 'Hackers (1995)',
-    director: 'Iain Softley',
-    genres: 'Comedy, Crime, Drama',
+    description: 'Depicts the final twelve hours in the life of Jesus of Nazareth, on the day of his crucifixion in Jerusalem.',
+    genres: 'Drama',
+    director: {
+      name: 'Mel Gibson',
+      bio: 'Mel Columcille Gerard Gibson was born January 3, 1956 in Peekskill, New York, USA, as the sixth of eleven children of Hutton Gibson, a railroad brakeman, and Anne Patricia (Reilly) Gibson (who died in December of 1990). His mother was Irish, from County Longford, while his American-born father is of mostly Irish descent.',
+      birthYear: '1956'
+    },
+    imageURL: 'https://www.imdb.com/title/tt0335345/mediaviewer/rm1588566272'
   },
   {
     title: 'The Social Network (2010)',
-    director: 'David Fincher',
-    genres: 'Biography, Drama ',
+    description: 'Depicts the final twelve hours in the life of Jesus of Nazareth, on the day of his crucifixion in Jerusalem.',
+    genres: 'Drama',
+    director: {
+      name: 'Mel Gibson',
+      bio: 'Mel Columcille Gerard Gibson was born January 3, 1956 in Peekskill, New York, USA, as the sixth of eleven children of Hutton Gibson, a railroad brakeman, and Anne Patricia (Reilly) Gibson (who died in December of 1990). His mother was Irish, from County Longford, while his American-born father is of mostly Irish descent.',
+      birthYear: '1956'
+    },
+    imageURL: 'https://www.imdb.com/title/tt0335345/mediaviewer/rm1588566272'
   },
   {
     title: 'TPB AFK: The Pirate Bay Away from Keyboard (2013)',
-    director: 'Simon Klose',
-    genres: 'Documentary ',
+    description: 'Depicts the final twelve hours in the life of Jesus of Nazareth, on the day of his crucifixion in Jerusalem.',
+    genres: 'Drama',
+    director: {
+      name: 'Mel Gibson',
+      bio: 'Mel Columcille Gerard Gibson was born January 3, 1956 in Peekskill, New York, USA, as the sixth of eleven children of Hutton Gibson, a railroad brakeman, and Anne Patricia (Reilly) Gibson (who died in December of 1990). His mother was Irish, from County Longford, while his American-born father is of mostly Irish descent.',
+      birthYear: '1956'
+    },
+    imageURL: 'https://www.imdb.com/title/tt0335345/mediaviewer/rm1588566272'
   },
   {
     title: 'The Matrix (1999)',
-    director: 'Lana Wachowski',
-    genres: 'Action, Sci-Fi ',
+    description: 'Depicts the final twelve hours in the life of Jesus of Nazareth, on the day of his crucifixion in Jerusalem.',
+    genres: 'Drama',
+    director: {
+      name: 'Mel Gibson',
+      bio: 'Mel Columcille Gerard Gibson was born January 3, 1956 in Peekskill, New York, USA, as the sixth of eleven children of Hutton Gibson, a railroad brakeman, and Anne Patricia (Reilly) Gibson (who died in December of 1990). His mother was Irish, from County Longford, while his American-born father is of mostly Irish descent.',
+      birthYear: '1956'
+    },
+    imageURL: 'https://www.imdb.com/title/tt0335345/mediaviewer/rm1588566272'
   },
   {
     title: 'The Godfather (1972)',
-    director: 'Francis Ford Coppola',
-    genres: 'Crime, Drama',
+    description: 'Depicts the final twelve hours in the life of Jesus of Nazareth, on the day of his crucifixion in Jerusalem.',
+    genres: 'Drama',
+    director: {
+      name: 'Mel Gibson',
+      bio: 'Mel Columcille Gerard Gibson was born January 3, 1956 in Peekskill, New York, USA, as the sixth of eleven children of Hutton Gibson, a railroad brakeman, and Anne Patricia (Reilly) Gibson (who died in December of 1990). His mother was Irish, from County Longford, while his American-born father is of mostly Irish descent.',
+      birthYear: '1956'
+    },
+    imageURL: 'https://www.imdb.com/title/tt0335345/mediaviewer/rm1588566272'
   },
   {
     title: 'Gladiator (2000)',
-    director: 'Ridley Scott',
-    genres: ' Action, Adventure, Drama',
+    description: 'Depicts the final twelve hours in the life of Jesus of Nazareth, on the day of his crucifixion in Jerusalem.',
+    genres: 'Drama',
+    director: {
+      name: 'Mel Gibson',
+      bio: 'Mel Columcille Gerard Gibson was born January 3, 1956 in Peekskill, New York, USA, as the sixth of eleven children of Hutton Gibson, a railroad brakeman, and Anne Patricia (Reilly) Gibson (who died in December of 1990). His mother was Irish, from County Longford, while his American-born father is of mostly Irish descent.',
+      birthYear: '1956'
+    },
+    imageURL: 'https://www.imdb.com/title/tt0335345/mediaviewer/rm1588566272'
   },
   {
     title: 'Raiders of the Lost Ark (1981)',
-    director: 'Steven Spielberg',
-    genres: 'Action, Adventure ',
+    description: 'Depicts the final twelve hours in the life of Jesus of Nazareth, on the day of his crucifixion in Jerusalem.',
+    genres: 'Drama',
+    director: {
+      name: 'Mel Gibson',
+      bio: 'Mel Columcille Gerard Gibson was born January 3, 1956 in Peekskill, New York, USA, as the sixth of eleven children of Hutton Gibson, a railroad brakeman, and Anne Patricia (Reilly) Gibson (who died in December of 1990). His mother was Irish, from County Longford, while his American-born father is of mostly Irish descent.',
+      birthYear: '1956'
+    },
+    imageURL: 'https://www.imdb.com/title/tt0335345/mediaviewer/rm1588566272'
   },
   {
     title: 'The Dark Knight (2008)',
-    director: 'Christopher Nolan',
-    genres: 'Action, Crime, Drama ',
+    description: 'Depicts the final twelve hours in the life of Jesus of Nazareth, on the day of his crucifixion in Jerusalem.',
+    genres: 'Drama',
+    director: {
+      name: 'Mel Gibson',
+      bio: 'Mel Columcille Gerard Gibson was born January 3, 1956 in Peekskill, New York, USA, as the sixth of eleven children of Hutton Gibson, a railroad brakeman, and Anne Patricia (Reilly) Gibson (who died in December of 1990). His mother was Irish, from County Longford, while his American-born father is of mostly Irish descent.',
+      birthYear: '1956'
+    },
+    imageURL: 'https://www.imdb.com/title/tt0335345/mediaviewer/rm1588566272'
   },
   {
     title: 'War Room (2015)',
-    director: 'Alex Kendrick',
+    description: 'Depicts the final twelve hours in the life of Jesus of Nazareth, on the day of his crucifixion in Jerusalem.',
     genres: 'Drama',
+    director: {
+      name: 'Mel Gibson',
+      bio: 'Mel Columcille Gerard Gibson was born January 3, 1956 in Peekskill, New York, USA, as the sixth of eleven children of Hutton Gibson, a railroad brakeman, and Anne Patricia (Reilly) Gibson (who died in December of 1990). His mother was Irish, from County Longford, while his American-born father is of mostly Irish descent.',
+      birthYear: '1956'
+    },
+    imageURL: 'https://www.imdb.com/title/tt0335345/mediaviewer/rm1588566272'
   }
 ]
 
