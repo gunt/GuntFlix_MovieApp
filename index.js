@@ -129,6 +129,10 @@ let topTenMovies = [{
   }
 ]
 
+// app.get("/students", (req, res) => {
+//  res.send(“Successful GET request returning data on all the students”);
+// });
+
 // This function automatically routes all requests for static files // documentation
 app.use(express.static('public'));
 
@@ -136,17 +140,30 @@ app.use(express.static('public'));
 app.use(morgan('common'));
 
 
-//GET requests //The _-prefix is a way to opt-out of this feature.
-app.get('/movies', function(_req, res) {
+//GET requests - all movies
+app.get('/movies', function(req, res) {
   res.json(topTenMovies)
 });
 
-app.get('/', function(_req, res) {
-  res.send('Welcome to GuntFlix movie app!')
+
+// app.get("/students/:name", (req, res) => {
+//   res.json(Students.find( (student) =>
+//     { return student.name === req.params.name   }));
+// });
+
+// Gets the data about a single student, by name
+
+
+app.get("/students/:name", (req, res) => {
+  res.json(Students.find( (student) =>
+    { return student.name === req.params.name   }));
 });
 
+
+
+
 //error-handling middleware function
-app.use(function(err, _req, res, _next) {
+app.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
