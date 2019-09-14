@@ -145,20 +145,23 @@ app.get('/movies', function(req, res) {
   res.json(topTenMovies)
 });
 
-
-// app.get("/students/:name", (req, res) => {
-//   res.json(Students.find( (student) =>
-//     { return student.name === req.params.name   }));
-// });
-
-// Gets the data about a single student, by name
-
-
-app.get("/students/:name", (req, res) => {
-  res.json(Students.find( (student) =>
-    { return student.name === req.params.name   }));
+// Gets the data about a single movie by title.
+app.get("/movies/:title", (req, res) => {
+  res.json(topTenMovies.find( (movie) =>
+    { return movie.title === req.params.title }));
 });
 
+// Get data data about a movie by genre (description).
+app.get("/movies/:title", (req, res) => {
+  res.json(topTenMovies.find( (movie) =>
+    { return movie.title === req.params.title }));
+});
+
+//Get data about a director by name
+
+//Create a new User
+
+//Update their user info (username, password, email, date of birth)
 
 
 
