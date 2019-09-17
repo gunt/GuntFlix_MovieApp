@@ -48,15 +48,15 @@ let topTenMovies = [{
     imageURL: 'https://www.imdb.com/title/tt1285016/mediaviewer/rm1054049280'
   },
   {
-    title: 'TPB AFK: The Pirate Bay Away from Keyboard',
-    description: 'An intellectual freedoms documentary based around the interpersonal triumphs, and defeats of the three main characters against the largest industry in the known universe. The media industry.',
-    genre: 'Documentary',
+    title: 'Braveheart',
+    description: 'When his secret bride is executed for assaulting an English soldier who tried to rape her, William Wallace begins a revolt against King Edward I of England.',
+    genre: 'Biography',
     director: {
-      name: 'Simon Klose',
-      bio: 'Simon Tobias Viktor Klose is a Swedish documentary and music video maker. His latest work is a documentary about The Pirate Bay called TPB AFK.',
-      birthYear: '1975'
+      name: 'Mel Gibson',
+      bio: 'Mel Columcille Gerard Gibson was born January 3, 1956 in Peekskill, New York, USA, as the sixth of eleven children of Hutton Gibson, a railroad brakeman, and Anne Patricia (Reilly) Gibson (who died in December of 1990). His mother was Irish, from County Longford, while his American-born father is of mostly Irish descent.',
+      birthYear: '1956'
     },
-    imageURL: 'https://www.imdb.com/title/tt2608732/mediaviewer/rm2467409152'
+    imageURL: 'https://www.imdb.com/title/tt0112573/mediaviewer/rm2059455488'
   },
   {
     title: 'The Matrix',
