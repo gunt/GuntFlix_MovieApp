@@ -19,7 +19,7 @@ let topTenMovies = [{
     genre: 'Drama',
     director: {
       name: 'Mel Gibson',
-      bio: 'Mel Columcille Gerard Gibson was born January 3, 1956 in Peekskill, New York, USA, as the sixth of eleven children of Hutton Gibson, a railroad brakeman, and Anne Patricia (Reilly) Gibson (who died in December of 1990). His mother was Irish, from County Longford, while his American-born father is of mostly Irish descent.',
+      bio: 'Mel Gibson, American-born Australian actor who became a star with a series of action films in the 1980s and later earned acclaim as a director.',
       birthYear: '1956'
     },
     imageURL: 'https://www.imdb.com/title/tt0335345/mediaviewer/rm1588566272'
@@ -53,7 +53,7 @@ let topTenMovies = [{
     genre: 'Biography',
     director: {
       name: 'Mel Gibson',
-      bio: 'Mel Columcille Gerard Gibson was born January 3, 1956 in Peekskill, New York, USA, as the sixth of eleven children of Hutton Gibson, a railroad brakeman, and Anne Patricia (Reilly) Gibson (who died in December of 1990). His mother was Irish, from County Longford, while his American-born father is of mostly Irish descent.',
+      bio: 'Mel Gibson, American-born Australian actor who became a star with a series of action films in the 1980s and later earned acclaim as a director.',
       birthYear: '1956'
     },
     imageURL: 'https://www.imdb.com/title/tt0112573/mediaviewer/rm2059455488'
