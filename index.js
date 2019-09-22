@@ -38,7 +38,7 @@ let topTenMovies = [{
   },
   {
     title: 'The Social Network',
-    description: 'Depicts the final twelve hours in the life of Jesus of Nazareth, on the day of his crucifixion in Jerusalem.',
+    description: 'As Harvard student Mark Zuckerberg creates the social networking site that would become known as Facebook.',
     genre: 'Biography',
     director: {
       name: 'David Fincher',
