@@ -1,8 +1,14 @@
+//integrate Mongoose into your REST API, which will allow your REST API to perform CRUD operation on your MongoDB data
 const mongoose = require('mongoose');
 const Models = require('./models.js');
 
 const Movies = Models.Movie;
 const Users = Models.User;
+
+//This allows Mongoose to connect to that database myFlixDB
+mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true});
+
+
 
 //Importing express
 const express = require('express');
