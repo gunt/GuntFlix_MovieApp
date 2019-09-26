@@ -145,25 +145,47 @@ app.put('/users/:Username', function (req, res) {
     })
 });
 
-
-
-
-
-
-
-
-
-
-
-//Add a movie to the user's favorites list // /favorites/[username]/[title]
-app.post("/favorites/:username/:title", (req, res) => {
-  res.send('Favorite movie by user added successfully.');
+// Add a movie to a user's list of favorites
+app.post('/users/:Username/Movies/:MovieID', function(req, res) {
+  Users.findOneAndUpdate({ Username : req.params.Username }, {
+    $push : { FavoritesMovies : req.params.MovieID }
+  },
+  { new : true }, // This line makes sure that the updated document is returned
+  function(err, updatedUser) {
+    if (err) {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    } else {
+      res.json(updatedUser)
+    }
+  })
 });
 
 //Remove a movie from user's favorites list // /favorites/[username]/[title]
 app.delete("/favorites/:username/:title", (req, res) => {
   res.send('Movie deleted from favorite list successfully.');
 });
+
+
+// Delete a user by username
+app.delete('/users/:Username', function(req, res) {
+  Users.findOneAndRemove({ Username: req.params.Username })
+  .then(function(user) {
+    if (!user) {
+      res.status(400).send(req.params.Username + " was not found");
+    } else {
+      res.status(200).send(req.params.Username + " was deleted.");
+    }
+  })
+  .catch(function(err) {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
+});
+
+
+
+
 
 //Allow existing users to deregister // /users/[username]
 app.delete("/users/:username", (req, res) => {
