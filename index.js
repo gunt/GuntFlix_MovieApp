@@ -18,6 +18,8 @@ const express = require('express');
 //const uuid = require("uuid");
 const app = express();
 
+// fixing the node server issue dependencies 
+// https://stackoverflow.com/questions/46291571/passport-js-cannot-read-property-username-of-undefined-node
 var bodyParser = require('body-parser')
 app.use( bodyParser.json() );       
 app.use(bodyParser.urlencoded({     
