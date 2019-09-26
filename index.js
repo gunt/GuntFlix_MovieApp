@@ -174,7 +174,7 @@ app.get('/movies', function(req, res) {
 // Gets the data about a single movie by Title (Documentation)
 app.get('/movies/:Title', function(req, res) {
   Movies.findOne({Title : req.params.Title})
-    .then (function(movies){
+    .then (function(movies) {
       res.json(movies)
     })
     .catch(function(err) {
@@ -184,27 +184,44 @@ app.get('/movies/:Title', function(req, res) {
 });
 
 
-// Get data data about a movie by Title (description) // /movies/genres/[Title]
-app.get("/movies/genres/:genre", (req, res) => {
-  res.json(topTenMovies.find( (movie) =>
-    { return movie.genre === req.params.genre }));
-});
+// Get data data about a movie by Genre_Title (description) // /movies/genres/[Title]
+// app.get("/movies/genres/:genre", (req, res) => {
+//   res.json(topTenMovies.find( (movie) =>
+//     { return movie.genre === req.params.genre }));
+// });
 
-// Get data data about a movie by Title // /movies/genres/[Title]
-Movies.find( { "Genre.Name" :"Thriller" }).then(function(movies) {
-  // Logic here
+app.get('/movies/genres/:Title',function (req, res) {
+  Movies.findOne({Title : req.params.Title})
+  .then(function(movie){
+    if(movie){
+      res.status(201).send( movie.Title + " is a " + movie.Genre.Name );
+    }else{
+      res.status(204).send( movie.Title + " is not available");
+    }
+  })
+  .catch(function(err) {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
 });
-app.get("/movies/genres/:genre", (req, res) => {
-  res.json(topTenMovies.find( (movie) =>
-    { return movie.genre === req.params.genre }));
-});
-
 
 
 
 //Get data about a director by name // /movies/directors/[name]
 app.get("/movies/director/:name", (req, res) => {
   res.send('Returning data about director by name successfully.');
+});
+
+//Get data about a director by name // /movies/directors/[name]
+app.get('/movies/director/:Name', function(req, res) {
+  Movies.findOne({"Director.Name" : req.params.Name})
+  .then(function(movies) {
+    res.json(movies.Director)
+  })
+  .catch(function(err) {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
 });
 
 //Create a new User // /users
@@ -218,6 +235,48 @@ app.post("/users", (req, res) => {
     res.send("User added successfully.");
   }
 });
+
+//Add a user
+/* We’ll expect JSON in this format
+{
+ ID : Integer,
+ Username : String,
+ Password : String,
+ Email : String,
+ Birthday : Date
+}*/
+app.post('/users', function(req, res) {
+  Users.findOne({ Username : req.body.Username })
+  .then(function(user) {
+    if (user) {
+      return res.status(400).send(req.body.Username + "already exists");
+    } else {
+      Users
+      .create({
+        Username: req.body.Username,
+        Password: req.body.Password,
+        Email: req.body.Email,
+        Birthday: req.body.Birthday
+      })
+      .then(function(user) {res.status(201).json(user) })
+      .catch(function(error) {
+        console.error(error);
+        res.status(500).send("Error: " + error);
+      })
+    }
+  }).catch(function(error) {
+    console.error(error);
+    res.status(500).send("Error: " + error);
+  });
+});
+
+
+
+
+
+
+
+
 
 //Update their user info (username, password, email, date of birth)
 // /users/[username]/[password]/[email]/[date_of_birth]
