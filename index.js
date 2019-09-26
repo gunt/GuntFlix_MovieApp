@@ -224,50 +224,68 @@ app.get('/movies/director/:Name', function(req, res) {
   });
 });
 
-//Create a new User // /users
-app.post("/users", (req, res) => {
-  let newUser = req.body;
-
-  if (!newUser.username) {
-    const message = "Missing name in request body";
-    res.status(400).send(message);
-  } else {
-    res.send("User added successfully.");
-  }
-});
-
-//Add a user
-/* We’ll expect JSON in this format
-{
- ID : Integer,
- Username : String,
- Password : String,
- Email : String,
- Birthday : Date
-}*/
-app.post('/users', function(req, res) {
-  Users.findOne({ Username : req.body.Username })
-  .then(function(user) {
-    if (user) {
-      return res.status(400).send(req.body.Username + "already exists");
-    } else {
-      Users
-      .create({
-        Username: req.body.Username,
-        Password: req.body.Password,
-        Email: req.body.Email,
-        Birthday: req.body.Birthday
-      })
-      .then(function(user) {res.status(201).json(user) })
-      .catch(function(error) {
+//Create a new User Moongose
+app.post('/users', function(req, res){
+  Users.findOne({Username: req.body.Username })
+    .then(function(user){
+      if(user){
+        return res.status(400).send(req.body.Username + " already exists.");
+      }else{
+        Users
+        .create ({
+          Username: req.body.Username,
+          Password: req.body.Password,
+          Email: req.body.Email,
+          Birthday: req.body.Birthday
+        })
+        .then(function(user) {res.status(201).json(user) })
+        .catch(function(error){
+          console.error(error);
+          res.status(500).send("Error: " + error);
+        })
+      }
+    }).catch(function(error){
         console.error(error);
         res.status(500).send("Error: " + error);
-      })
-    }
-  }).catch(function(error) {
-    console.error(error);
-    res.status(500).send("Error: " + error);
+    });
   });
+
+
+
+//Update Usernname
+// app.put("/users/:username/:password/:email/:date_of_birth", (req, res) => {
+//   res.send('User information updated successfully.');
+// });
+
+//Update Username
+// Update a user's info, by username
+/* We’ll expect JSON in this format
+{
+  Username: String,
+  (required)
+  Password: String,
+  (required)
+  Email: String,
+  (required)
+  Birthday: Date
+}*/
+app.put('/users/:Username', function(req, res) {
+  Users.findOneAndUpdate({ Username : req.params.Username }, { $set :
+  {
+    Username : req.body.Username,
+    Password : req.body.Password,
+    Email : req.body.Email,
+    Birthday : req.body.Birthday
+  }},
+  { new : true }, // This line makes sure that the updated document is returned
+  function(err, updatedUser) {
+    if(err) {
+      console.error(err);
+      res.status(500).send("Error: " +err);
+    } else {
+      res.json(updatedUser)
+    }
+  })
 });
 
 
@@ -278,11 +296,7 @@ app.post('/users', function(req, res) {
 
 
 
-//Update their user info (username, password, email, date of birth)
-// /users/[username]/[password]/[email]/[date_of_birth]
-app.put("/users/:username/:password/:email/:date_of_birth", (req, res) => {
-  res.send('User information updated successfully.');
-});
+
 
 //Add a movie to the user's favorites list // /favorites/[username]/[title]
 app.post("/favorites/:username/:title", (req, res) => {
