@@ -152,7 +152,7 @@ app.use(morgan('common'));
 //   res.json(topTenMovies)
 // });
 
-//READ in Mongoose
+//READ in Mongoose GET requests - all movies
 app.get('/movies', function(req, res) {
   Movies.find()
   .then(function(movies) {
@@ -165,18 +165,42 @@ app.get('/movies', function(req, res) {
 });
 
 
+// Gets the data about a single movie by Title (Documentation)
+// app.get("/movies/:title", (req, res) => {
+//   res.json(topTenMovies.find( (movie) =>
+//     { return movie.title === req.params.title }));
+// });
 
-// Gets the data about a single movie by title
-app.get("/movies/:title", (req, res) => {
-  res.json(topTenMovies.find( (movie) =>
-    { return movie.title === req.params.title }));
+// Gets the data about a single movie by Title (Documentation)
+app.get('/movies/:Title', function(req, res) {
+  Movies.findOne({Title : req.params.Title})
+    .then (function(movies){
+      res.json(movies)
+    })
+    .catch(function(err) {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
 });
 
-// Get data data about a movie by genre (description) // /movies/genres/[genre]
+
+// Get data data about a movie by Title (description) // /movies/genres/[Title]
 app.get("/movies/genres/:genre", (req, res) => {
   res.json(topTenMovies.find( (movie) =>
     { return movie.genre === req.params.genre }));
 });
+
+// Get data data about a movie by Title // /movies/genres/[Title]
+Movies.find( { "Genre.Name" :"Thriller" }).then(function(movies) {
+  // Logic here
+});
+app.get("/movies/genres/:genre", (req, res) => {
+  res.json(topTenMovies.find( (movie) =>
+    { return movie.genre === req.params.genre }));
+});
+
+
+
 
 //Get data about a director by name // /movies/directors/[name]
 app.get("/movies/director/:name", (req, res) => {
