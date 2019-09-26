@@ -14,9 +14,9 @@ mongoose.connect('mongodb://localhost:27017/myFlixDB', {
 const express = require('express');
 
 // //Importing body-parser & uuid
-// bodyParser = require("body-parser"),
-  uuid = require("uuid");
-// const app = express();
+const bodyParser = require("body-parser");
+const uuid = require("uuid");
+const app = express();
 
 // //Importing morgan middleware
 // const morgan = require('morgan');
