@@ -14,9 +14,15 @@ mongoose.connect('mongodb://localhost:27017/myFlixDB', {
 const express = require('express');
 
 // //Importing body-parser & uuid
-const bodyParser = require("body-parser");
-const uuid = require("uuid");
+//bodyParser = require("body-parser");
+//const uuid = require("uuid");
 const app = express();
+
+var bodyParser = require('body-parser')
+app.use( bodyParser.json() );       
+app.use(bodyParser.urlencoded({     
+  extended: true
+}));
 
 // //Importing morgan middleware
 // const morgan = require('morgan');
@@ -87,30 +93,27 @@ app.get('/movies/directors/:Name', function (req, res) {
 });
 
 //Create a new User Moongose
-app.post('/users', function (req, res) {
-  Users.findOne({
-      Username: req.body.Username
-    })
-    .then(function (user) {
+app.post('/users', (req, res) => {
+  Users.findOne({Username: req.body.Username})
+    .then(user => {
       if (user) {
         return res.status(400).send(req.body.Username + " already exists.");
       } else {
-        Users
-          .create({
+        Users.create({
             Username: req.body.Username,
             Password: req.body.Password,
             Email: req.body.Email,
             Birthday: req.body.Birthday
           })
-          .then(function (user) {
+          .then(user => {
             res.status(201).json(user)
           })
-          .catch(function (error) {
+          .catch(error => {
             console.error(error);
             res.status(500).send("Error: " + error);
           })
       }
-    }).catch(function (error) {
+    }).catch(error => {
       console.error(error);
       res.status(500).send("Error: " + error);
     });
@@ -167,7 +170,7 @@ app.delete('/users/:Username/Movies/:MovieID', function (req, res) {
       Username: req.params.Username
     }, {
       $pull: {
-        FavoritesMovies: req.params.MovieID
+        FavoriteMovies: req.params.MovieID
       }
     }, {
       new: true
