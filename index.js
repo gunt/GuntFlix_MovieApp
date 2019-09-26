@@ -148,9 +148,23 @@ app.use(morgan('common'));
 
 
 //GET requests - all movies
+// app.get('/movies', function(req, res) {
+//   res.json(topTenMovies)
+// });
+
+//READ in Mongoose
 app.get('/movies', function(req, res) {
-  res.json(topTenMovies)
+  Movies.find()
+  .then(function(movies) {
+    res.status(201).json(movies)
+  })
+  .catch(function(err) {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
 });
+
+
 
 // Gets the data about a single movie by title
 app.get("/movies/:title", (req, res) => {
