@@ -177,7 +177,7 @@ app.post('/users/:Username/Movies/:MovieID', passport.authenticate('jwt', {
     })
 });
 
-// Remove a movie to a user's list of favorites
+// Remove a movie from a user's list of favorites
 app.delete('/users/:Username/Movies/:MovieID', passport.authenticate('jwt', {
   session: false
 }), function (req, res) {
