@@ -1,59 +1,26 @@
-//integrate Mongoose into your REST API, which will allow your REST API to perform CRUD operation on your MongoDB data
 const mongoose = require('mongoose');
-const Models = require('./models.js');
-
+const express = require('express');
+const bodyParser = require('body-parser');
+const Models = require('./model.js');
 const Movies = Models.Movie;
 const Users = Models.User;
-
-const passport = require('passport');
-require('./passport');
-
 const cors = require('cors');
-app.use(cors());
-
-// //Importing express
-const express = require('express');
-const app = express();
-
-// const { check, validationResult } = require('express-validator');
 const validator = require('express-validator');
+const app = express();
+const bcrypt = require('bcrypt');
 
-//This allows Mongoose to connect to that database myFlixDB
 mongoose.connect('mongodb://localhost:27017/myFlixDB', {
   useNewUrlParser: true
 });
 
-
-// >>> only certain origins to be given access <<<
-// var allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
-
-// app.use(cors({
-//   origin: function(origin, callback){
-//     if(!origin) return callback(null, true);
-//     if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
-//       var message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
-//       return callback(new Error(message ), false);
-//     }
-//     return callback(null, true);
-//   }
-// }));
-
-
-
-// fixing the node server issue dependencies 
-// https://stackoverflow.com/questions/46291571/passport-js-cannot-read-property-username-of-undefined-node
-var bodyParser = require('body-parser')
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.use(cors()); // 
+const auth = require('./auth.js')(app);
+const passport = require('passport');
+require('./passport.js');
 
-// import your auth.js
-var auth = require('./auth')(app);
 
-// This function automatically routes all requests for static files // documentation
-app.use(express.static('public'));
-
+app.use(validator());
 
 // Incorporating API Endpoints - passport.authenticate('jwt', {session: false})
 //READ in Mongoose GET requests - all movies

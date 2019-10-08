@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const bcrypt = require('bcrypt');
 
 var movieSchema = mongoose.Schema({
@@ -23,7 +22,7 @@ var movieSchema = mongoose.Schema({
    Password : {type: String, required: true},
    Email : {type: String, required: true},
    Birthday : Date,
-   FavoriteMovies : [{ type : mongoose.Schema.Types.ObjectId, ref: 'Movies' }]
+   FavoriteMovies : [{ type : mongoose.Schema.Types.ObjectId, ref: 'Movie' }]
   });
   
   userSchema.statics.hashPassword = function(password) {
