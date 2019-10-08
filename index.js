@@ -1,26 +1,34 @@
 const mongoose = require('mongoose');
-const express = require('express');
-const bodyParser = require('body-parser');
 const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
+const express = require('express');
+const morgan = require('morgan');
+const bodyParser = require("body-parser");
 const cors = require('cors');
-const validator = require('express-validator');
-const app = express();
-const bcrypt = require('bcrypt');
-
-mongoose.connect('mongodb://localhost:27017/myFlixDB', {
-  useNewUrlParser: true
-});
-
-app.use(bodyParser.json());
-app.use(cors()); // 
-const auth = require('./auth.js')(app);
-const passport = require('passport');
-require('./passport.js');
-
+const { check, validationResult } = require('express-validator');
+app.use(cors());
+const passport = require ('passport');
+require('./passport');
 
 app.use(validator());
+
+//creating variable to use express functionality
+const app = express();
+
+app.use(express.static('public'));
+
+//using middleware function for bodyParer
+app.use(bodyParser.json());
+
+
+app.use(morgan('common'));
+
+//connecting Mongoose to the database
+mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true});
+
+//importing auth.js file
+var auth = require('./auth')(app);
 
 // Incorporating API Endpoints - passport.authenticate('jwt', {session: false})
 //READ in Mongoose GET requests - all movies
