@@ -15,6 +15,9 @@ app.use(cors());
 const express = require('express');
 const app = express();
 
+// const { check, validationResult } = require('express-validator');
+const validator = require('express-validator');
+
 //This allows Mongoose to connect to that database myFlixDB
 mongoose.connect('mongodb://localhost:27017/myFlixDB', {
   useNewUrlParser: true
@@ -119,8 +122,22 @@ app.get('/movies/directors/:Name', passport.authenticate('jwt', {
     });
 });
 
-//Create a new User Moongose
+// Registration New User
 app.post('/users', (req, res) => {
+  req.checkBody('Username', 'Username is required').notEmpty();
+  req.checkBody('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric()
+  req.checkBody('Password', 'Password is required').notEmpty();
+  req.checkBody('Email', 'Email is required').notEmpty();
+  req.checkBody('Email', 'Email does not appear to be valid').isEmail();
+
+
+  // check the validation object for errors
+  var errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+
   var hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({
       Username: req.body.Username
