@@ -17,18 +17,24 @@ app.use(validator());
 const app = express();
 
 app.use(express.static('public'));
-
-//using middleware function for bodyParer
-app.use(bodyParser.json());
-
-
 app.use(morgan('common'));
 
 //connecting Mongoose to the database
 mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true});
 
-//importing auth.js file
+// fixing the node server issue dependencies 
+// https://stackoverflow.com/questions/46291571/passport-js-cannot-read-property-username-of-undefined-node
+var bodyParser = require('body-parser')
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+// import your auth.js
 var auth = require('./auth')(app);
+
+// This function automatically routes all requests for static files // documentation
+app.use(express.static('public'));
 
 // Incorporating API Endpoints - passport.authenticate('jwt', {session: false})
 //READ in Mongoose GET requests - all movies
