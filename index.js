@@ -131,7 +131,7 @@ app.post('/users', (req, res) => {
   req.checkBody('Email', 'Email does not appear to be valid').isEmail();
 
 
-  // check the validation object for errors
+  // check the validation object for errors // error handling function
   var errors = validationResult(req);
 
   if (!errors.isEmpty()) {
