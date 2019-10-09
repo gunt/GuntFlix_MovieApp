@@ -110,19 +110,20 @@ app.get('/movies/directors/:Name', passport.authenticate('jwt', {
 });
 
 // Registration New User
-app.post('/users', (req, res) => {
-  req.checkBody('Username', 'Username is required.').notEmpty();
-  req.checkBody('Username', 'Username contains non alphanumeric characters: Not allowed.').isAlphanumeric();
-  req.checkBody('Password', 'Password is required.').notEmpty();
-  req.checkBody('Email', 'Email is required.').notEmpty();
-  req.checkBody('Email', 'Email does not appear to be valid.').isEmail();
+app.post('/users', [
+  check('Username', 'Username is required.').notEmpty(),
+  check('Username', 'Username contains non alphanumeric characters: Not allowed.').isAlphanumeric(),
+  check('Password', 'Password is required.').notEmpty(),
+  check('Email', 'Email is required.').notEmpty(),
+  check('Email', 'Email does not appear to be valid.').isEmail()],
+  (req, res) => {
   
-  const errors = req.validationErrors();
+  var errors = req.validationResult();
   if (errors) {
       return res.status(422).json({errors: errors});
   }
 
-  const hashedPassword = users.hashPassword(req.body.Password);
+  var hashedPassword = users.hashPassword(req.body.Password);
   users.findOne({Username: req.body.Username})
   .then(user => {
       if (user) {
