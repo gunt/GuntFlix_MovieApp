@@ -110,49 +110,40 @@ app.get('/movies/directors/:Name', passport.authenticate('jwt', {
 });
 
 // Registration New User
-app.post('/users', passport.authenticate('jwt', {
-  session: false
-}), function (req, res) {
-  req.checkBody('Username', 'Username is required').notEmpty();
-  // req.checkBody('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric()
-  req.checkBody('Password', 'Password is required').notEmpty();
-  req.checkBody('Email', 'Email is required').notEmpty();
-  // req.checkBody('Email', 'Email does not appear to be valid').isEmail();
-
-
-  // check the validation object for errors // error handling function
-  var errors = validationResult(req);
-
-  if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.array() });
+app.post('/users', (req, res) => {
+  req.checkBody('Username', 'Username is required.').notEmpty();
+  req.checkBody('Username', 'Username contains non alphanumeric characters: Not allowed.').isAlphanumeric();
+  req.checkBody('Password', 'Password is required.').notEmpty();
+  req.checkBody('Email', 'Email is required.').notEmpty();
+  req.checkBody('Email', 'Email does not appear to be valid.').isEmail();
+  
+  const errors = req.validationErrors();
+  if (errors) {
+      return res.status(422).json({errors: errors});
   }
 
-  var hashedPassword = Users.hashPassword(req.body.Password);
-  Users.findOne({
-      Username: req.body.Username
-    })
-    .then(user => {
+  const hashedPassword = users.hashPassword(req.body.Password);
+  users.findOne({Username: req.body.Username})
+  .then(user => {
       if (user) {
-        return res.status(400).send(req.body.Username + " already exists.");
+          return res.status(400).send(req.body.Username + ' already exists.');
       } else {
-        Users.create({
-            Username: req.body.Username,
-            Password: hashedPassword,
-            Email: req.body.Email,
-            Birthday: req.body.Birthday
+          users.create({
+              Username: req.body.Username,
+              Password: hashedPassword,
+              Email: req.body.Email,
+              Birthday: req.body.Birthday
           })
-          .then(user => {
-            res.status(201).json(user)
-          })
+          .then(user => {res.status(201).json(user)})
           .catch(error => {
-            console.error(error);
-            res.status(500).send("Error: " + error);
-          })
+              console.error(error);
+              res.status(500).send('Error: ' + error);
+          });
       }
-    }).catch(error => {
+  }).catch(error => {
       console.error(error);
-      res.status(500).send("Error: " + error);
-    });
+      res.status(500).send('Error: ' + error);
+  });
 });
 
 //Update Username
