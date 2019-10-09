@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
 const express = require('express');
+const app = express();
 const bodyParser = require('body-parser');
 const Models = require('./model.js');
-const movies = Models.movies;
-const users = Models.users;
+const Movies = Models.movie;
+const users = Models.user;
 const cors = require('cors');
-const validator = require('express-validator');
-const app = express();
+// const validator = require('express-validator');
+
 const bcrypt = require('bcrypt');
 
 //local database connection
@@ -98,14 +99,16 @@ app.get('/movies/directors/:Name', passport.authenticate('jwt', {
 });
 
 // Registration New User
-app.post('/users', (req, res) => {
-  req.checkBody('Username', 'Username is required.').notEmpty();
-  req.checkBody('Username', 'Username contains non alphanumeric characters: Not allowed.').isAlphanumeric();
-  req.checkBody('Password', 'Password is required.').notEmpty();
-  req.checkBody('Email', 'Email is required.').notEmpty();
-  req.checkBody('Email', 'Email does not appear to be valid.').isEmail();
-  
-  const errors = req.validationErrors();
+const { check, validationResult } = require('express-validator');
+
+app.post('/users', [
+  check('Username', 'Username is required.').notEmpty(),
+  check('Username', 'Username contains non alphanumeric characters: Not allowed.').isAlphanumeric(),
+  check('Password', 'Password is required.').notEmpty(),
+  check('Email', 'Email is required.').notEmpty(),
+  check('Email', 'Email does not appear to be valid.').isEmail()],
+  (req, res) => {
+  const errors = validationResult(req);
   if (errors) {
       return res.status(422).json({errors: errors});
   }
