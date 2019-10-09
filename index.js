@@ -7,8 +7,9 @@ const morgan = require('morgan');
 
 
 var expressValidator = require('express-validator');
-app.use(expressValidator())
 var app = express.Router();
+app.use(expressValidator())
+
 
 var cors = require('cors')
 var app = express()
