@@ -4,7 +4,6 @@ const Movies = Models.Movie;
 const Users = Models.User;
 const express = require('express');
 const morgan = require('morgan');
-const uuid = require("uuid");
 
 const validator = require('express-validator');
 
@@ -49,7 +48,7 @@ var auth = require('./auth')(app);
 //READ in Mongoose GET requests - all movies
 //app.get('/movies', passport.authenticate('jwt', {session: false}), (req, res) => {
 
-  app.get('/movies', passport.authenticate('jwt', {session: false}), (_req, res) => {
+  app.get('/movies', (_req, res) => {  // Testing without Passport Authenticate
   Movies.find()
     .then(function (movies) {
       res.status(201).json(movies)
@@ -61,7 +60,7 @@ var auth = require('./auth')(app);
 });
 
 // Gets the data about a single movie by Title (Documentation)
-app.get('/movies/:Title', function (req, res) { // Testing without Passport Authenticate > Browser Purpose Task
+app.get('/movies/:Title', passport.authenticate('jwt', {session: false}), function (req, res) {
   Movies.findOne({
       Title: req.params.Title
     })
@@ -111,7 +110,9 @@ app.get('/movies/directors/:Name', passport.authenticate('jwt', {
 });
 
 // Registration New User
-app.post('/users', (req, res) => {
+app.post('/users', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
   req.checkBody('Username', 'Username is required').notEmpty();
   req.checkBody('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric()
   req.checkBody('Password', 'Password is required').notEmpty();
