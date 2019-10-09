@@ -28,7 +28,7 @@ app.use(cors()); // CORS-enabled for all origins
 const auth = require('./auth.js')(app);
 const passport = require('passport');
 require('./passport.js');
-app.use(validator());
+// app.use(validator());
 
 // //importing auth.js file
 // var auth = require('./auth')(app);
