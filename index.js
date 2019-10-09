@@ -108,11 +108,9 @@ var validationResult = require('express-validator');
 
 
 app.post('/users', [
-  
   check('Username').notEmpty(),
   check('Password').notEmpty(),
   check('Email',).notEmpty()],
-
   (req, res) => {
   const errors = validationResult(req);
   if (errors) {
