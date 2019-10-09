@@ -133,7 +133,6 @@ app.post('/users', [
       console.error(error);
       res.status(500).send('Error: ' + error);
   });
-});
 
 //Update Username
 app.put('/users/:Username', passport.authenticate('jwt', {
