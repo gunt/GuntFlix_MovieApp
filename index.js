@@ -112,10 +112,10 @@ app.get('/movies/directors/:Name', passport.authenticate('jwt', {
 // Registration New User
 app.post('/users', function (req, res) {
   req.checkBody('Username', 'Username is required').notEmpty();
-  req.checkBody('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric()
+  // req.checkBody('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric()
   req.checkBody('Password', 'Password is required').notEmpty();
   req.checkBody('Email', 'Email is required').notEmpty();
-  req.checkBody('Email', 'Email does not appear to be valid').isEmail();
+  // req.checkBody('Email', 'Email does not appear to be valid').isEmail();
 
 
   // check the validation object for errors // error handling function
