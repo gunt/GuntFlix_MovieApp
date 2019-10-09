@@ -99,7 +99,9 @@ app.get('/movies/directors/:Name', passport.authenticate('jwt', {
 });
 
 // Registration New User
-const { check, validationResult } = require('express-validator');
+// const { check, validationResult } = require('express-validator');
+const check = require('express-validator/check').check;
+const validationResult = require('express-validator/check').validationResult;
 
 app.post('/users', [
   check('Username').notEmpty(),
