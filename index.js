@@ -1,40 +1,19 @@
 const mongoose = require('mongoose');
-const Models = require('./models.js');
-const Movies = Models.Movie;
-const Users = Models.User;
 const express = require('express');
-const morgan = require('morgan');
-
-
-var expressValidator = require('express-validator');
-var app = express.Router();
-app.use(expressValidator())
-
-
-var cors = require('cors')
-var app = express()
-app.use(cors())
-
-
-const passport = require ('passport');
-require('./passport');
-
-// app.use(validator());
-
-
-// const app = express();
-// app.use(express.static('public'));
-app.use(morgan('common'));
+const bodyParser = require('body-parser');
+const Models = require('./model.js');
+const movies = Models.movies;
+const users = Models.users;
+const cors = require('cors');
+const validator = require('express-validator');
+const app = express();
+const bcrypt = require('bcrypt');
 
 //local database connection
 // mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true});
 
 //online database connection fix
 mongoose.connect('mongodb+srv://MaxOctAdmin:vi82R3s2XP5VLL8G@maxoct-didgb.mongodb.net/myFlixDB?retryWrites=true&w=majority', {useNewUrlParser: true});
-
-// mongoose.connect('mongodb+srv://kay:myRealPassword@cluster0.mongodb.net/myFlixDB?retryWrites=true', { useNewUrlParser: true });
-
-
 
 // fixing the node server issue dependencies 
 // https://stackoverflow.com/questions/46291571/passport-js-cannot-read-property-username-of-undefined-node
@@ -44,9 +23,14 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+app.use(cors()); // CORS-enabled for all origins
+const auth = require('./auth.js')(app);
+const passport = require('passport');
+require('./passport.js');
+app.use(validator());
 
-//importing auth.js file
-var auth = require('./auth')(app);
+// //importing auth.js file
+// var auth = require('./auth')(app);
 
 // Incorporating API Endpoints - passport.authenticate('jwt', {session: false})
 //READ in Mongoose GET requests - all movies
