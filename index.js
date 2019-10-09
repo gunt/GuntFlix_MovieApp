@@ -103,9 +103,10 @@ app.get('/movies/directors/:Name', passport.authenticate('jwt', {
 // const check = require('express-validator/check').check;
 // const validationResult = require('express-validator/check').validationResult;
 
-var check  = require('express-validator');
-var validationResult = require('express-validator');
+// var check  = require('express-validator');
+// var validationResult = require('express-validator');
 
+const { check, validationResult } = require('express-validator/check');
 
 app.post('/users', [
   check('Username').notEmpty(),
