@@ -5,9 +5,10 @@ const Users = Models.User;
 const express = require('express');
 const morgan = require('morgan');
 
-var api = express.Router();
+
 var expressValidator = require('express-validator');
 api.use(expressValidator())
+var api = express.Router();
 
 var cors = require('cors')
 var app = express()
