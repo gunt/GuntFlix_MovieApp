@@ -239,12 +239,8 @@ app.delete('/users/:Username', passport.authenticate('jwt', {
     });
 });
 
-// app listen function for other people
-// var port = process.env.PORT || 3000;
-// app.listen(port, "0.0.0.0", function() {
-// console.log("Listening on Port 3000");
-// });
-
-app.listen(process.env.PORT || 3000, function(){
-  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+//app listen function for other people
+var port = process.env.PORT || 3000;
+app.listen(port, "0.0.0.0", function() {
+console.log("Listening on Port 3000");
 });
