@@ -49,7 +49,7 @@ var auth = require('./auth')(app);
 //READ in Mongoose GET requests - all movies
 //app.get('/movies', passport.authenticate('jwt', {session: false}), (req, res) => {
 
-  app.get('/movies', (_req, res) => {  // Testing without Passport Authenticate
+  app.get('/movies', passport.authenticate('jwt', {session: false}), (_req, res) => {
   Movies.find()
     .then(function (movies) {
       res.status(201).json(movies)
