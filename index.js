@@ -102,11 +102,9 @@ app.get('/movies/directors/:Name', passport.authenticate('jwt', {
 const { check, validationResult } = require('express-validator');
 
 app.post('/users', [
-  check('Username', 'Username is required.').notEmpty(),
-  check('Username', 'Username contains non alphanumeric characters: Not allowed.').isAlphanumeric(),
-  check('Password', 'Password is required.').notEmpty(),
-  check('Email', 'Email is required.').notEmpty(),
-  check('Email', 'Email does not appear to be valid.').isEmail()],
+  check('Username').notEmpty(),
+  check('Password').notEmpty(),
+  check('Email',).notEmpty(),
   (req, res) => {
   const errors = validationResult(req);
   if (errors) {
