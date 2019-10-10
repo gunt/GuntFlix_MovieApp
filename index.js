@@ -26,8 +26,13 @@ app.use(cors());
 
 const auth = require('./auth.js')(app);
 
-app.get('/', (_req, res) => {
-  res.send('Welcome to myFlixDB!');
+// app.get('/', (_req, res) => {
+//   res.send('Welcome to myFlixDB');
+// });
+
+//assuming app is express Object.
+app.get('/',function(_req,res) {
+  res.sendFile('/public/documentation.html');
 });
 
 // Incorporating API Endpoints - passport.authenticate('jwt', {session: false})
