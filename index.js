@@ -105,13 +105,14 @@ app.get('/movies/directors/:Name', passport.authenticate('jwt', {
 
 // var check  = require('express-validator');
 // var validationResult = require('express-validator');
+// Yes, with the check API you can use check('something').not().isEmpty() for now.
 
 const { check, validationResult } = require('express-validator/check');
 
 app.post('/users', [
-  check('Username').notEmpty(),
-  check('Password').notEmpty(),
-  check('Email',).notEmpty()],
+  check('Username').not().isEmpty(),
+  check('Password').not().isEmpty(),
+  check('Email',).not().isEmpty()],
   (req, res) => {
   const errors = validationResult(req);
   if (errors) {
