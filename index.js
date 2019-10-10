@@ -13,10 +13,15 @@ const bcrypt = require('bcrypt');
 //local database connection
 // mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true});
 
-//online database connection fix
-mongoose.connect('mongodb+srv://MaxOctAdmin:vi82R3s2XP5VLL8G@maxoct-didgb.mongodb.net/myFlixDB?retryWrites=true&w=majority', {
-  useNewUrlParser: true
-});
+mongoose.connect('mongodb://localhost:27017/myFlixDB', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+  });
+
+// //online database connection fix
+// mongoose.connect('mongodb+srv://MaxOctAdmin:vi82R3s2XP5VLL8G@maxoct-didgb.mongodb.net/myFlixDB?retryWrites=true&w=majority', {
+//   useNewUrlParser: true
+// });
 
 // fixing the node server issue dependencies 
 // https://stackoverflow.com/questions/46291571/passport-js-cannot-read-property-username-of-undefined-node
