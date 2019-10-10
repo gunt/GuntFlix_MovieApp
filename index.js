@@ -48,16 +48,29 @@ require('./passport.js');
 //READ in Mongoose GET requests - all movies
 //app.get('/movies', passport.authenticate('jwt', {session: false}), (req, res) => {
 
-app.get('/movies', (_req, res) => { // Testing without Passport Authenticate
-  Movies.find()
-    .then(function (movies) {
+// app.get('/movies', (_req, res) => { // Testing without Passport Authenticate
+//   Movies.find()
+//     .then(function (movies) {
+//       res.status(201).json(movies)
+//     })
+//     .catch(function (err) {
+//       console.error(err);
+//       res.status(500).send("Error: " + err);
+//     });
+// });
+
+
+app.get('/movies', passport.authenticate('jwt', {session: false}), (_req, res) => {
+  Movies.findOne()
+  .then(movies => {
       res.status(201).json(movies)
-    })
-    .catch(function (err) {
+  })
+  .catch(err => {
       console.error(err);
-      res.status(500).send("Error: " + err);
-    });
+      res.status(500).send('Error: ' + err);
+  });
 });
+
 
 // Gets the data about a single movie by Title (Documentation)
 app.get('/movies/:Title', passport.authenticate('jwt', {
