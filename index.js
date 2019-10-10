@@ -60,15 +60,19 @@ require('./passport.js');
 // });
 
 
-app.get('/movies', passport.authenticate('jwt', {session: false}), (_req, res) => {
-  Movies.findOne()
-  .then(movies => {
+// Incorporating API Endpoints - passport.authenticate('jwt', {session: false})
+//READ in Mongoose GET requests - all movies
+app.get('/movies', passport.authenticate('jwt', {
+  session: false
+}), function (_req, res) {
+  Movies.find()
+    .then(function (movies) {
       res.status(201).json(movies)
-  })
-  .catch(err => {
+    })
+    .catch(function (err) {
       console.error(err);
-      res.status(500).send('Error: ' + err);
-  });
+      res.status(500).send("Error: " + err);
+    });
 });
 
 
