@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 const Models = require('./model.js');
-const Movies = Models.movie;
-const Users = Models.user;
+const Movies = Models.Movie;
+const Users = Models.User;
 const cors = require('cors');
 // const validator = require('express-validator');
 
@@ -29,11 +29,11 @@ mongoose.connect('mongodb+srv://MaxOctAdmin:vi82R3s2XP5VLL8G@maxoct-didgb.mongod
 
 // fixing the node server issue dependencies 
 // https://stackoverflow.com/questions/46291571/passport-js-cannot-read-property-username-of-undefined-node
-// var bodyParser = require('body-parser')
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({
-//   extended: true
-// }));
+var bodyParser = require('body-parser')
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 app.use(cors()); // CORS-enabled for all origins
 const auth = require('./auth.js')(app);
