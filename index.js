@@ -32,7 +32,7 @@ const auth = require('./auth.js')(app);
 
 //assuming app is express Object.
 app.get('/',function(_req,res) {
-  res.sendFile('/public/documentation.html');
+  res.sendFile('documentation.html');
 });
 
 // Incorporating API Endpoints - passport.authenticate('jwt', {session: false})
