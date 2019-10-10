@@ -134,13 +134,11 @@ const {
 } = require('express-validator');
 
 
-app.post('/users', [
-    // check('Username').not().isEmpty(), // check('Username').isLength({ min: 5 })
-    check('Username').isLength({ min: 5 }),
-    // check('Password').not().isEmpty(), // check('password').isLength({ min: 5 })
-    check('Password').isLength({ min: 5 }),
-    check('Email', ).isLength({ min: 5 })
-  ],
+app.post('/users', 
+[check('Username', 'Username is required').isLength({min: 5}),
+check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+check('Password', 'Password is required').not().isEmpty(),
+check('Email', 'Email does not appear to be valid').isEmail()],
   (req, res) => {
     const errors = validationResult(req);
     if (errors) {
