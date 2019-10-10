@@ -11,7 +11,7 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 
 //local database connection
-mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true}, {useUnifiedTopology: true});
+mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true, useUnifiedTopology: true});
 
 // mongoose.connect('mongodb+srv://MaxOctAdmin:vi82R3s2XP5VLL8G@maxoct-didgb.mongodb.net/myFlixDB?retryWrites=true&w=majority', {
 //   useNewUrlParser: true,
