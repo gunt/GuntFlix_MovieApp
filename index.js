@@ -4,7 +4,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const Models = require('./model.js');
 const Movies = Models.movie;
-const users = Models.user;
+const Users = Models.user;
 const cors = require('cors');
 // const validator = require('express-validator');
 
