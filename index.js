@@ -135,9 +135,11 @@ const {
 
 
 app.post('/users', [
-    check('Username').not().isEmpty(), // check('Username').not().isEmpty()
-    check('Password').not().isEmpty(),
-    check('Email', ).not().isEmpty()
+    // check('Username').not().isEmpty(), // check('Username').isLength({ min: 5 })
+    check('Username').isLength({ min: 5 }),
+    // check('Password').not().isEmpty(), // check('password').isLength({ min: 5 })
+    check('Password').isLength({ min: 5 }),
+    check('Email', ).isLength({ min: 5 })
   ],
   (req, res) => {
     const errors = validationResult(req);
