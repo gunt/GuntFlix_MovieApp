@@ -235,7 +235,12 @@ app.delete('/users/:Username', passport.authenticate('jwt', {
     });
 });
 
-}).listen(5000);
+const port = process.env.PORT || 8000;
+server.listen(port, () => {
+  console.log("App is running on port " + port);
+});
+
+// }).listen(5000);
 
 // //app listen function for other people
 // var port = process.env.PORT || 3000;  // listen(process.env.PORT || 5000)
