@@ -249,8 +249,8 @@ app.post('/users', [
         });
     });
 
-    const port = process.env.PORT || 8000;
-    server.listen(port, () => {
-      console.log("App is running on port " + port);
+    var port = process.env.PORT || 8000;
+    app.listen(port, "0.0.0.0", function () {
+      console.log("Listening on Port 3000");
     })
-  })
+  });
