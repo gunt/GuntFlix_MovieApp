@@ -234,8 +234,10 @@ app.delete('/users/:Username', passport.authenticate('jwt', {
     });
 });
 
-//app listen function for other people
-var port = process.env.PORT || 3000;
-app.listen(port, "0.0.0.0", function() {
-console.log("Listening on Port 3000");
-})})
+}).listen(5000);
+
+// //app listen function for other people
+// var port = process.env.PORT || 3000;  // listen(process.env.PORT || 5000)
+// app.listen(port, "0.0.0.0", function() {
+// console.log("Listening on Port 3000");
+// })})
