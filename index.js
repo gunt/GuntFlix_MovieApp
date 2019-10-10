@@ -26,6 +26,9 @@ app.use(cors());
 
 const auth = require('./auth.js')(app);
 
+app.get('/', (_req, res) => {
+  res.send('Welcome to myFlixDB!');
+});
 
 // Incorporating API Endpoints - passport.authenticate('jwt', {session: false})
 //READ in Mongoose GET requests - all movies
