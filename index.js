@@ -134,17 +134,18 @@ const {
 } = require('express-validator');
 
 
-app.post('/users', 
-[check('Username', 'Username is required').isLength({min: 5}),
-check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
-check('Password', 'Password is required').not().isEmpty(),
-check('Email', 'Email does not appear to be valid').isEmail()],
-  (req, res) => {
+app.post('/users',[
+  // Validation logic here for request
+    check('Username').isAlphanumeric(),
+    check('Password').isLength({ min: 5}),
+    check('Email').normalizeEmail().isEmail()
+  ], (req, res) => {
+  
+    // check validation object for errors
     const errors = validationResult(req);
-    if (errors) {
-      return res.status(422).json({
-        errors: errors
-      });
+  
+    if (!errors.isEmpty) {
+      return res.status(422).json({ errors: errors.array});
     }
 
     const hashedPassword = users.hashPassword(req.body.Password);
