@@ -3,4 +3,4 @@ GET https://movie-flix-777.herokuapp.com/movies/
 
 ###
 
-POST https://movie-flix-777.herokuapp.com/login/?Username=LudAlfred&Password=3839943344
+GET https://movie-flix-777.herokuapp.com/movies/genres/The%20Godfather
