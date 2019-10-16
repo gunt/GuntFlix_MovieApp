@@ -38,9 +38,8 @@ app.get('/', (_req, res) => {
 
 // Incorporating API Endpoints - passport.authenticate('jwt', {session: false})
 //READ in Mongoose GET requests - all movies
-app.get('/movies', passport.authenticate('jwt', {
-  session: false
-}), function (_req, res) {
+// passport.authenticate('jwt', { session: false }) < (remove it to allow anonymous users to make requests on the movies endpoint)
+app.get('/movies', function (_req, res) {
   Movies.find()
     .then(function (movies) {
       res.status(201).json(movies)
