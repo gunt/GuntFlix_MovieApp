@@ -27,7 +27,22 @@ mongoose.connect('mongodb+srv://MaxOctAdmin:vi82R3s2XP5VLL8G@maxoct-didgb.mongod
 app.use(express.static('public'));
 app.use(morgan('common'));
 app.use(bodyParser.json());
+
 app.use(cors());
+
+let allowedOrigins = [`http://localhost:${port}`, ...process.env.ALLOWED_ORIGINS.split(' ')];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      // If a specific origin is not found on the list of allowed origins.
+      let message = `The CORS policy for this application does not allow access from origin: ${origin}`;
+      return callback(new Error(message), false);
+    }
+    return callback(null, true);
+  }
+}));
 
 const auth = require('./auth.js')(app);
 
