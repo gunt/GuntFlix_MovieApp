@@ -1,4 +1,4 @@
-// client/src/main-view/movie-view.jsx
+// client/src/components/main-view/movie-view.jsx
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
@@ -35,7 +35,7 @@ export class MovieView extends React.Component {
           <h3 className='label'>Director</h3>
           <p className='value'>{movie.Director.Name}</p>
         </div>
-        <button onClick={() => onClick()}>Back</button>
+        <Button onClick={() => onClick()}>Back</Button>
       </div>
     );
   }
