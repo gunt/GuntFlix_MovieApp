@@ -1,0 +1,28 @@
+// Form Styling
+
+.form {
+    border-style: solid;
+    border-width: 1px
+}
+
+.form-group {
+    margin-top: 70px;
+}
+
+.form-label {
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 16px;
+}
+
+.form-text {
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 16px;
+}
+
+span {
+    text-decoration: underline;
+}
+
+span:hover {
+    cursor: pointer;
+}
