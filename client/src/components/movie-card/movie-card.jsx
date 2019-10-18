@@ -1,4 +1,10 @@
+// client/src/main-view/movie-card.jsx
+
 import React from 'react';
+import PropTypes from 'prop-types';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import './movie-card.scss';
 
 export class MovieCard extends React.Component {
   render() {
@@ -9,9 +15,28 @@ export class MovieCard extends React.Component {
 
     //onClick prop support to the MovieCard
     return (
-      <div onClick={() => onClick(movie)} className='movie-card'>
-        {movie.Title}
-      </div>
+      // react-bootstrap Card
+      <Card>
+        <Card.Header
+          as='center'
+          onClick={() => onClick(movie)}
+          className='movie-card'
+        >
+          {movie.Title}
+        </Card.Header>
+
+        {/* <Card.Text>
+      With supporting text below as a natural lead-in to additional content.
+    </Card.Text> */}
+        <Button
+          type='button'
+          as='button'
+          onClick={() => onClick(movie)}
+          className='movie-button'
+        >
+          Click Here
+        </Button>
+      </Card>
     );
   }
 }
