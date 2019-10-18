@@ -51,11 +51,11 @@ export class MainView extends React.Component {
     });
   }
 
-  //   onBackClick(movie) {
-  //     this.setState({
-  //       selectedMovie: null
-  //     });
-  //   }
+  onBackClick(movie) {
+    this.setState({
+      selectedMovie: null
+    });
+  }
 
   onLoggedIn(user) {
     this.setState({
@@ -111,9 +111,7 @@ export class MainView extends React.Component {
     return (
       <body className='mainV'>
         <Navbar className='title' fluid='true'>
-          <Navbar.Brand className='t'>
-            Welcome to my Movie Reel App
-          </Navbar.Brand>
+          <Navbar.Brand className='t'>GuntFlix MovieAPP</Navbar.Brand>
         </Navbar>
 
         <Container className='main-view'>

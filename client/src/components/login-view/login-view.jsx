@@ -43,9 +43,8 @@ export function LoginView(props) {
         />
         <Form.Text className='text-muted'></Form.Text>
       </Form.Group>
-      <Button variant='primary' type='button'>
-        {' '}
-        onClick={handleSubmit}>Submit
+      <Button type='button' onClick={handleSubmit}>
+        Submit
       </Button>
       <Form.Group controlId='formNewUser'>
         <Form.Text className='newUsers'>

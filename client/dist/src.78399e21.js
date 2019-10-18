@@ -36054,9 +36054,9 @@ function LoginView(props) {
   }, _defineProperty(_React$createElement2, "type", "email"), _defineProperty(_React$createElement2, "placeholder", "Enter Password"), _React$createElement2)), _react.default.createElement(_Form.default.Text, {
     className: "text-muted"
   })), _react.default.createElement(_Button.default, {
-    variant: "primary",
-    type: "button"
-  }, ' ', "onClick=", handleSubmit, ">Submit"), _react.default.createElement(_Form.default.Group, {
+    type: "button",
+    onClick: handleSubmit
+  }, "Submit"), _react.default.createElement(_Form.default.Group, {
     controlId: "formNewUser"
   }, _react.default.createElement(_Form.default.Text, {
     className: "newUsers"
@@ -38803,12 +38803,14 @@ function (_React$Component) {
       this.setState({
         selectedMovie: movie
       });
-    } //   onBackClick(movie) {
-    //     this.setState({
-    //       selectedMovie: null
-    //     });
-    //   }
-
+    }
+  }, {
+    key: "onBackClick",
+    value: function onBackClick(movie) {
+      this.setState({
+        selectedMovie: null
+      });
+    }
   }, {
     key: "onLoggedIn",
     value: function onLoggedIn(user) {
@@ -38878,7 +38880,7 @@ function (_React$Component) {
         fluid: "true"
       }, _react.default.createElement(_Navbar.default.Brand, {
         className: "t"
-      }, "Welcome to my Movie Reel App")), _react.default.createElement(_Container.default, {
+      }, "GuntFlix MovieAPP")), _react.default.createElement(_Container.default, {
         className: "main-view"
       }, _react.default.createElement(_Row.default, null, selectedMovie ? _react.default.createElement(_Col.default, null, _react.default.createElement(_movieView.MovieView, {
         movie: selectedMovie,
@@ -39002,7 +39004,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62495" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62744" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
