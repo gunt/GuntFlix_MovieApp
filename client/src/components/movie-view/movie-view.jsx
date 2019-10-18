@@ -1,4 +1,8 @@
+// client/src/main-view/movie-view.jsx
 import React from 'react';
+import PropTypes from 'prop-types';
+import Button from 'react-bootstrap/Button';
+import './movie-view.scss';
 
 export class MovieView extends React.Component {
   constructor() {
@@ -14,25 +18,32 @@ export class MovieView extends React.Component {
     return (
       <div className='movie-view'>
         <div className='movie-title'>
-          <div className='label'>Title</div>
-          <div className='value'>{movie.Title}</div>
+          <h3 className='label'>Title</h3>
+          <p className='value'>{movie.Title}</p>
         </div>
         <div className='movie-description'>
-          <div className='label'>Description</div>
-          <div className='value'>{movie.Description}</div>
+          <h3 className='label'>Description</h3>
+          <p className='value'>{movie.Description}</p>
         </div>
         <img className='movie-poster' src={movie.ImageURL} />
 
         <div className='movie-genre'>
-          <div className='label'>Genre</div>
-          <div className='value'>{movie.Genre.Name}</div>
+          <h3 className='label'>Genre</h3>
+          <p className='value'>{movie.Genre.Name}</p>
         </div>
         <div className='movie-director'>
-          <div className='label'>Director</div>
-          <div className='value'>{movie.Director.Name}</div>
+          <h3 className='label'>Director</h3>
+          <p className='value'>{movie.Director.Name}</p>
         </div>
         <button onClick={() => onClick()}>Back</button>
       </div>
     );
   }
 }
+
+MovieView.propTypes = {
+  movie: PropTypes.shape({
+    Title: PropTypes.string
+  }).isRequired,
+  onClick: PropTypes.func.isRequired
+};
