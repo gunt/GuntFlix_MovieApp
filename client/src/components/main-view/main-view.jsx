@@ -106,9 +106,6 @@ export class MainView extends React.Component {
             )}
           </Row>
         </Container>
-        <Navbar fixed='bottom' className='borderBottom' fluid='true'>
-          <Navbar.Brand href='#'>Navbar</Navbar.Brand>
-        </Navbar>
       </body>
     );
   }
