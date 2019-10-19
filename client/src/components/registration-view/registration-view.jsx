@@ -1,4 +1,4 @@
-// client/src/components/main-view/registration-view.jsx
+// client/src/components/registration-view/registration-view.jsx
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
@@ -14,25 +14,6 @@ export function RegistrationView(props) {
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
   const [validated, setValidated] = useState(false);
-
-  const formField = (label, value, onChange, type = 'text', feedback) => {
-    if (!feedback) {
-      feedback = `Please insert your ${label.toLowerCase()}.`;
-    }
-    return (
-      <Form.Group controlId='formBasicUsername'>
-        <Form.Label>{label}</Form.Label>
-        <Form.Control
-          type={type}
-          value={value}
-          onChange={e => onChange(e.target.value)}
-          required
-          placeholder={`Enter ${label.toLowerCase()}`}
-        />
-        <Form.Control.Feedback type='invalid'>{feedback}</Form.Control.Feedback>
-      </Form.Group>
-    );
-  };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -70,7 +51,7 @@ export function RegistrationView(props) {
               birthday,
               setBirthday,
               'date',
-              'Please provide a valid date (e.g. 01/01/1970).'
+              'Please provide a valid date.'
             )}
 
             <Button variant='primary' type='submit'>
@@ -84,5 +65,10 @@ export function RegistrationView(props) {
 }
 
 RegistrationView.propTypes = {
-  onNewUserRegistered: PropTypes.func.isRequired
+  onLoggedIn: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
+  username: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  birthday: PropTypes.string.isRequired
 };

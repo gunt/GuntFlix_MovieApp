@@ -1,15 +1,16 @@
-// client/src/components/main-view/movie-view.jsx
+// client/src/components/movie-view/movie-view.jsx
 import React from 'react';
 import PropTypes from 'prop-types';
-import Media from 'react-bootstrap/Media';
+import { MainView } from '../main-view/main-view';
+import Button from 'react-bootstrap/Button';
 import './movie-view.scss';
 
 export class MovieView extends React.Component {
   constructor() {
     super();
-
     this.state = {};
   }
+
   render() {
     const { movie, onClick } = this.props;
 
@@ -17,17 +18,27 @@ export class MovieView extends React.Component {
 
     return (
       <div className='movie-view'>
-        <h1>{movie.Title}</h1>
-        <Media className='d-flex flex-column flex-md-row align-items-center'>
-          <Media.Body>
-            <h5>Genre: {movie.Genre.Name}</h5>
-            <h5>Director: {movie.Director.Name}</h5>
-            <br />
-            <h5>Description</h5>
-            <p>{movie.Description}</p>
-          </Media.Body>
-          <img width={200} height={300} className='ml-3' src={movie.ImageUrl} />
-        </Media>
+        <div className='movie-title'>
+          <h2 className='label'>Title</h2>
+          <p className='value'>{this.props.movie.Title}</p>
+        </div>
+        <div className='movie-description'>
+          <h3 className='label'>Description</h3>
+          <p className='value'>{this.props.movie.Description}</p>
+        </div>
+        <div className='movie-genre'>
+          <h3 className='label'>Genre</h3>
+          <p className='value'>{this.props.movie.Genre.Name}</p>
+        </div>
+        <div className='movie-director'>
+          <h3 className='label'>Director</h3>
+          <p className='value'>{this.props.movie.Director.Name}</p>
+        </div>
+        <div className='return-button'>
+          <Button variant='primary' onClick={() => this.props.returnCallback()}>
+            Return
+          </Button>
+        </div>
       </div>
     );
   }
@@ -36,15 +47,13 @@ export class MovieView extends React.Component {
 MovieView.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string,
-    ImageUrl: PropTypes.string,
     Description: PropTypes.string,
-    Genre: PropTypes.exact({
-      _id: PropTypes.string,
-      Name: PropTypes.string,
-      Description: PropTypes.string
+    Genre: PropTypes.shape({
+      Name: PropTypes.string
     }),
     Director: PropTypes.shape({
       Name: PropTypes.string
     })
-  }).isRequired
+  }).isRequired,
+  onClick: PropTypes.func.isRequired
 };
