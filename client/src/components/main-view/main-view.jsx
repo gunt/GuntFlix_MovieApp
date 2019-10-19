@@ -1,20 +1,18 @@
-// client/src/main-view/main-view.jsx
+// client/src/components/main-view/main-view.jsx
 import React from 'react';
 import axios from 'axios';
+//import PropTypes from 'prop-types'; // Not at the moment
 
 // views imports
 import { LoginView } from '../login-view/login-view';
-import { RegistrationView } from '../registration-view/registration-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 
-// react-bootstrap imports
+//react-bootstrap imports // not now
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Navbar from 'react-bootstrap/Navbar';
-
-import './main-view.scss';
 
 export class MainView extends React.Component {
   constructor() {
@@ -24,10 +22,10 @@ export class MainView extends React.Component {
 
     // Initialize the state to an empty object so we can destructure it later
     this.state = {
-      movie: null,
+      movies: null,
       selectedMovie: null,
       user: null,
-      newUser: false
+      userAction: null
     };
   }
 
@@ -47,80 +45,52 @@ export class MainView extends React.Component {
 
   onMovieClick(movie) {
     this.setState({
-      selectedMovie: movie
-    });
-  }
-
-  onBackClick(movie) {
-    this.setState({
-      selectedMovie: null
+      selectedMovie: movie,
+      userAction: null
     });
   }
 
   onLoggedIn(user) {
     this.setState({
-      user
+      user,
+      userAction: null
     });
   }
 
-  newUser() {
+  onNewUserRegistered(user) {
     this.setState({
-      newUser: true
+      user,
+      userAction: null
     });
   }
 
-  onSignedIn(user) {
+  onBackClick(_movie) {
     this.setState({
-      user: user,
-      register: false
-    });
-  }
-
-  alreadyRegistered() {
-    this.setState({
-      newUser: false
+      selectedMovie: null
     });
   }
 
   render() {
     // If the state isn't initialized, this will throw on runtime
     // before the data is initially loaded
-    const { movies, selectedMovie, user, newUser } = this.state;
+    const { movies, selectedMovie, user } = this.state;
 
-    if (!user && newUser === false)
-      return (
-        <LoginView
-          onClick={() => this.newUser()}
-          onLoggedIn={user => this.onLoggedIn(user)}
-        />
-      );
+    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
 
-    if (newUser)
-      return (
-        <RegistrationView
-          onClick={() => this.alreadyRegistered()}
-          onSignedIn={user => this.onSignedIn(user)}
-        />
-      );
-
-    // Before the movies have been loaded //change the class to avoid confusion
-    // if (!movies) return <div className='main-view' />;
-
-    if (!movies) return <body className='mainV' />;
+    if (!movies) return <body className='main-view' />;
 
     return (
-      <body className='mainV'>
+      <body className='moview'>
         <Navbar className='title' fluid='true'>
-          <Navbar.Brand className='t'>GuntFlix MovieAPP</Navbar.Brand>
+          <Navbar.Brand> MovieFlix App</Navbar.Brand>
         </Navbar>
-
         <Container className='main-view'>
           <Row>
             {selectedMovie ? (
               <Col>
                 <MovieView
                   movie={selectedMovie}
-                  onClick={button => this.onBackClick()}
+                  onClick={() => this.onBackClick()}
                 />
               </Col>
             ) : (
@@ -137,7 +107,7 @@ export class MainView extends React.Component {
           </Row>
         </Container>
         <Navbar fixed='bottom' className='borderBottom' fluid='true'>
-          <Navbar.Brand className='t'></Navbar.Brand>
+          <Navbar.Brand href='#'>Navbar</Navbar.Brand>
         </Navbar>
       </body>
     );

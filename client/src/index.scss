@@ -3,3 +3,12 @@ $color: steelblue;
 .my-flix {
     color: $color;
 }
+
+form-container {
+    position: fixed;
+    padding: 1rem;
+    margin-right: 0;
+    margin-left: 0;
+    border: .0.5rem solid $form-container-color;
+    border-radius: 7px;
+}

@@ -1,5 +1,4 @@
-// client/src/main-view/movie-card.jsx
-
+// client/src/components/main-view/movie-card.jsx
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card from 'react-bootstrap/Card';
@@ -25,9 +24,6 @@ export class MovieCard extends React.Component {
           {movie.Title}
         </Card.Header>
 
-        {/* <Card.Text>
-      With supporting text below as a natural lead-in to additional content.
-    </Card.Text> */}
         <Button
           type='button'
           as='button'
