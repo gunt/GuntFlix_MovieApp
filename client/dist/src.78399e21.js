@@ -36123,14 +36123,23 @@ function LoginView(props) {
   }, "Please insert your password.")), _react.default.createElement(_Button.default, {
     variant: "primary",
     type: "submit"
-  }, "Submit")))));
-} // LoginView.propTypes = {
-//   username: PropTypes.string.isRequired,
-//   password: PropTypes.string.isRequired,
-//   onClick: PropTypes.func.isRequired,
-//   newUser: PropTypes.func.isRequired,
-//   onLoggedIn: PropTypes.func.isRequired
-// };
+  }, "Submit"), _react.default.createElement(_Form.default.Group, {
+    controlId: "formNewUser"
+  }, _react.default.createElement(_Form.default.Text, null, "New user? Click", ' ', _react.default.createElement(_Button.default, {
+    id: "login-view__register",
+    style: {
+      padding: 0
+    },
+    variant: "link",
+    onClick: function onClick() {
+      return props.newUser();
+    }
+  }, ' ', "here", ' '), ' ', "to register"))))));
+}
+
+LoginView.propTypes = {
+  onLoggedIn: _propTypes.default.func.isRequired
+};
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","./login-view.scss":"components/login-view/login-view.scss"}],"../node_modules/react-bootstrap/esm/utils/divWithClassName.js":[function(require,module,exports) {
 "use strict";
 

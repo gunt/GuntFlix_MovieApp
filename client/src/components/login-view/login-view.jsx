@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+
 import './login-view.scss';
 
 export function LoginView(props) {
@@ -62,6 +64,21 @@ export function LoginView(props) {
             <Button variant='primary' type='submit'>
               Submit
             </Button>
+            <Form.Group controlId='formNewUser'>
+              <Form.Text>
+                New user? Click{' '}
+                <Button
+                  id='login-view__register'
+                  style={{ padding: 0 }}
+                  variant='link'
+                  onClick={() => props.newUser()}
+                >
+                  {' '}
+                  here{' '}
+                </Button>{' '}
+                to register
+              </Form.Text>
+            </Form.Group>
           </Form>
         </Col>
       </Row>
@@ -69,10 +86,6 @@ export function LoginView(props) {
   );
 }
 
-// LoginView.propTypes = {
-//   username: PropTypes.string.isRequired,
-//   password: PropTypes.string.isRequired,
-//   onClick: PropTypes.func.isRequired,
-//   newUser: PropTypes.func.isRequired,
-//   onLoggedIn: PropTypes.func.isRequired
-// };
+LoginView.propTypes = {
+  onLoggedIn: PropTypes.func.isRequired
+};
