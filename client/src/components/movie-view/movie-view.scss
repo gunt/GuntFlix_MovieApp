@@ -1,4 +1,27 @@
-p {
-    font-family: 'Merriweather', serif;
-    font-size: 16px;
+$primary-color: rgb(37, 94, 80);
+$secondary-color: rgb(108, 115, 130);
+
+
+body {
+    // background: url('http://clipart-library.com/images/pTqrbEXkc.jpg');
+    background-size: cover;
+}
+
+.movie-view {
+    background-color: $primary-color;
+    border-radius: 25px;
+    color: #fff;
+    margin-top: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+div.card-body {
+    text-transform: capitalize;
+}
+
+div.card-title {
+    text-align: center;
 }
