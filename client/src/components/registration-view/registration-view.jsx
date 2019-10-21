@@ -1,9 +1,9 @@
-// client/src/components/registration-view/registration-view.jsx
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import Form from 'react-bootstrap/Form';
+//imports
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import './registration-view.scss';
 
 export function RegistrationView(props) {
@@ -69,15 +69,29 @@ export function RegistrationView(props) {
         <Button variant='primary' type='submit' onClick={handleSubmit}>
           Create Account
         </Button>
-        <Button variant='primary' onClick={() => props.onClick()}>
-          Have an account? Sign in.
-        </Button>
+        <Form.Text>
+          Already registered? Click{' '}
+          <Button
+            style={{ padding: 0 }}
+            variant='link'
+            onClick={() => props.userRegistered()}
+          >
+            {' '}
+            here{' '}
+          </Button>{' '}
+          to login
+        </Form.Text>
       </Form>
     </Container>
   );
 }
 
 RegistrationView.propTypes = {
-  onSignedIn: PropTypes.func.isRequired,
-  onClick: PropTypes.func.isRequired
+  username: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  birthday: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  userRegistered: PropTypes.func.isRequired,
+  onLoggedIn: PropTypes.func.isRequired
 };
