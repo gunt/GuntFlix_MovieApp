@@ -36473,7 +36473,7 @@ function (_React$Component) {
         className: "ml-3",
         src: movie.ImageUrl // image urlto fix from DATAbase
         ,
-        alt: "Generic placeholder" //
+        alt: "" //
 
       })));
     }
