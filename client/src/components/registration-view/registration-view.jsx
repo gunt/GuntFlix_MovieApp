@@ -3,72 +3,81 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
 import './registration-view.scss';
 
 export function RegistrationView(props) {
-  const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [birthday, setBirthday] = useState('');
-  const [validated, setValidated] = useState(false);
+  const [username, createUsername] = useState('');
+  const [password, createPassword] = useState('');
+  const [email, createEmail] = useState('');
+  const [birthday, createDob] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
-
-    // handles form validation
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.stopPropagation();
-    } else {
-      console.log('new registration', username, 'with password', password);
-
-      props.onNewUserRegistered(username);
-    }
-
-    setValidated(true);
+    console.log(username, password, birthday, email);
+    props.onLoggedIn(username);
   };
 
   return (
-    <div className='registration-view'>
-      <Row className='justify-content-center'>
-        <Col xs={11} sm={8} md={6} className='form-container'>
-          <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            {formField('Name', name, setName)}
-            {formField('Username', username, setUsername)}
-            {formField('Password', password, setPassword, 'password')}
-            {formField(
-              'Email',
-              email,
-              setEmail,
-              'email',
-              'Please provide a valid email address.'
-            )}
-            {formField(
-              'Birthday',
-              birthday,
-              setBirthday,
-              'date',
-              'Please provide a valid date.'
-            )}
+    <Container className='regContainer'>
+      <Form className='registrationForm'>
+        <Form.Group controlId='formBasicEmail'>
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            type='email'
+            placeholder='Enter email'
+            value={email}
+            onChange={e => createEmail(e.target.value)}
+          />
+          <Form.Text className='emailShare'>
+            We never share your information.
+          </Form.Text>
+        </Form.Group>
 
-            <Button variant='primary' type='submit'>
-              Submit
-            </Button>
-          </Form>
-        </Col>
-      </Row>
-    </div>
+        <Form.Group controlId='formBasicUsername'>
+          <Form.Label>Username</Form.Label>
+          <Form.Control
+            type='text'
+            placeholder='Username'
+            value={username}
+            onChange={e => createUsername(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group controlId='formBasicPassword'>
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type='password'
+            placeholder='Password'
+            value={password}
+            onChange={e => createPassword(e.target.value)}
+          />
+        </Form.Group>
+
+        <Form.Group controlId='formBasicDob'>
+          <Form.Label>Date of Birth</Form.Label>
+          <Form.Control
+            type='date'
+            placeholder='07/07/1977'
+            value={birthday}
+            onChange={e => createDob(e.target.value)}
+          />
+        </Form.Group>
+
+        <Form.Group controlId='formBasicCheckbox'>
+          <Form.Check type='checkbox' label='Accept Terms and Conditions' />
+        </Form.Group>
+        <Button variant='primary' type='submit' onClick={handleSubmit}>
+          Create Account
+        </Button>
+        <Button variant='primary' onClick={() => props.onClick()}>
+          Have an account? Sign in.
+        </Button>
+      </Form>
+    </Container>
   );
 }
 
 RegistrationView.propTypes = {
-  onLoggedIn: PropTypes.func.isRequired,
-  onClick: PropTypes.func.isRequired,
-  username: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  birthday: PropTypes.string.isRequired
+  onSignedIn: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired
 };

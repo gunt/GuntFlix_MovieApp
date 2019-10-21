@@ -1,28 +1,18 @@
-.form {
-  border-style: solid;
-  border-width: 1px;
+body {
+  background: url("http://clipart-library.com/images/pTqrbEXkc.jpg");
+  background-size: cover;
 }
 
-.form-group {
-  margin-top: 70px;
+.logContainer {
+  background-color: #255e50;
+  border-radius: 25px;
+  color: #6c7382;
+  margin-top: 20px;
 }
 
-.form-label {
-  font-family: "Open Sans Condensed", sans-serif;
-  font-size: 16px;
-}
-
-.form-text {
-  font-family: "Open Sans Condensed", sans-serif;
-  font-size: 16px;
-}
-
-span {
-  text-decoration: underline;
-}
-
-span:hover {
-  cursor: pointer;
+h1 {
+  text-align: center;
+  color: #fff;
 }
 .card-header {
   font-family: "Merriweather", serif;
@@ -36,8 +26,16 @@ p {
   font-family: "Merriweather", serif;
   font-size: 16px;
 }
-.form-group {
-  margin-top: 33px;
+body {
+  background: url("http://clipart-library.com/images/pTqrbEXkc.jpg");
+  background-size: cover;
+}
+
+.regContainer {
+  background-color: #255e50;
+  border-radius: 25px;
+  color: #6c7382;
+  margin-top: 20px;
 }
 .main-view {
   margin-left: auto;
