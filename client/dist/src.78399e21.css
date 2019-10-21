@@ -8,6 +8,7 @@ body {
   border-radius: 25px;
   color: #6c7382;
   margin-top: 20px;
+  width: 60%;
 }
 
 h1 {
@@ -22,9 +23,27 @@ h1 {
 .button {
   max-width: 20%;
 }
-p {
-  font-family: "Merriweather", serif;
-  font-size: 16px;
+body {
+  background-size: cover;
+}
+
+.movie-view {
+  background-color: #255e50;
+  border-radius: 25px;
+  color: #fff;
+  margin-top: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+div.card-body {
+  text-transform: capitalize;
+}
+
+div.card-title {
+  text-align: center;
 }
 body {
   background: url("http://clipart-library.com/images/pTqrbEXkc.jpg");
