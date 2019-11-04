@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -74,10 +74,10 @@ export function LoginView(props) {
   );
 }
 
-LoginView.propTypes = {
-  username: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  onLoggedIn: PropTypes.func.isRequired
-  // onClick: PropTypes.func.isRequired
-};
+// LoginView.propTypes = {
+//   username: PropTypes.string.isRequired,
+//   password: PropTypes.string.isRequired,
+//   handleSubmit: PropTypes.func.isRequired,
+//   onLoggedIn: PropTypes.func.isRequired
+//   // onClick: PropTypes.func.isRequired
+// };
