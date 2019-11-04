@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Media from 'react-bootstrap/Media';
+import Button from 'react-bootstrap/Button';
 import './movie-view.scss';
 
 export class MovieView extends React.Component {
@@ -11,7 +12,7 @@ export class MovieView extends React.Component {
   }
 
   render() {
-    const { movie } = this.props;
+    const { movie, onClick } = this.props;
 
     if (!movie) return null;
 
@@ -34,6 +35,13 @@ export class MovieView extends React.Component {
             alt='' //
           />
         </Media>
+        <Button
+          className='button-back'
+          onClick={() => this.props.returnCallback()}
+          variant='outline-info'
+        >
+          BACK
+        </Button>
       </div>
     );
   }
