@@ -7,7 +7,7 @@ const Models = require('./model.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 const passport = require('passport');
-// const cors = require('cors');
+const cors = require('cors');
 const {
   check,
   validationResult
