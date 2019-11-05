@@ -36782,8 +36782,7 @@ function (_React$Component) {
         this.setState({
           user: localStorage.getItem('user')
         });
-        this.getMovies(accessToken);
-        this.getUser(localStorage.getItem('user'), accessToken);
+        this.getMovies(accessToken); // this.getUser(localStorage.getItem('user'), accessToken);
       }
     }
   }, {
@@ -36972,7 +36971,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56175" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59219" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
