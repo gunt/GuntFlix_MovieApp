@@ -36488,8 +36488,7 @@ function (_React$Component) {
         width: 220,
         height: 326,
         className: "ml-3",
-        src: movie.ImageUrl // image urlto fix from DATAbase
-        ,
+        src: movie.ImageUrl,
         alt: "" //
 
       })), _react.default.createElement(_Button.default, {
@@ -36784,6 +36783,7 @@ function (_React$Component) {
           user: localStorage.getItem('user')
         });
         this.getMovies(accessToken);
+        this.getUser(localStorage.getItem('user'), accessToken);
       }
     }
   }, {
@@ -36972,7 +36972,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53877" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56175" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

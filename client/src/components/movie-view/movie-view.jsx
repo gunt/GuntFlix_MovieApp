@@ -31,7 +31,7 @@ export class MovieView extends React.Component {
             width={220}
             height={326}
             className='ml-3'
-            src={movie.ImageUrl} // image urlto fix from DATAbase
+            src={movie.ImageUrl}
             alt='' //
           />
         </Media>

@@ -34,6 +34,7 @@ export class MainView extends React.Component {
         user: localStorage.getItem('user')
       });
       this.getMovies(accessToken);
+      this.getUser(localStorage.getItem('user'), accessToken);
     }
   }
 
