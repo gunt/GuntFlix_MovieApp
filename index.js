@@ -36,9 +36,6 @@ app.get('/', (_req, res) => {
   res.send('Welcome to myFlixDB');
 });
 
-// Incorporating API Endpoints - passport.authenticate('jwt', {session: false})
-//READ in Mongoose GET requests - all movies
-// passport.authenticate('jwt', { session: false }) < (remove it to allow anonymous users to make requests on the movies endpoint)
 app.get('/movies', passport.authenticate('jwt', {
   session: false
 }), function (_req, res) {
