@@ -1,4 +1,4 @@
-//imports
+import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -87,11 +87,6 @@ export function RegistrationView(props) {
 }
 
 RegistrationView.propTypes = {
-  username: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  birthday: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
-  userRegistered: PropTypes.func.isRequired,
-  onLoggedIn: PropTypes.func.isRequired
+  onSignedIn: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired
 };

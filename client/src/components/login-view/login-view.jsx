@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
+
+import { Link } from 'react-router-dom';
 
 import './login-view.scss';
 
@@ -13,7 +15,6 @@ export function LoginView(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    /* Send a request to the server for authentication */
     axios
       .post('https://movie-flix-777.herokuapp.com/login', {
         Username: username,
@@ -54,19 +55,13 @@ export function LoginView(props) {
           Login
         </Button>
 
-        <Form.Group controlId='formNewUser'>
+        <Form.Group controlId='newUser'>
           <Form.Text>
-            New user? Click{' '}
-            <Button
-              id='login-view__register'
-              style={{ padding: 0 }}
-              variant='link'
-              onClick={() => props.newUser()}
-            >
+            New User? Click{' '}
+            <Button id='registerButton' onClick={() => props.onClick()}>
               {' '}
-              here{' '}
-            </Button>{' '}
-            to register
+              Register
+            </Button>
           </Form.Text>
         </Form.Group>
       </form>
@@ -74,10 +69,6 @@ export function LoginView(props) {
   );
 }
 
-// LoginView.propTypes = {
-//   username: PropTypes.string.isRequired,
-//   password: PropTypes.string.isRequired,
-//   handleSubmit: PropTypes.func.isRequired,
-//   onLoggedIn: PropTypes.func.isRequired
-//   // onClick: PropTypes.func.isRequired
-// };
+LoginView.propTypes = {
+  onLoggedIn: PropTypes.func.isRequired
+};

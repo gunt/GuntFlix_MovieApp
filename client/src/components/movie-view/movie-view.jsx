@@ -1,64 +1,41 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Media from 'react-bootstrap/Media';
 import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import React from 'react';
 import './movie-view.scss';
 
 export class MovieView extends React.Component {
   constructor() {
     super();
-
     this.state = {};
   }
 
   render() {
     const { movie, onClick } = this.props;
-
     if (!movie) return null;
 
     return (
-      <div className='movie-view'>
-        <h1>{movie.Title}</h1>
-        <Media className='d-flex flex-column flex-md-row align-items-center'>
-          <Media.Body>
-            <h6>Genre: {movie.Genre.Name}</h6>
-            <h6>Director: {movie.Director.Name}</h6>
-            <br />
-            <h6>Description</h6>
-            <p>{movie.Description}</p>
-          </Media.Body>
-          <img
-            width={220}
-            height={326}
-            className='ml-3'
-            src={movie.ImageUrl}
-            alt='' //
-          />
-        </Media>
-        <Button
-          className='button-back'
-          onClick={() => this.props.returnCallback()}
-          variant='outline-info'
-        >
-          BACK
-        </Button>
+      <div>
+        <Card style={{ width: '75%' }}>
+          <Card.Img variant='top' src={movie.imagepath} />
+          <Card.Body>
+            <Card.Title>{movie.title}</Card.Title>
+            <Card.Text>Genre: {movie.genre.name}</Card.Text>
+            <Card.Text>Director: {movie.director.name}</Card.Text>
+            <Card.Text>Director Bio: {movie.director.bio}</Card.Text>
+            <Card.Text>
+              <a href={movie.trailer}>Watch Trailer</a>
+            </Card.Text>
+
+            <Button
+              variant='primary'
+              onClick={() => onClick()}
+              className='homeButton'
+            >
+              Go back
+            </Button>
+          </Card.Body>
+        </Card>
       </div>
     );
   }
 }
-
-MovieView.propTypes = {
-  movie: PropTypes.shape({
-    Title: PropTypes.string,
-    ImageUrl: PropTypes.string,
-    Description: PropTypes.string,
-    Genre: PropTypes.exact({
-      _id: PropTypes.string,
-      Name: PropTypes.string,
-      Description: PropTypes.string
-    }),
-    Director: PropTypes.shape({
-      Name: PropTypes.string
-    })
-  }).isRequired
-};
