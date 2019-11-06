@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import axios from 'axios';
+import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import axios from 'axios';
-
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import './login-view.scss';
 
 export function LoginView(props) {
@@ -15,53 +13,59 @@ export function LoginView(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
+
     axios
       .post('https://movie-flix-777.herokuapp.com/login', {
-        Username: username,
-        Password: password
+        username: username,
+        password: password
       })
-      .then(response => {
-        const data = response.data;
+      .then(res => {
+        const data = res.data;
         props.onLoggedIn(data);
       })
       .catch(e => {
-        console.log('no such user');
+        alert('Incorrect info, please try again.');
       });
   };
 
   return (
-    <Container className='logContainer'>
+    <Container className='logContainer '>
       <h1>Welcome to Movies</h1>
       <form>
-        <Form.Group controlId='formUsername'>
+        <Form.Group controlId='formBasicEmail'>
           <Form.Label>Username</Form.Label>
           <Form.Control
-            type='text'
-            placeholder='Enter username'
+            type='email'
+            placeholder='movies'
             value={username}
             onChange={e => setUsername(e.target.value)}
           />
+          <Form.Text className='emailShare'>
+            We'll never share your email.
+          </Form.Text>
         </Form.Group>
+
         <Form.Group controlId='formBasicPassword'>
           <Form.Label>Password</Form.Label>
           <Form.Control
             type='password'
-            placeholder='Enter Password'
+            placeholder='Password'
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Button variant='info' type='submit' onClick={handleSubmit}>
-          Login
+        <Button id='loginButton' onClick={handleSubmit}>
+          Log in
         </Button>
 
         <Form.Group controlId='newUser'>
           <Form.Text>
-            New User? Click{' '}
-            <Button id='registerButton' onClick={() => props.onClick()}>
-              {' '}
-              Register
-            </Button>
+            New User? Click
+            <Link to={`/register`}>
+              <Button size='sm' id='registerButton'>
+                here
+              </Button>
+            </Link>
           </Form.Text>
         </Form.Group>
       </form>

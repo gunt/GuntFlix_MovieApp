@@ -1,28 +1,27 @@
 // client/src/components/main-view/movie-card.jsx
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import './movie-card.scss';
-
 import { Link } from 'react-router-dom';
+import './movie-card.scss';
 
 export class MovieCard extends React.Component {
   render() {
-    const { movie, onClick } = this.props;
-
+    const { movie } = this.props;
     return (
-      <Card>
-        <Card.Img src={movie.imagepath} />
-        <Card.Body>
-          <Card.Title>{movie.title}</Card.Title>
-          <Card.Text>{movie.description}</Card.Text>
-          <Link to={`/movies/${movie._id}`}>
-            <Button>More info</Button>
-          </Link>
-        </Card.Body>
-      </Card>
+      <div>
+        <Card>
+          <Card.Img src={movie.imagepath} />
+          <Card.Body>
+            <Card.Title key={movie._id}>{movie.title}</Card.Title>
+            <Card.Text>{movie.description}</Card.Text>
+            <Link to={`/movies/${movie._id}`}>
+              <Button>More info</Button>
+            </Link>
+          </Card.Body>
+        </Card>
+      </div>
     );
   }
 }
