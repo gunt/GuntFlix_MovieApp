@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import PropTypes from 'prop-types';
+// import { Link } from 'react-router-dom';
 
 import './login-view.scss';
 
@@ -17,26 +17,27 @@ export function LoginView(props) {
 
     axios
       .post('https://movie-flix-777.herokuapp.com/login', {
-        username: username,
-        password: password
+        Username: username,
+        Password: password
       })
-      .then(res => {
-        const data = res.data;
+      .then(response => {
+        const data = response.data;
         props.onLoggedIn(data);
       })
       .catch(e => {
-        alert('Incorrect info, please try again.');
+        alert('No such user');
       });
+    // props.onLoggedIn(username);
   };
 
   return (
     <Container className='logContainer'>
       <h1>Welcome to MovieFlix</h1>
       <form>
-        <Form.Group controlId='formUsername'>
+        <Form.Group controlId='formBasicUsername'>
           <Form.Label>Username</Form.Label>
           <Form.Control
-            type='email'
+            type='text'
             placeholder='Enter username'
             value={username}
             onChange={e => setUsername(e.target.value)}
@@ -76,5 +77,6 @@ export function LoginView(props) {
 }
 
 LoginView.propTypes = {
-  onLoggedIn: PropTypes.func.isRequired
+  onLoggedIn: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired
 };
