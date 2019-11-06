@@ -41834,21 +41834,19 @@ function LoginView(props) {
   return _react.default.createElement(_Container.default, {
     className: "logContainer "
   }, _react.default.createElement("h1", null, "Welcome to Movies"), _react.default.createElement("form", null, _react.default.createElement(_Form.default.Group, {
-    controlId: "formBasicEmail"
+    controlId: "formUsername"
   }, _react.default.createElement(_Form.default.Label, null, "Username"), _react.default.createElement(_Form.default.Control, {
-    type: "email",
-    placeholder: "movies",
+    type: "text",
+    placeholder: "Enter username",
     value: username,
     onChange: function onChange(e) {
       return setUsername(e.target.value);
     }
-  }), _react.default.createElement(_Form.default.Text, {
-    className: "emailShare"
-  }, "We'll never share your email.")), _react.default.createElement(_Form.default.Group, {
+  })), _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicPassword"
   }, _react.default.createElement(_Form.default.Label, null, "Password"), _react.default.createElement(_Form.default.Control, {
     type: "password",
-    placeholder: "Password",
+    placeholder: "Enter Password",
     value: password,
     onChange: function onChange(e) {
       return setPassword(e.target.value);
@@ -42369,8 +42367,7 @@ function (_React$Component) {
         });
         this.getMovies(accessToken);
       }
-    } //clicking movie to get more info
-
+    }
   }, {
     key: "onMovieClick",
     value: function onMovieClick(movie) {
@@ -42388,8 +42385,7 @@ function (_React$Component) {
       localStorage.setItem('token', authData.token);
       localStorage.setItem('user', authData.user.username);
       this.getMovies(authData.token);
-    } //getting the movies after the user is logged in
-
+    }
   }, {
     key: "getMovies",
     value: function getMovies(token) {
@@ -42406,16 +42402,14 @@ function (_React$Component) {
       }).catch(function (err) {
         console.log(err);
       });
-    } //button to return back
-
+    }
   }, {
     key: "onButtonClick",
     value: function onButtonClick() {
       this.setState({
         selectedMovie: null
       });
-    } //button to logout and clear token/username
-
+    }
   }, {
     key: "buttonLogout",
     value: function buttonLogout() {
@@ -42423,8 +42417,8 @@ function (_React$Component) {
       localStorage.removeItem('username');
       this.setState({
         user: false,
-        selctedMovie: null
-      }); // window.location.reload();
+        selectedMovie: null
+      });
     }
   }, {
     key: "onSignedIn",
@@ -42504,7 +42498,7 @@ function (_React$Component) {
           return _react.default.createElement(_registrationView.RegistrationView, null);
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
-        path: "/user/update",
+        path: "/users/update",
         render: function render() {
           return _react.default.createElement(_updateProfile.UpdateProfile, null);
         }
@@ -42616,7 +42610,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56986" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55598" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

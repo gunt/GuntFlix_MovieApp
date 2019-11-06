@@ -170,7 +170,7 @@ app.put('/Users/:Username', passport.authenticate('jwt', {
     });
   }
 
-  var hashedPassword = Users.hashPassword(req.body.Password);
+  const hashedPassword = Users.hashPassword(req.body.Password);
 
   Users.findOneAndUpdate({
       Username: req.params.Username

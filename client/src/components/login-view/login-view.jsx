@@ -32,24 +32,20 @@ export function LoginView(props) {
     <Container className='logContainer '>
       <h1>Welcome to Movies</h1>
       <form>
-        <Form.Group controlId='formBasicEmail'>
+        <Form.Group controlId='formUsername'>
           <Form.Label>Username</Form.Label>
           <Form.Control
-            type='email'
-            placeholder='movies'
+            type='text'
+            placeholder='Enter username'
             value={username}
             onChange={e => setUsername(e.target.value)}
           />
-          <Form.Text className='emailShare'>
-            We'll never share your email.
-          </Form.Text>
         </Form.Group>
-
         <Form.Group controlId='formBasicPassword'>
           <Form.Label>Password</Form.Label>
           <Form.Control
             type='password'
-            placeholder='Password'
+            placeholder='Enter Password'
             value={password}
             onChange={e => setPassword(e.target.value)}
           />

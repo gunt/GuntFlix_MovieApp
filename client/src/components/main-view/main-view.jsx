@@ -34,7 +34,7 @@ export class MainView extends React.Component {
       this.getMovies(accessToken);
     }
   }
-  //clicking movie to get more info
+
   onMovieClick(movie) {
     this.setState({
       selectedMovie: movie
@@ -49,7 +49,7 @@ export class MainView extends React.Component {
     localStorage.setItem('user', authData.user.username);
     this.getMovies(authData.token);
   }
-  //getting the movies after the user is logged in
+
   getMovies(token) {
     axios
       .get('https://movie-flix-777.herokuapp.com/movies', {
@@ -64,21 +64,20 @@ export class MainView extends React.Component {
         console.log(err);
       });
   }
-  //button to return back
+
   onButtonClick() {
     this.setState({
       selectedMovie: null
     });
   }
-  //button to logout and clear token/username
+
   buttonLogout() {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
     this.setState({
       user: false,
-      selctedMovie: null
+      selectedMovie: null
     });
-    // window.location.reload();
   }
   onSignedIn(user) {
     this.setState({
@@ -143,7 +142,7 @@ export class MainView extends React.Component {
 
               <Route path='/register' render={() => <RegistrationView />} />
 
-              <Route path='/user/update' render={() => <UpdateProfile />} />
+              <Route path='/users/update' render={() => <UpdateProfile />} />
 
               <Route
                 path='/movies/:movieId'
