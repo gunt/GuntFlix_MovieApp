@@ -1,161 +1,126 @@
-import axios from 'axios';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
+// client/src/components/main-view/main-view.jsx
 import React from 'react';
-import Row from 'react-bootstrap/Row';
-import Button from 'react-bootstrap/Button';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+//import PropTypes from 'prop-types'; // Not at the moment
 
+import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
-import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
-import { ProfileView } from '../profile-view/profile-view';
-import { UpdateProfile } from '../update-profile/update-profile';
+
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import './main-view.scss';
 
 export class MainView extends React.Component {
   constructor(props) {
     super(props);
+
+    // Initialize the state to an empty object so we can destructure it later
     this.state = {
-      movies: [],
-      selectedMovieId: null,
-      user: null,
-      register: false
+      movies: null,
+      selectedMovie: null,
+      user: null
     };
   }
+
+  //One fot the "hooks" available in a react component
   componentDidMount() {
-    let accessToken = localStorage.getItem('token');
-    if (accessToken !== null) {
-      this.setState({
-        user: localStorage.getItem('user')
+    axios
+      .get(' https://movie-flix-777.herokuapp.com/movies')
+      .then(response => {
+        console.log(response);
+        // Assign the result to the state
+        this.setState({
+          movies: response.data
+        });
+      })
+      .catch(function(error) {
+        console.log(error);
       });
-      this.getMovies(accessToken);
-    }
   }
 
+  //go to movie view
   onMovieClick(movie) {
     this.setState({
       selectedMovie: movie
     });
   }
-  onLoggedIn(authData) {
-    console.log(authData);
-    this.setState({
-      user: authData.user.username
-    });
-    localStorage.setItem('token', authData.token);
-    localStorage.setItem('user', authData.user.username);
-    this.getMovies(authData.token);
-  }
 
-  getMovies(token) {
-    axios
-      .get('https://movie-flix-777.herokuapp.com/movies', {
-        headers: { Authorization: `Bearer ${token}` }
-      })
-      .then(res => {
-        this.setState({
-          movies: res.data
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-
-  onButtonClick() {
+  resetMainView() {
     this.setState({
       selectedMovie: null
     });
   }
 
-  buttonLogout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('username');
+  onLoggedIn(user) {
     this.setState({
-      user: false,
-      selectedMovie: null
-    });
-  }
-  onSignedIn(user) {
-    this.setState({
-      user: user,
-      register: false
+      user
     });
   }
 
-  register() {
+  registerUser() {
     this.setState({
-      register: true
+      newUser: true
     });
   }
-  alreadyMember() {
+
+  userRegistered() {
     this.setState({
-      register: false
+      newUser: null
     });
   }
 
   render() {
-    const { movies, selectedMovie, user, register } = this.state;
+    const { movies, selectedMovie, user, newUser } = this.state;
 
+    if (!user) {
+      if (newUser)
+        return (
+          <RegistrationView
+            userRegistered={() => this.userRegistered()}
+            onLoggedIn={user => this.onLoggedIn(user)}
+          />
+        );
+      else
+        return (
+          <LoginView
+            onLoggedIn={user => this.onLoggedIn(user)}
+            newUser={() => this.registerUser()}
+            userRegistered={() => this.userRegistered()}
+          />
+        );
+    }
+
+    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
     if (!movies) return <div className='main-view' />;
+
     return (
-      <Router>
-        <div className='main-view'>
-          <Container>
-            <Row>
-              <Route
-                exact
-                path='/'
-                render={() => {
-                  if (!user)
-                    return (
-                      <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-                    );
-
-                  return (
-                    <div>
-                      <Button
-                        className='logoutButton'
-                        onClick={() => this.buttonLogout()}
-                      >
-                        Log Out
-                      </Button>
-                      <Link to={`/user`}>
-                        <Button>Profile</Button>
-                      </Link>
-                      {movies.map(m => (
-                        <Col xs={12} sm={6} md={4} lg={4}>
-                          <MovieCard key={m._id} movie={m} />
-                        </Col>
-                      ))}
-                    </div>
-                  );
-                }}
+      <Container className='main-view' fluid='true'>
+        <Row>
+          {selectedMovie ? (
+            <Col>
+              <MovieView
+                returnCallback={() => this.resetMainView()}
+                movie={selectedMovie}
               />
-              <Route
-                path='/user'
-                render={() => <ProfileView username={this.state.user} />}
-              />
-
-              <Route path='/register' render={() => <RegistrationView />} />
-
-              <Route path='/users/update' render={() => <UpdateProfile />} />
-
-              <Route
-                path='/movies/:movieId'
-                render={({ match }) => (
-                  <MovieView
-                    movie={movies.find(m => m._id === match.params.movieId)}
+            </Col>
+          ) : (
+            movies.map(movie => {
+              return (
+                <Col xl={3} sm={6} md={4} xs={12}>
+                  <MovieCard
+                    key={movie._id}
+                    movie={movie}
+                    onClick={movie => this.onMovieClick(movie)}
                   />
-                )}
-              />
-            </Row>
-          </Container>
-        </div>
-      </Router>
+                </Col>
+              );
+            })
+          )}
+        </Row>
+      </Container>
     );
   }
 }

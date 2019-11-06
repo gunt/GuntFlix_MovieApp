@@ -1,10 +1,11 @@
-import axios from 'axios';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import axios from 'axios';
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+
 import './login-view.scss';
 
 export function LoginView(props) {
@@ -29,23 +30,24 @@ export function LoginView(props) {
   };
 
   return (
-    <Container className='logContainer '>
-      <h1>Welcome to Movies</h1>
+    <Container className='logContainer'>
+      <h1>Welcome to MovieFlix</h1>
       <form>
         <Form.Group controlId='formUsername'>
           <Form.Label>Username</Form.Label>
           <Form.Control
-            type='text'
+            type='email'
             placeholder='Enter username'
             value={username}
             onChange={e => setUsername(e.target.value)}
           />
         </Form.Group>
+
         <Form.Group controlId='formBasicPassword'>
           <Form.Label>Password</Form.Label>
           <Form.Control
             type='password'
-            placeholder='Enter Password'
+            placeholder='Password'
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
@@ -53,15 +55,19 @@ export function LoginView(props) {
         <Button id='loginButton' onClick={handleSubmit}>
           Log in
         </Button>
-
-        <Form.Group controlId='newUser'>
+        <Form.Group controlId='formNewUser'>
           <Form.Text>
-            New User? Click
-            <Link to={`/register`}>
-              <Button size='sm' id='registerButton'>
-                here
-              </Button>
-            </Link>
+            New user? Click{' '}
+            <Button
+              id='login-view__register'
+              style={{ padding: 0 }}
+              variant='link'
+              onClick={() => props.newUser()}
+            >
+              {' '}
+              here{' '}
+            </Button>{' '}
+            to register
           </Form.Text>
         </Form.Group>
       </form>

@@ -1,3 +1,20 @@
+body {
+  background: url("https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1655&q=80");
+  background-size: cover;
+}
+
+.logContainer {
+  background-color: #255e50;
+  border-radius: 25px;
+  color: #6c7382;
+  margin-top: 20px;
+  width: 60%;
+}
+
+h1 {
+  text-align: center;
+  color: #fff;
+}
 .card-header {
   font-family: "Merriweather", serif;
   font-size: 16px;
@@ -31,25 +48,6 @@ div.card-title {
 body {
   background: url("https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1655&q=80");
   background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.logContainer {
-  background-color: #255e50;
-  border-radius: 25px;
-  color: #6c7382;
-  margin-top: 20px;
-  width: 60%;
-}
-
-h1 {
-  text-align: center;
-  color: #fff;
-}
-body {
-  background: url("https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1655&q=80");
-  background-size: cover;
-  background-repeat: no-repeat;
 }
 
 .regContainer {
