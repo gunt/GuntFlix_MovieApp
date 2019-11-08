@@ -194,7 +194,7 @@ export class MainView extends React.Component {
               render={() => <ProfileView movies={movies} />}
             />
             {/* Endpoint Users/:Username to a new Update or the same profile component */}
-            {/* example with the users billgraham - http://localhost:1234/users/billygraham */}
+            {/* example with the users billygraham - http://localhost:1234/users/billygraham */}
             <Route path='/Users/:Username' render={() => <UpdateProfile />} />
           </Row>
         </Container>
