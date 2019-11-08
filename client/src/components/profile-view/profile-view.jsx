@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
-import Collapse from 'react-bootstrap/Collapse';
+// import Collapse from 'react-bootstrap/Collapse';
 import Form from 'react-bootstrap/Form';
 
 import './profile-view.scss';
@@ -47,23 +47,23 @@ export class ProfileView extends React.Component {
       });
   }
 
-  removeMovie(movieId) {
-    axios
-      .delete(
-        `https://movie-flix-777.herokuapp.com/users/${this.state.username}/movies/${movieId}`,
-        {
-          headers: { Authorization: `Bearer ${localStorage.token}` }
-        }
-      )
-      .then(response => {
-        this.setState({
-          favoriteMovies: response.data.FavoriteMovies
-        });
-      })
-      .catch(err => {
-        console.error(err);
-      });
-  }
+  //   removeMovie(movieId) {
+  //     axios
+  //       .delete(
+  //         `https://movie-flix-777.herokuapp.com/users/${this.state.username}/movies/${movieId}`,
+  //         {
+  //           headers: { Authorization: `Bearer ${localStorage.token}` }
+  //         }
+  //       )
+  //       .then(response => {
+  //         this.setState({
+  //           favoriteMovies: response.data.FavoriteMovies
+  //         });
+  //       })
+  //       .catch(err => {
+  //         console.error(err);
+  //       });
+  //   }
 
   render() {
     if (!localStorage.user) {
@@ -144,106 +144,106 @@ class EditProfile extends React.Component {
     };
   }
 
-  render() {
-    const { open } = this.state;
-    return (
-      <div className='profile-view'>
-        <h1 className='director'>User Profile</h1>
-        <div className='username'>
-          <div className='label'>Name</div>
-          <div className='value'>{user.Username}</div>
-        </div>
-        <div className='password'>
-          <div className='label'>Password</div>
-          <div className='value'>********</div>
-        </div>
-        <div className='birthday'>
-          <div className='label'>Birthday</div>
-          <div className='value'>{user.Birthday}</div>
-        </div>
-        <div className='email'>
-          <div className='label'>Email</div>
-          <div className='value'>{user.Email}</div>
-        </div>
-        <div className='favoritemovies'>
-          <div className='label'>Favorite Movies</div>
-          <div className='value'>{user.FavoriteMovies}</div>
-        </div>
-        <Link to={'/'}>
-          <Button className='view-btn' variant='outline-dark' type='button'>
-            Back
-          </Button>
-        </Link>
-        <Button
-          className='view-btn'
-          variant='outline-dark'
-          type='button'
-          onClick={event => this.deleteUser(event)}
-        >
-          Delete
-        </Button>
-        <Button
-          id='toggleButton'
-          className='vuew-btn'
-          variant='outline-dark'
-          type='button'
-          onClick={() => this.toggleForm()}
-        >
-          Change Data
-        </Button>
+//   render() {
+//     const { open } = this.state;
+//     return (
+//       <div className='profile-view'>
+//         <h1 className='director'>User Profile</h1>
+//         <div className='username'>
+//           <div className='label'>Name</div>
+//           <div className='value'>{user.Username}</div>
+//         </div>
+//         <div className='password'>
+//           <div className='label'>Password</div>
+//           <div className='value'>********</div>
+//         </div>
+//         <div className='birthday'>
+//           <div className='label'>Birthday</div>
+//           <div className='value'>{user.Birthday}</div>
+//         </div>
+//         <div className='email'>
+//           <div className='label'>Email</div>
+//           <div className='value'>{user.Email}</div>
+//         </div>
+//         <div className='favoritemovies'>
+//           <div className='label'>Favorite Movies</div>
+//           <div className='value'>{user.FavoriteMovies}</div>
+//         </div>
+//         <Link to={'/'}>
+//           <Button className='view-btn' variant='outline-dark' type='button'>
+//             Back
+//           </Button>
+//         </Link>
+//         <Button
+//           className='view-btn'
+//           variant='outline-dark'
+//           type='button'
+//           onClick={event => this.deleteUser(event)}
+//         >
+//           Delete
+//         </Button>
+//         <Button
+//           id='toggleButton'
+//           className='vuew-btn'
+//           variant='outline-dark'
+//           type='button'
+//           onClick={() => this.toggleForm()}
+//         >
+//           Change Data
+//         </Button>
 
-        <Form className='changeDataForm'>
-          <h2>Change Data</h2>
-          <Form.Group controlId='formBasicUsername'>
-            <Form.Label>Your Username</Form.Label>
-            <Form.Control
-              type='text'
-              name='username'
-              onChange={event => this.handleChange(event)}
-              Placeholder='Enter Username'
-            />
-            <Form.Text className='text-muted'>Type username here.</Form.Text>
-          </Form.Group>
+//         <Form className='changeDataForm'>
+//           <h2>Change Data</h2>
+//           <Form.Group controlId='formBasicUsername'>
+//             <Form.Label>Your Username</Form.Label>
+//             <Form.Control
+//               type='text'
+//               name='username'
+//               onChange={event => this.handleChange(event)}
+//               Placeholder='Enter Username'
+//             />
+//             <Form.Text className='text-muted'>Type username here.</Form.Text>
+//           </Form.Group>
 
-          <Form.Group controlId='formBasicPassword'>
-            <Form.Label>Your Password</Form.Label>
-            <Form.Control
-              type='text'
-              name='password'
-              onChange={event => this.handleChange(event)}
-              Placeholder='Password'
-            />
-          </Form.Group>
+//           <Form.Group controlId='formBasicPassword'>
+//             <Form.Label>Your Password</Form.Label>
+//             <Form.Control
+//               type='text'
+//               name='password'
+//               onChange={event => this.handleChange(event)}
+//               Placeholder='Password'
+//             />
+//           </Form.Group>
 
-          <Form.Group controlId='formBasicEmail'>
-            <Form.Label>Your Email</Form.Label>
-            <Form.Control
-              type='text'
-              name='Email'
-              onChange={event => this.handleChange(event)}
-              Placeholder='example@email.com'
-            />
-          </Form.Group>
+//           <Form.Group controlId='formBasicEmail'>
+//             <Form.Label>Your Email</Form.Label>
+//             <Form.Control
+//               type='text'
+//               name='Email'
+//               onChange={event => this.handleChange(event)}
+//               Placeholder='example@email.com'
+//             />
+//           </Form.Group>
 
-          <Form.Group controlId='formBasicBirthday'>
-            <Form.Label>Your Birthday</Form.Label>
-            <Form.Control
-              type='text'
-              name='birthday'
-              onChange={event => this.handleChange(event)}
-              Placeholder='Birthday'
-            />
-          </Form.Group>
+//           <Form.Group controlId='formBasicBirthday'>
+//             <Form.Label>Your Birthday</Form.Label>
+//             <Form.Control
+//               type='text'
+//               name='birthday'
+//               onChange={event => this.handleChange(event)}
+//               Placeholder='Birthday'
+//             />
+//           </Form.Group>
 
-          <Button
-            variant='outline-dark'
-            type='button'
-            onClick={event => this.handleSubmit(event)}
-          >
-            Change
-          </Button>
-        </Form>
-      </div>
-    );
-  }
-}
+//           <Button
+//             variant='outline-dark'
+//             type='button'
+//             onClick={event => this.handleSubmit(event)}
+//           >
+//             Change
+//           </Button>
+//         </Form>
+//       </div>
+//     );
+//   }
+// }
