@@ -19,7 +19,7 @@ export function UpdateProfile(props) {
     // send a request to the server for authentication
     axios
       .put(
-        `https://movie-flix-777.herokuapp.com/users/${localStorage.getItem(
+        `https://movie-flix-777.herokuapp.com/Users/:Username${localStorage.getItem(
           'user'
         )}`,
         {
@@ -93,7 +93,7 @@ export function UpdateProfile(props) {
         >
           Update me
         </Button>
-        <Link to={`/Users`}>
+        <Link to={`/`}>
           <Button className='back-btn' variant='primary'>
             Go back
           </Button>

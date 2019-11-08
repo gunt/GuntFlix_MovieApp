@@ -39527,7 +39527,7 @@ function UpdateProfile(props) {
     e.preventDefault();
     console.log(); // send a request to the server for authentication
 
-    _axios.default.put("https://movie-flix-777.herokuapp.com/users/".concat(localStorage.getItem('user')), {
+    _axios.default.put("https://movie-flix-777.herokuapp.com/Users/:Username".concat(localStorage.getItem('user')), {
       username: username,
       password: password,
       birthday: birthday,
@@ -39593,7 +39593,7 @@ function UpdateProfile(props) {
     type: "submit",
     onClick: handleSubmit
   }, "Update me"), _react.default.createElement(_reactRouterDom.Link, {
-    to: "/Users"
+    to: "/"
   }, _react.default.createElement(_Button.default, {
     className: "back-btn",
     variant: "primary"

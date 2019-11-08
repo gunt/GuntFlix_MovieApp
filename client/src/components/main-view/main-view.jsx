@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
+// import { withRouter } from 'react-router-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+// import Route from 'react-router-dom/Route';
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
@@ -192,6 +194,7 @@ export class MainView extends React.Component {
               render={() => <ProfileView movies={movies} />}
             />
             {/* Endpoint Users/:Username to a new Update or the same profile component */}
+            {/* example with the users billgraham - http://localhost:1234/users/billygraham */}
             <Route path='/Users/:Username' render={() => <UpdateProfile />} />
           </Row>
         </Container>

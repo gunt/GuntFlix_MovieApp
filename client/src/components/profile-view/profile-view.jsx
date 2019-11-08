@@ -165,7 +165,7 @@ class EditProfile extends React.Component {
             <Button
               variant='primary'
               size='sm'
-              onClick={() => console.log('teste=', this.state.userInput)}
+              onClick={() => console.log('test=', this.state.userInput)}
             >
               Submit
             </Button>
