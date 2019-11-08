@@ -39759,14 +39759,14 @@ function (_React$Component) {
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
-        path: "/users",
+        path: "/Users",
         render: function render() {
           return _react.default.createElement(ProfileView, {
             movies: movies
           });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
-        path: "/users/update",
+        path: "/Users/:Username",
         render: function render() {
           return _react.default.createElement(UpdateProfile, null);
         }

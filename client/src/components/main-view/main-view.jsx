@@ -167,11 +167,11 @@ export class MainView extends React.Component {
 
             <Route
               exact
-              path='/users'
+              path='/Users'
               render={() => <ProfileView movies={movies} />}
             />
-
-            <Route path='/users/update' render={() => <UpdateProfile />} />
+            {/* Endpoint Users/:Username to a new Update or the sampe profile component */}
+            <Route path='/Users/:Username' render={() => <UpdateProfile />} />
           </Row>
         </Container>
       </Router>
