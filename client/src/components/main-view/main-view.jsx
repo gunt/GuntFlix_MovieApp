@@ -48,6 +48,7 @@ export class MainView extends React.Component {
     });
   };
 
+  //get the Movies after the User logged in
   getMovies(token) {
     axios
       .get('https://movie-flix-777.herokuapp.com/movies', {
@@ -62,6 +63,22 @@ export class MainView extends React.Component {
         console.log(error);
       });
   }
+
+  //get information from user
+  // async getUser(_user, token) {
+  //   let username = localStorage.getItem('user');
+  //   axios
+  //     .get(`https://movie-flix-777.herokuapp.com/users/${username}`, {
+  //       headers: { Authorization: `Bearer ${token}` }
+  //     })
+  //     .then(response => {
+  //       this.props.setUsers(response.data);
+  //       console.log(response.data);
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  // }
 
   onMovieClick(movie) {
     this.setState({

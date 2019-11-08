@@ -39755,6 +39755,7 @@ function (_React$Component) {
     }
   }, {
     key: "getMovies",
+    //get the Movies after the User logged in
     value: function getMovies(token) {
       var _this2 = this;
 
@@ -39769,7 +39770,22 @@ function (_React$Component) {
       }).catch(function (error) {
         console.log(error);
       });
-    }
+    } //get information from user
+    // async getUser(_user, token) {
+    //   let username = localStorage.getItem('user');
+    //   axios
+    //     .get(`https://movie-flix-777.herokuapp.com/users/${username}`, {
+    //       headers: { Authorization: `Bearer ${token}` }
+    //     })
+    //     .then(response => {
+    //       this.props.setUsers(response.data);
+    //       console.log(response.data);
+    //     })
+    //     .catch(error => {
+    //       console.log(error);
+    //     });
+    // }
+
   }, {
     key: "onMovieClick",
     value: function onMovieClick(movie) {
