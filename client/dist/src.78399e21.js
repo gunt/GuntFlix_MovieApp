@@ -42330,18 +42330,28 @@ function (_React$Component) {
       newUser: null
     };
     return _this;
-  }
+  } // componentDidMount() {
+  //   window.addEventListener('hashchange', this.handleNewHash, false);
+  //   this.handleNewHash();
+  //   const accessToken = localStorage.getItem('token');
+  //   if (accessToken !== null) {
+  //     this.setState({
+  //       user: localStorage.getItem('user')
+  //     });
+  //     this.getMovies(accessToken);
+  //   }
+  // }
+
 
   _createClass(MainView, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      window.addEventListener('hashchange', this.handleNewHash, false);
-      this.handleNewHash();
       var accessToken = localStorage.getItem('token');
 
       if (accessToken !== null) {
         this.setState({
-          user: localStorage.getItem('user')
+          user: localStorage.getItem('user'),
+          profileData: localStorage.getItem('user')
         });
         this.getMovies(accessToken);
       }
@@ -42660,7 +42670,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53175" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53324" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

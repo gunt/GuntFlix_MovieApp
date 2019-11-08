@@ -30,15 +30,26 @@ export class MainView extends React.Component {
     };
   }
 
+  // componentDidMount() {
+  //   window.addEventListener('hashchange', this.handleNewHash, false);
+
+  //   this.handleNewHash();
+
+  //   const accessToken = localStorage.getItem('token');
+  //   if (accessToken !== null) {
+  //     this.setState({
+  //       user: localStorage.getItem('user')
+  //     });
+  //     this.getMovies(accessToken);
+  //   }
+  // }
+
   componentDidMount() {
-    window.addEventListener('hashchange', this.handleNewHash, false);
-
-    this.handleNewHash();
-
-    const accessToken = localStorage.getItem('token');
+    let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
       this.setState({
-        user: localStorage.getItem('user')
+        user: localStorage.getItem('user'),
+        profileData: localStorage.getItem('user')
       });
       this.getMovies(accessToken);
     }
