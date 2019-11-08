@@ -93,7 +93,7 @@ export function UpdateProfile(props) {
         >
           Update me
         </Button>
-        <Link to={`/user`}>
+        <Link to={`/Users`}>
           <Button className='back-btn' variant='primary'>
             Go back
           </Button>

@@ -5,10 +5,14 @@ import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { RegistrationView } from '../registration-view/registration-view';
+//to update user profile page first import component
+import { UpdateProfile } from '../update-profile/update-profile';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+
 import './main-view.scss';
+
 export class MainView extends React.Component {
   constructor(props) {
     super(props);
@@ -170,7 +174,7 @@ export class MainView extends React.Component {
               path='/Users'
               render={() => <ProfileView movies={movies} />}
             />
-            {/* Endpoint Users/:Username to a new Update or the sampe profile component */}
+            {/* Endpoint Users/:Username to a new Update or the same profile component */}
             <Route path='/Users/:Username' render={() => <UpdateProfile />} />
           </Row>
         </Container>
