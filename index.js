@@ -144,16 +144,32 @@ app.post('/users', [
 });
 
 //Gets user profile by username
-app.get('/users/:username', function (req, res) {
+// app.get('/users/:username', function (req, res) {
+//   Users.findOne({
+//       Username: req.params.Username
+//     })
+//     .then(function (user) {
+//       res.json(user)
+//     })
+//     .catch(function (err) {
+//       console.error(err);
+//       res.status(500).send("Error:" + err);
+//     });
+// });
+
+// get specific user
+app.get('/users/:Username', passport.authenticate('jwt', {
+  session: false
+}), (req, res) => {
   Users.findOne({
       Username: req.params.Username
     })
-    .then(function (user) {
-      res.json(user)
+    .then((user) => {
+      res.status(201).json(user)
     })
-    .catch(function (err) {
-      console.error(err);
-      res.status(500).send("Error:" + err);
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
     });
 });
 

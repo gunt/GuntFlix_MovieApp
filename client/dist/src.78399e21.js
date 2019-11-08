@@ -42568,7 +42568,7 @@ function (_React$Component) {
         strict: true,
         component: _updateProfile.UpdateProfile
       }), _react.default.createElement(_reactRouterDom.Route, {
-        path: "/username/:username",
+        path: "/username/:Username",
         exact: true,
         strict: true,
         component: _profileView.ProfileView
@@ -42670,7 +42670,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53324" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53451" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

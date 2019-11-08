@@ -275,7 +275,7 @@ export class MainView extends React.Component {
             />
 
             <Route
-              path='/username/:username'
+              path='/username/:Username'
               exact
               strict
               component={ProfileView}
