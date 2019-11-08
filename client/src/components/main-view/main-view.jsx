@@ -8,6 +8,7 @@ import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { RegistrationView } from '../registration-view/registration-view';
 //to update user profile page first import component
+import { ProfileView } from '../profile-view/profile-view';
 import { UpdateProfile } from '../update-profile/update-profile';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -188,7 +189,11 @@ export class MainView extends React.Component {
             </Link>
           </div>
 
-          <Link to='/Users/:Username'>
+          <Link to='/users/:username'>
+            <Button variant='primary'>Profile View</Button>
+          </Link>
+
+          <Link to='/update/:username'>
             <Button variant='primary'>Update Profile</Button>
           </Link>
 
@@ -230,15 +235,40 @@ export class MainView extends React.Component {
               path='/directors/:Director'
               render={() => <DirectorView />}
             />
-
-            <Route
+            {/* <Route
               exact
               path='/Users'
               render={() => <ProfileView movies={movies} />}
-            />
+            /> */}
             {/* Endpoint Users/:Username to a new Update or the same profile component */}
             {/* example with the users billygraham - http://localhost:1234/users/billygraham */}
-            <Route path='/Users/:Username' render={() => <UpdateProfile />} />
+            {/* <Route
+              path='/users/:username'
+              exact
+              strict
+              component={ProfileView}
+            /> */}
+
+            {/* <Route
+              path='/users/:username'
+              render={({ match }) => {
+                return <ProfileView userInfo={userInfo} />;
+              }}
+            /> */}
+
+            <Route
+              path='/update/:username'
+              exact
+              strict
+              component={UpdateProfile}
+            />
+
+            <Route
+              path='/username/:username'
+              exact
+              strict
+              component={ProfileView}
+            />
           </Row>
         </Container>
       </Router>

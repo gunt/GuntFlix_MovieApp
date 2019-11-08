@@ -1,177 +1,162 @@
 import React from 'react';
-import axios from 'axios';
-// import { MovieCard } from '../movie-card/movie-card';
-import { Redirect } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import ListGroup from 'react-bootstrap/ListGroup';
+//import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
-import Collapse from 'react-bootstrap/Collapse';
-import Form from 'react-bootstrap/Form';
-
 import './profile-view.scss';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import Form from 'react-bootstrap/Form';
+//import { FORM } from 'dns';
 
 export class ProfileView extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
       username: null,
+      password: null,
       email: null,
-      birthday: null,
-      favoriteMovies: []
+      birthday: null
     };
   }
 
-  componentDidMount() {
-    this.getUserInfo();
-  }
-
-  getUserInfo() {
-    axios
-      .get(`https://movie-flix-777.herokuapp.com/users/${localStorage.user}`, {
-        headers: { Authorization: `Bearer ${localStorage.token}` }
-      })
-      .then(response => {
-        this.setState({
-          username: response.data.Username,
-          email: response.data.Email,
-          birthday: response.data.Birthday,
-          favoriteMovies: response.data.FavoriteMovies
-        });
-      })
-      .catch(err => {
-        console.error(err);
-      });
-  }
-
-  removeMovie(movieId) {
+  //delete user
+  deleteUser(event) {
+    event.preventDefault();
     axios
       .delete(
-        `https://movie-flix-777.herokuapp.com/users/${this.state.username}/movies/${movieId}`,
+        `https://movie-flix-777.herokuapp.com/users/${this.props.Username}`,
         {
-          headers: { Authorization: `Bearer ${localStorage.token}` }
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         }
       )
       .then(response => {
-        this.setState({
-          favoriteMovies: response.data.FavoriteMovies
-        });
+        alert('Your account has been delted!');
+        //clears your storage
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        //opens login view
+        window.open('/', '_self');
       })
-      .catch(err => {
-        console.error(err);
+      .catch(event => {
+        alert('failed to delete user');
       });
   }
 
-  render() {
-    if (!localStorage.user) {
-      return <Redirect to='/' />;
+  toggleForm() {
+    let form = document.getElementsByClassName('changeDataForm')[0];
+    let toggleButton = document.getElementsById('toggleButton');
+
+    form.classList.toggle('show-form');
+    if (form.classList.contains('show-form')) {
+      toggleButton.innerHTML = 'CHANGE DATA &uarr;';
     } else {
-      console.log(this.props.movies);
-      return (
-        <Container className='profile-view'>
-          <Row>
-            <Col>
-              <h2>User profile</h2>
-              <div className='user-username'>
-                <h3 className='label'>Username</h3>
-                <p className='value'>
-                  {this.state.username} <EditProfile type={'username'} />
-                </p>
-              </div>
-              <div className='user-email'>
-                <h3 className='label'>Email</h3>
-                <p className='value'>
-                  {this.state.email} <EditProfile type={'email'} />
-                </p>
-              </div>
-              <div className='user-birthday'>
-                <h3 className='label'>Birthday</h3>
-                <p className='value'>
-                  {this.state.birthday} <EditProfile type={'date'} />
-                </p>
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <h3 className='label'>Favorite Movies</h3>
-              <ListGroup className='user-favorite-movies'>
-                {this.props.movies.map(mov => {
-                  if (
-                    mov._id ===
-                    this.state.favoriteMovies.find(favMov => favMov === mov._id)
-                  ) {
-                    return (
-                      <ListGroup.Item>
-                        {mov.Title}
-                        <Link to={`/movies/${mov._id}`}>
-                          <Button variant='primary' size='sm'>
-                            View
-                          </Button>
-                        </Link>
-                        <Button
-                          variant='danger'
-                          size='sm'
-                          onClick={() => this.removeMovie(mov._id)}
-                        >
-                          Remove
-                        </Button>
-                      </ListGroup.Item>
-                    );
-                  } else {
-                    return null;
-                  }
-                })}
-              </ListGroup>
-            </Col>
-          </Row>
-        </Container>
-      );
+      toggleButton.innerHTML = 'CHANGE DATA &uarr;';
     }
   }
-}
-
-class EditProfile extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      open: false,
-      userInput: null
-    };
-  }
 
   render() {
-    const { open } = this.state;
+    const { user } = this.props;
+
+    if (!user) return null;
+
     return (
-      <>
+      <div className='profile-view'>
+        <h1 className='director'>User Profile</h1>
+        <div className='username'>
+          <div className='label'>Name</div>
+          <div className='value'>{user.Username}</div>
+        </div>
+        <div className='password'>
+          <div className='label'>Password</div>
+          <div className='value'>********</div>
+        </div>
+        <div className='birthday'>
+          <div className='label'>Birthday</div>
+          <div className='value'>{user.Birthday}</div>
+        </div>
+        <div className='email'>
+          <div className='label'>Email</div>
+          <div className='value'>{user.Email}</div>
+        </div>
+        <div className='favoritemovies'>
+          <div className='label'>Favorite Movies</div>
+          <div className='value'>{user.FavoriteMovies}</div>
+        </div>
+        <Link to={'/'}>
+          <Button className='view-btn' variant='outline-dark' type='button'>
+            Back
+          </Button>
+        </Link>
         <Button
-          onClick={() => this.setState({ open: !open })}
-          variant='secondary'
-          size='sm'
+          className='view-btn'
+          variant='outline-dark'
+          type='button'
+          onClick={event => this.deleteUser(event)}
         >
-          Edit
+          Delete
         </Button>
-        <Collapse in={this.state.open}>
-          <div>
+        <Button
+          id='toggleButton'
+          className='vuew-btn'
+          variant='outline-dark'
+          type='button'
+          onClick={() => this.toggleForm()}
+        >
+          Change Data
+        </Button>
+
+        <Form className='changeDataForm'>
+          <h2>Change Data</h2>
+          <Form.Group controlId='formBasicUsername'>
+            <Form.Label>Your Username</Form.Label>
             <Form.Control
-              type={this.props.type}
-              placeholder={`Enter ${this.props.type}`}
-              onChange={e => this.setState({ userInput: e.target.value })}
+              type='text'
+              name='username'
+              onChange={event => this.handleChange(event)}
+              Placeholder='Enter Username'
             />
-            <Button
-              variant='primary'
-              size='sm'
-              onClick={() => console.log('test=', this.state.userInput)}
-            >
-              Submit
-            </Button>
-          </div>
-        </Collapse>
-      </>
+            <Form.Text className='text-muted'>Type username here.</Form.Text>
+          </Form.Group>
+
+          <Form.Group controlId='formBasicPassword'>
+            <Form.Label>Your Password</Form.Label>
+            <Form.Control
+              type='text'
+              name='password'
+              onChange={event => this.handleChange(event)}
+              Placeholder='Password'
+            />
+          </Form.Group>
+
+          <Form.Group controlId='formBasicEmail'>
+            <Form.Label>Your Email</Form.Label>
+            <Form.Control
+              type='text'
+              name='Email'
+              onChange={event => this.handleChange(event)}
+              Placeholder='example@email.com'
+            />
+          </Form.Group>
+
+          <Form.Group controlId='formBasicBirthday'>
+            <Form.Label>Your Birthday</Form.Label>
+            <Form.Control
+              type='text'
+              name='birthday'
+              onChange={event => this.handleChange(event)}
+              Placeholder='Birthday'
+            />
+          </Form.Group>
+
+          <Button
+            variant='outline-dark'
+            type='button'
+            onClick={event => this.handleSubmit(event)}
+          >
+            Change
+          </Button>
+        </Form>
+      </div>
     );
   }
 }

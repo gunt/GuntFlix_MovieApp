@@ -96,7 +96,7 @@ app.get('/movies/directors/:Name', function (req, res) {
 // Registration New User
 // Fix code according to documentation Validator
 //https://express-validator.github.io/docs/
-app.post('/Users', [
+app.post('/users', [
   check('Username').isAlphanumeric(),
   check('Password').isLength({
     min: 5
@@ -144,7 +144,7 @@ app.post('/Users', [
 });
 
 //Gets user profile by username
-app.get('/users/:Username', function (req, res) {
+app.get('/users/:username', function (req, res) {
   Users.findOne({
       Username: req.params.Username
     })
@@ -159,7 +159,7 @@ app.get('/users/:Username', function (req, res) {
 
 
 //Update Username
-app.put('/Users/:Username', [
+app.put('/users/:username', [
 
   check('Username').isAlphanumeric(),
   check('Password').isLength({
@@ -202,7 +202,7 @@ app.put('/Users/:Username', [
 });
 
 // Add a movie to a user's list of favorites
-app.post('/Users/:Username/Movies/:MovieID', function (req, res) {
+app.post('/users/:username/ovies/:movieID', function (req, res) {
   Users.findOneAndUpdate({
       Username: req.params.Username
     }, {
@@ -223,7 +223,7 @@ app.post('/Users/:Username/Movies/:MovieID', function (req, res) {
 });
 
 // Remove a movie from a user's list of favorites
-app.delete('/users/:Username/Movies/:MovieID', function (req, res) {
+app.delete('/users/:username/movies/:movieID', function (req, res) {
   Users.findOneAndUpdate({
       Username: req.params.Username
     }, {
@@ -245,7 +245,7 @@ app.delete('/users/:Username/Movies/:MovieID', function (req, res) {
 });
 
 // Delete a User Profile
-app.delete('/Users/:Username', function (req, res) {
+app.delete('/users/:username', function (req, res) {
   Users.findOneAndUpdate({
       Username: req.params.Username
     })
