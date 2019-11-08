@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 // import { withRouter } from 'react-router-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 // import Route from 'react-router-dom/Route';
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
@@ -12,6 +12,7 @@ import { UpdateProfile } from '../update-profile/update-profile';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 import './main-view.scss';
 
@@ -67,28 +68,52 @@ export class MainView extends React.Component {
   }
 
   //get information from user
-  // async getUser(_user, token) {
-  //   let username = localStorage.getItem('user');
+  getUser(token) {
+    let username = localStorage.getItem('user');
+    axios
+      .get(`https://movie-flix-777.herokuapp.com/users/${username}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(response => {
+        this.props.setUsers(response.data);
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  // getUser(token) {
   //   axios
-  //     .get(`https://movie-flix-777.herokuapp.com/users/${username}`, {
+  //     .get('https://movie-flix-777.herokuapp.com/users/', {
   //       headers: { Authorization: `Bearer ${token}` }
   //     })
   //     .then(response => {
-  //       this.props.setUsers(response.data);
-  //       console.log(response.data);
+  //       this.props.setLoggedUser(response.data);
   //     })
   //     .catch(error => {
   //       console.log(error);
   //     });
   // }
 
-  onMovieClick(movie) {
+  buttonLogout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
     this.setState({
-      selectedMovieId: movie._id
+      user: false,
+      selectedMovie: null
     });
-
-    window.location.hash = '#' + movie._id;
+    window.location.reload();
+    // window.location.reload();
   }
+
+  // onMovieClick(movie) {
+  //   this.setState({
+  //     selectedMovieId: movie._id
+  //   });
+
+  //   window.location.hash = '#' + movie._id;
+  // }
 
   resetMainView() {
     this.setState({
@@ -149,6 +174,24 @@ export class MainView extends React.Component {
     return (
       <Router>
         <Container className='main-view' fluid='true'>
+          <div className='upButton'>
+            <Button
+              className='logoutButton'
+              onClick={() => this.buttonLogout()}
+            >
+              Log Out
+            </Button>
+            <Link to={'/'}>
+              <Button className='back-btn' variant='primary'>
+                Go back
+              </Button>
+            </Link>
+          </div>
+
+          <Link to='/Users/:Username'>
+            <Button variant='primary'>Update Profile</Button>
+          </Link>
+
           <Row>
             <Route
               exact
@@ -160,7 +203,7 @@ export class MainView extends React.Component {
                   );
                 } else {
                   return movies.map(movie => (
-                    <Col xl={3} sm={6} md={4} xs={12}>
+                    <Col xl={3} sm={3} md={5} xs={5}>
                       <MovieCard key={movie._id} movie={movie} />
                     </Col>
                   ));

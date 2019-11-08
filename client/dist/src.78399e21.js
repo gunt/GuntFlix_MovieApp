@@ -39548,7 +39548,7 @@ function UpdateProfile(props) {
   };
 
   return _react.default.createElement(_Container.default, {
-    className: "registrationContainer"
+    className: "regContainer"
   }, _react.default.createElement(_Form.default, {
     className: "registrationForm"
   }, _react.default.createElement(_Form.default.Group, {
@@ -39592,12 +39592,7 @@ function UpdateProfile(props) {
     variant: "primary",
     type: "submit",
     onClick: handleSubmit
-  }, "Update me"), _react.default.createElement(_reactRouterDom.Link, {
-    to: "/"
-  }, _react.default.createElement(_Button.default, {
-    className: "back-btn",
-    variant: "primary"
-  }, "Go back"))));
+  }, "Update")));
 }
 },{"axios":"../node_modules/axios/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react":"../node_modules/react/index.js","./update-profile.scss":"components/update-profile/update-profile.scss"}],"../node_modules/react-bootstrap/esm/Row.js":[function(require,module,exports) {
 "use strict";
@@ -39675,6 +39670,8 @@ var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
 var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
 
 var _Col = _interopRequireDefault(require("react-bootstrap/Col"));
+
+var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 
 require("./main-view.scss");
 
@@ -39771,15 +39768,32 @@ function (_React$Component) {
         console.log(error);
       });
     } //get information from user
-    // async getUser(_user, token) {
-    //   let username = localStorage.getItem('user');
+
+  }, {
+    key: "getUser",
+    value: function getUser(token) {
+      var _this3 = this;
+
+      var username = localStorage.getItem('user');
+
+      _axios.default.get("https://movie-flix-777.herokuapp.com/users/".concat(username), {
+        headers: {
+          Authorization: "Bearer ".concat(token)
+        }
+      }).then(function (response) {
+        _this3.props.setUsers(response.data);
+
+        console.log(response.data);
+      }).catch(function (error) {
+        console.log(error);
+      });
+    } // getUser(token) {
     //   axios
-    //     .get(`https://movie-flix-777.herokuapp.com/users/${username}`, {
+    //     .get('https://movie-flix-777.herokuapp.com/users/', {
     //       headers: { Authorization: `Bearer ${token}` }
     //     })
     //     .then(response => {
-    //       this.props.setUsers(response.data);
-    //       console.log(response.data);
+    //       this.props.setLoggedUser(response.data);
     //     })
     //     .catch(error => {
     //       console.log(error);
@@ -39787,13 +39801,22 @@ function (_React$Component) {
     // }
 
   }, {
-    key: "onMovieClick",
-    value: function onMovieClick(movie) {
+    key: "buttonLogout",
+    value: function buttonLogout() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('username');
       this.setState({
-        selectedMovieId: movie._id
+        user: false,
+        selectedMovie: null
       });
-      window.location.hash = '#' + movie._id;
-    }
+      window.location.reload(); // window.location.reload();
+    } // onMovieClick(movie) {
+    //   this.setState({
+    //     selectedMovieId: movie._id
+    //   });
+    //   window.location.hash = '#' + movie._id;
+    // }
+
   }, {
     key: "resetMainView",
     value: function resetMainView() {
@@ -39819,7 +39842,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var _this$state = this.state,
           movies = _this$state.movies,
@@ -39830,20 +39853,20 @@ function (_React$Component) {
       if (!user) {
         if (newUser) return _react.default.createElement(_registrationView.RegistrationView, {
           userRegistered: function userRegistered() {
-            return _this3.userRegistered();
+            return _this4.userRegistered();
           },
           onLoggedIn: function onLoggedIn(user) {
-            return _this3.onLoggedIn(user);
+            return _this4.onLoggedIn(user);
           }
         });else return _react.default.createElement(_loginView.LoginView, {
           onLoggedIn: function onLoggedIn(user) {
-            return _this3.onLoggedIn(user);
+            return _this4.onLoggedIn(user);
           },
           newUser: function newUser() {
-            return _this3.registerUser();
+            return _this4.registerUser();
           },
           userRegistered: function userRegistered() {
-            return _this3.userRegistered();
+            return _this4.userRegistered();
           }
         });
       }
@@ -39857,23 +39880,39 @@ function (_React$Component) {
       return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_Container.default, {
         className: "main-view",
         fluid: "true"
-      }, _react.default.createElement(_Row.default, null, _react.default.createElement(_reactRouterDom.Route, {
+      }, _react.default.createElement("div", {
+        className: "upButton"
+      }, _react.default.createElement(_Button.default, {
+        className: "logoutButton",
+        onClick: function onClick() {
+          return _this4.buttonLogout();
+        }
+      }, "Log Out"), _react.default.createElement(_reactRouterDom.Link, {
+        to: '/'
+      }, _react.default.createElement(_Button.default, {
+        className: "back-btn",
+        variant: "primary"
+      }, "Go back"))), _react.default.createElement(_reactRouterDom.Link, {
+        to: "/Users/:Username"
+      }, _react.default.createElement(_Button.default, {
+        variant: "primary"
+      }, "Update Profile")), _react.default.createElement(_Row.default, null, _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
         path: "/",
         render: function render() {
           if (!user) {
             return _react.default.createElement(_loginView.LoginView, {
               onLoggedIn: function onLoggedIn(user) {
-                return _this3.onLoggedIn(user);
+                return _this4.onLoggedIn(user);
               }
             });
           } else {
             return movies.map(function (movie) {
               return _react.default.createElement(_Col.default, {
                 xl: 3,
-                sm: 6,
-                md: 4,
-                xs: 12
+                sm: 3,
+                md: 5,
+                xs: 5
               }, _react.default.createElement(_movieCard.MovieCard, {
                 key: movie._id,
                 movie: movie
@@ -39890,7 +39929,7 @@ function (_React$Component) {
         path: "/profile",
         render: function render() {
           return _react.default.createElement(ProfileView, {
-            movies: _this3.state.movies
+            movies: _this4.state.movies
           });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
@@ -39934,7 +39973,7 @@ function (_React$Component) {
 }(_react.default.Component);
 
 exports.MainView = MainView;
-},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","../login-view/login-view":"components/login-view/login-view.jsx","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../registration-view/registration-view":"components/registration-view/registration-view.jsx","../update-profile/update-profile":"components/update-profile/update-profile.jsx","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","./main-view.scss":"components/main-view/main-view.scss"}],"index.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","../login-view/login-view":"components/login-view/login-view.jsx","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../registration-view/registration-view":"components/registration-view/registration-view.jsx","../update-profile/update-profile":"components/update-profile/update-profile.jsx","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","./main-view.scss":"components/main-view/main-view.scss"}],"index.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);

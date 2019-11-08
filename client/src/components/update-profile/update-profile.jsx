@@ -45,7 +45,7 @@ export function UpdateProfile(props) {
   };
 
   return (
-    <Container className='registrationContainer'>
+    <Container className='regContainer'>
       <Form className='registrationForm'>
         <Form.Group controlId='formBasicEmail'>
           <Form.Label>Email address</Form.Label>
@@ -91,13 +91,8 @@ export function UpdateProfile(props) {
           type='submit'
           onClick={handleSubmit}
         >
-          Update me
+          Update
         </Button>
-        <Link to={`/`}>
-          <Button className='back-btn' variant='primary'>
-            Go back
-          </Button>
-        </Link>
       </Form>
     </Container>
   );

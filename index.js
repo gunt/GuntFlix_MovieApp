@@ -143,6 +143,21 @@ app.post('/Users', [
     });
 });
 
+//Gets user profile by username
+app.get('/users/:Username', function (req, res) {
+  Users.findOne({
+      Username: req.params.Username
+    })
+    .then(function (user) {
+      res.json(user)
+    })
+    .catch(function (err) {
+      console.error(err);
+      res.status(500).send("Error:" + err);
+    });
+});
+
+
 //Update Username
 app.put('/Users/:Username', [
 

@@ -65,6 +65,15 @@ body {
   padding: 35px;
   width: 70%;
 }
+.regContainer {
+  background-color: #495057;
+  border-radius: 25px;
+  color: #6c7382;
+  margin-top: 20px;
+  width: 80%;
+  color: #fff;
+  padding: 35px;
+}
 .main-view {
   margin-left: auto;
   margin-right: auto;
@@ -103,6 +112,10 @@ body {
 .borderBottom {
   background-color: #b8c3cc;
   min-height: 10px;
+}
+
+.upButton {
+  float: right;
 }
 .my-flix {
   color: steelblue;

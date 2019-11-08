@@ -1,0 +1,12 @@
+$primary-color: rgb(73, 80, 87);
+$secondary-color: rgb(108, 115, 130);
+
+.regContainer {
+    background-color: $primary-color;
+    border-radius: 25px;
+    color: $secondary-color;
+    margin-top: 20px;
+    width: 80%;
+    color: #fff;
+    padding: 35px
+}
