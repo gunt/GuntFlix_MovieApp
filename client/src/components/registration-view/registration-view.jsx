@@ -1,10 +1,13 @@
-import axios from 'axios';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+
+import { Link } from 'react-router-dom';
 import './registration-view.scss';
+
+import axios from 'axios';
 
 export function RegistrationView(props) {
   const [username, createUsername] = useState('');
@@ -12,11 +15,28 @@ export function RegistrationView(props) {
   const [email, createEmail] = useState('');
   const [birthday, createDob] = useState('');
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    console.log(username, password, birthday, email);
-    props.onLoggedIn(username);
+  const registerNewUser = () => {
+    axios
+      .post('https://movie-flix-777.herokuapp.com/users', {
+        Username: username,
+        Password: password,
+        Email: email,
+        Birthday: birthday
+      })
+      .then(response => {
+        console.log(response.data);
+        window.open('/', '_self');
+      })
+      .catch(err => {
+        console.error('error registering the user: ', err);
+      });
   };
+
+  // const handleSubmit = e => {
+  //   e.preventDefault();
+  //   console.log(username, password, birthday, email);
+  //   props.onLoggedIn(username);
+  // };
 
   return (
     <Container className='regContainer'>
@@ -66,8 +86,8 @@ export function RegistrationView(props) {
         <Form.Group controlId='formBasicCheckbox'>
           <Form.Check type='checkbox' label='Accept Terms and Conditions' />
         </Form.Group>
-        <Button variant='primary' type='submit' onClick={handleSubmit}>
-          Create Account
+        <Button variant='primary' onClick={registerNewUser}>
+          Register
         </Button>
         <Form.Text>
           Already registered? Click{' '}
@@ -87,6 +107,10 @@ export function RegistrationView(props) {
 }
 
 RegistrationView.propTypes = {
-  onSignedIn: PropTypes.func.isRequired,
-  onClick: PropTypes.func.isRequired
+  username: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  birthday: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  userRegistered: PropTypes.func.isRequired
 };

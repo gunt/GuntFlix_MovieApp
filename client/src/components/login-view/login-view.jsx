@@ -25,14 +25,14 @@ export function LoginView(props) {
         props.onLoggedIn(data);
       })
       .catch(e => {
-        alert('No such user');
+        alert('Welcome to Red 23, Please Register First');
       });
     // props.onLoggedIn(username);
   };
 
   return (
     <Container className='logContainer'>
-      <h1>Welcome to MovieFlix</h1>
+      <h1>Cinema Red 23</h1>
       <form>
         <Form.Group controlId='formBasicUsername'>
           <Form.Label>Username</Form.Label>
@@ -77,6 +77,6 @@ export function LoginView(props) {
 }
 
 LoginView.propTypes = {
-  onLoggedIn: PropTypes.func.isRequired,
-  onClick: PropTypes.func.isRequired
+  onLoggedIn: PropTypes.func.isRequired
+  // onClick: PropTypes.func.isRequired
 };

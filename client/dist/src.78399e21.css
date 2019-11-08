@@ -1,19 +1,22 @@
 body {
-  background: url("https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1655&q=80");
+  background: url("http://clipart-library.com/images/pTqrbEXkc.jpg") no-repeat center center fixed;
   background-size: cover;
+  height: 100%;
 }
 
 .logContainer {
-  background-color: #255e50;
+  background-color: #495057;
   border-radius: 25px;
   color: #6c7382;
   margin-top: 20px;
   width: 60%;
+  color: #fff;
+  padding: 35px;
 }
 
 h1 {
   text-align: center;
-  color: #fff;
+  color: #ef6262;
 }
 .card-header {
   font-family: "Merriweather", serif;
@@ -24,14 +27,17 @@ h1 {
   max-width: 20%;
 }
 body {
+  background: url("https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1655&q=80") no-repeat center center fixed;
   background-size: cover;
+  height: 100%;
 }
 
 .movie-view {
-  background-color: #255e50;
+  background-color: #495057;
   border-radius: 25px;
   color: #fff;
   margin-top: 20px;
+  padding: 70px;
 }
 
 h1 {
@@ -51,16 +57,25 @@ body {
 }
 
 .regContainer {
-  background-color: #255e50;
+  background-color: #495057;
   border-radius: 25px;
   color: #6c7382;
   margin-top: 20px;
+  color: #fff;
+  padding: 35px;
+  width: 70%;
 }
 .main-view {
   margin-left: auto;
   margin-right: auto;
   width: 80%;
   margin-bottom: 0;
+}
+
+body {
+  background: url("https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1655&q=80") no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
 }
 
 .card {
@@ -91,6 +106,12 @@ body {
 }
 .my-flix {
   color: steelblue;
+}
+
+body {
+  background: url("https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1655&q=80") no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
 }
 
 form-container {

@@ -1,17 +1,24 @@
 import React from 'react';
-import './profile-view.scss';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+// import { MovieCard } from '../movie-card/movie-card';
+import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
+import Collapse from 'react-bootstrap/Collapse';
+import Form from 'react-bootstrap/Form';
+
+import './profile-view.scss';
+
 export class ProfileView extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       username: null,
-      password: null,
       email: null,
       birthday: null,
       favoriteMovies: []
@@ -19,77 +26,152 @@ export class ProfileView extends React.Component {
   }
 
   componentDidMount() {
-    const accessToken = localStorage.getItem('token');
-    this.getUser(accessToken);
+    this.getUserInfo();
   }
 
-  getUser(token) {
-    const username = this.props.username;
+  getUserInfo() {
     axios
-      .get(`https://movie-flix-777.herokuapp.com/users/${username}`, {
-        headers: { Authorization: `Bearer ${token}` }
+      .get(`https://movie-flix-777.herokuapp.com/users/${localStorage.user}`, {
+        headers: { Authorization: `Bearer ${localStorage.token}` }
       })
-      .then(res => {
+      .then(response => {
         this.setState({
-          userdata: res.data,
-          username: res.data.username,
-          password: res.data.password,
-          email: res.data.email,
-          birthday: res.data.birthday,
-          favoriteMovies: res.data.favoriteMovies
+          username: response.data.Username,
+          email: response.data.Email,
+          birthday: response.data.Birthday,
+          favoriteMovies: response.data.FavoriteMovies
         });
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
       });
   }
 
-  deleteUser(e) {
-    e.preventDefault();
+  removeMovie(movieId) {
     axios
       .delete(
-        `https://movie-flix-777.herokuapp.com/users/${localStorage.getItem(
-          'user'
-        )}`,
+        `https://movie-flix-777.herokuapp.com/users/${this.state.username}/movies/${movieId}`,
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+          headers: { Authorization: `Bearer ${localStorage.token}` }
         }
       )
       .then(response => {
-        alert('Account deleted');
-
-        localStorage.removeItem('token, user');
-        window.open('/');
+        this.setState({
+          favoriteMovies: response.data.FavoriteMovies
+        });
       })
-      .catch(event => {
-        alert('failed to delete user');
+      .catch(err => {
+        console.error(err);
       });
   }
 
   render() {
-    return (
-      <div>
-        <Container>
-          <Col>
-            <Card>
-              <Card.Body>
-                <Card.Title>{this.state.username}</Card.Title>
-                <Card.Text>email: {this.state.email}</Card.Text>
-                <Card.Text>birthday {this.state.birthday}</Card.Text>
-                <Card.Text>
-                  favorite movies: {this.state.favoriteMovies}
-                </Card.Text>
-                <Link to={`/`}>
-                  <Button variant='primary'> Go back</Button>
-                </Link>
-                <Link to={'/user/update'}>
-                  <Button variant='primary'> Update ALL your profile.</Button>
-                </Link>
-              </Card.Body>
-            </Card>
-          </Col>
+    if (!localStorage.user) {
+      return <Redirect to='/' />;
+    } else {
+      console.log(this.props.movies);
+      return (
+        <Container className='profile-view'>
+          <Row>
+            <Col>
+              <h2>User profile</h2>
+              <div className='user-username'>
+                <h3 className='label'>Username</h3>
+                <p className='value'>
+                  {this.state.username} <EditProfile type={'username'} />
+                </p>
+              </div>
+              <div className='user-email'>
+                <h3 className='label'>Email</h3>
+                <p className='value'>
+                  {this.state.email} <EditProfile type={'email'} />
+                </p>
+              </div>
+              <div className='user-birthday'>
+                <h3 className='label'>Birthday</h3>
+                <p className='value'>
+                  {this.state.birthday} <EditProfile type={'date'} />
+                </p>
+              </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <h3 className='label'>Favorite Movies</h3>
+              <ListGroup className='user-favorite-movies'>
+                {this.props.movies.map(mov => {
+                  if (
+                    mov._id ===
+                    this.state.favoriteMovies.find(favMov => favMov === mov._id)
+                  ) {
+                    return (
+                      <ListGroup.Item>
+                        {mov.Title}
+                        <Link to={`/movies/${mov._id}`}>
+                          <Button variant='primary' size='sm'>
+                            View
+                          </Button>
+                        </Link>
+                        <Button
+                          variant='danger'
+                          size='sm'
+                          onClick={() => this.removeMovie(mov._id)}
+                        >
+                          Remove
+                        </Button>
+                      </ListGroup.Item>
+                    );
+                  } else {
+                    return null;
+                  }
+                })}
+              </ListGroup>
+            </Col>
+          </Row>
         </Container>
-      </div>
+      );
+    }
+  }
+}
+
+class EditProfile extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      open: false,
+      userInput: null
+    };
+  }
+
+  render() {
+    const { open } = this.state;
+    return (
+      <>
+        <Button
+          onClick={() => this.setState({ open: !open })}
+          variant='secondary'
+          size='sm'
+        >
+          Edit
+        </Button>
+        <Collapse in={this.state.open}>
+          <div>
+            <Form.Control
+              type={this.props.type}
+              placeholder={`Enter ${this.props.type}`}
+              onChange={e => this.setState({ userInput: e.target.value })}
+            />
+            <Button
+              variant='primary'
+              size='sm'
+              onClick={() => console.log('teste=', this.state.userInput)}
+            >
+              Submit
+            </Button>
+          </div>
+        </Collapse>
+      </>
     );
   }
 }

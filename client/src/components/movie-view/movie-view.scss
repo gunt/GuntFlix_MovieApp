@@ -1,10 +1,10 @@
-$primary-color: rgb(37, 94, 80);
+$primary-color: rgb(73, 80, 87);
 $secondary-color: rgb(108, 115, 130);
 
-
 body {
-    // background: url('http://clipart-library.com/images/pTqrbEXkc.jpg');
+    background: url('https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1655&q=80')no-repeat center center fixed;
     background-size: cover;
+    height: 100%;
 }
 
 .movie-view {
@@ -12,6 +12,7 @@ body {
     border-radius: 25px;
     color: #fff;
     margin-top: 20px;
+    padding: 70px;
 }
 
 h1 {

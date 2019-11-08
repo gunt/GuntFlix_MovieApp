@@ -1,4 +1,4 @@
-$primary-color: rgb(37, 94, 80);
+$primary-color: rgb(73, 80, 87);
 $secondary-color: rgb(108, 115, 130);
 
 
@@ -13,4 +13,7 @@ body {
     border-radius: 25px;
     color: $secondary-color;
     margin-top: 20px;
+    color: #fff;
+    padding: 35px;
+    width: 70%;
 }
