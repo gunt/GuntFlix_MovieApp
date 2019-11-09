@@ -39152,7 +39152,6 @@ function (_React$Component) {
   _createClass(MovieCard, [{
     key: "render",
     value: function render() {
-      // const { movie, onClick } = this.props;
       var movie = this.props.movie;
       return _react.default.createElement(_Card.default, {
         style: {

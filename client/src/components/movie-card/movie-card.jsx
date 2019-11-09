@@ -8,7 +8,6 @@ import './movie-card.scss';
 
 export class MovieCard extends React.Component {
   render() {
-    // const { movie, onClick } = this.props;
     const { movie } = this.props;
 
     return (
