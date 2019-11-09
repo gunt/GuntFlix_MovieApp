@@ -158,7 +158,9 @@ app.post('/users', [
 // });
 
 // get specific user
-app.get('/users/:username', (req, res) => {
+app.get('/users/:username', passport.authenticate('jwt', {
+  session: false
+}), (req, res) => {
   Users.findOne({
       Username: req.params.Username
     })

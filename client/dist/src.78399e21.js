@@ -39152,9 +39152,8 @@ function (_React$Component) {
   _createClass(MovieCard, [{
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          movie = _this$props.movie,
-          onClick = _this$props.onClick;
+      // const { movie, onClick } = this.props;
+      var movie = this.props.movie;
       return _react.default.createElement(_Card.default, {
         style: {
           width: '16rem'
@@ -42566,7 +42565,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54355" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58171" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
