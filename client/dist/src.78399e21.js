@@ -39595,7 +39595,7 @@ function (_React$Component) {
       var FavoritesMovieList = this.props.movies.filter(function (m) {
         return _this4.state.FavoritesMovies.includes(m._id);
       });
-      return _react.default.createElement("div", null, _react.default.createElement(_Container.default, null, _react.default.createElement(_Col.default, null, _react.default.createElement(_Card.default, null, _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, this.state.username), _react.default.createElement(_Card.default.Text, null, "Email: ", this.state.email), _react.default.createElement(_Card.default.Text, null, "Birthday ", this.state.birthday), "Favorite Movies:", FavoritesMovies.map(function (m) {
+      return _react.default.createElement("div", null, _react.default.createElement(_Container.default, null, _react.default.createElement(_Col.default, null, _react.default.createElement(_Card.default, null, _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, this.state.username), _react.default.createElement(_Card.default.Text, null, "Email: ", this.state.email), _react.default.createElement(_Card.default.Text, null, "Birthday ", this.state.birthday), FavoritesMovies.map(function (m) {
         return _react.default.createElement("div", {
           key: m._id,
           className: "fav-movies-button"
@@ -40216,7 +40216,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64801" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64979" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
