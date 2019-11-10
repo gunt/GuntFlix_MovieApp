@@ -30,20 +30,6 @@ export class MainView extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   window.addEventListener('hashchange', this.handleNewHash, false);
-
-  //   this.handleNewHash();
-
-  //   const accessToken = localStorage.getItem('token');
-  //   if (accessToken !== null) {
-  //     this.setState({
-  //       user: localStorage.getItem('user')
-  //     });
-  //     this.getMovies(accessToken);
-  //   }
-  // }
-
   componentDidMount() {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
@@ -81,9 +67,8 @@ export class MainView extends React.Component {
 
   //get information from user
   getUser(token) {
-    let username = localStorage.getItem('user');
     axios
-      .get(`https://movie-flix-777.herokuapp.com/users/${username}`, {
+      .get('https://movie-flix-777.herokuapp.com/users', {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {
@@ -95,19 +80,6 @@ export class MainView extends React.Component {
       });
   }
 
-  // getUser(token) {
-  //   axios
-  //     .get('https://movie-flix-777.herokuapp.com/users/', {
-  //       headers: { Authorization: `Bearer ${token}` }
-  //     })
-  //     .then(response => {
-  //       this.props.setLoggedUser(response.data);
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // }
-
   buttonLogout() {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
@@ -116,16 +88,7 @@ export class MainView extends React.Component {
       selectedMovie: null
     });
     window.location.reload();
-    // window.location.reload();
   }
-
-  // onMovieClick(movie) {
-  //   this.setState({
-  //     selectedMovieId: movie._id
-  //   });
-
-  //   window.location.hash = '#' + movie._id;
-  // }
 
   resetMainView() {
     this.setState({
@@ -200,11 +163,11 @@ export class MainView extends React.Component {
             </Link>
           </div>
 
-          <Link to='/users/:username'>
+          <Link to='/users/:Username'>
             <Button variant='primary'>Profile View</Button>
           </Link>
 
-          <Link to='/update/:username'>
+          <Link to='/update/:Username'>
             <Button variant='primary'>Update Profile</Button>
           </Link>
 
@@ -246,29 +209,9 @@ export class MainView extends React.Component {
               path='/directors/:Director'
               render={() => <DirectorView />}
             />
-            {/* <Route
-              exact
-              path='/Users'
-              render={() => <ProfileView movies={movies} />}
-            /> */}
-            {/* Endpoint Users/:Username to a new Update or the same profile component */}
-            {/* example with the users billygraham - http://localhost:1234/users/billygraham */}
-            {/* <Route
-              path='/users/:username'
-              exact
-              strict
-              component={ProfileView}
-            /> */}
-
-            {/* <Route
-              path='/users/:username'
-              render={({ match }) => {
-                return <ProfileView userInfo={userInfo} />;
-              }}
-            /> */}
 
             <Route
-              path='/update/:username'
+              path='/update/:Username'
               exact
               strict
               component={UpdateProfile}
@@ -276,16 +219,9 @@ export class MainView extends React.Component {
 
             <Route
               exact
-              path='/username/:username'
+              path='/users/:Username'
               render={() => <ProfileView movies={movies} />}
             />
-
-            {/* <Route
-              path='/username/:Username'
-              exact
-              strict
-              component={ProfileView}
-            /> */}
           </Row>
         </Container>
       </Router>

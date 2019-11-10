@@ -49,8 +49,32 @@ export class ProfileView extends React.Component {
       });
   }
 
+  deleteMovieFromFavs(event, FavoritesMovies) {
+    event.preventDefault();
+    console.log(FavoritesMovie);
+    axios
+      .delete(
+        `https://movie-flix-777.herokuapp.com/users/${localStorage.getItem(
+          'user'
+        )}/Favourites/${FavoritesMovies}`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+        }
+      )
+      .then(response => {
+        this.getUser(localStorage.getItem('token'));
+      })
+      .catch(event => {
+        alert('Something went wrong');
+      });
+  }
+
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
   render() {
-    const favoriteMovieList = this.props.movies.filter(m =>
+    const FavoritesMovieList = this.props.movies.filter(m =>
       this.state.FavoritesMovies.includes(m._id)
     );
 

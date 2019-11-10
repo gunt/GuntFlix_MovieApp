@@ -39490,6 +39490,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -39563,12 +39565,35 @@ function (_React$Component) {
       });
     }
   }, {
-    key: "render",
-    value: function render() {
+    key: "deleteMovieFromFavs",
+    value: function deleteMovieFromFavs(event, FavoritesMovies) {
       var _this3 = this;
 
-      var favoriteMovieList = this.props.movies.filter(function (m) {
-        return _this3.state.FavoritesMovies.includes(m._id);
+      event.preventDefault();
+      console.log(FavoritesMovie);
+
+      _axios.default.delete("https://movie-flix-777.herokuapp.com/users/".concat(localStorage.getItem('user'), "/Favourites/").concat(FavoritesMovies), {
+        headers: {
+          Authorization: "Bearer ".concat(localStorage.getItem('token'))
+        }
+      }).then(function (response) {
+        _this3.getUser(localStorage.getItem('token'));
+      }).catch(function (event) {
+        alert('Something went wrong');
+      });
+    }
+  }, {
+    key: "handleChange",
+    value: function handleChange(e) {
+      this.setState(_defineProperty({}, e.target.name, e.target.value));
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this4 = this;
+
+      var FavoritesMovieList = this.props.movies.filter(function (m) {
+        return _this4.state.FavoritesMovies.includes(m._id);
       });
       return _react.default.createElement("div", null, _react.default.createElement(_Container.default, null, _react.default.createElement(_Col.default, null, _react.default.createElement(_Card.default, null, _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, this.state.username), _react.default.createElement(_Card.default.Text, null, "Email: ", this.state.email), _react.default.createElement(_Card.default.Text, null, "Birthday ", this.state.birthday), "Favorite Movies:", FavoritesMovies.map(function (m) {
         return _react.default.createElement("div", {
@@ -39581,7 +39606,7 @@ function (_React$Component) {
         }, m.title)), _react.default.createElement(_Button.default, {
           size: "sm",
           onClick: function onClick(e) {
-            return _this3.deleteFavoriteMovie(m._id);
+            return _this4.deleteFavoriteMovie(m._id);
           }
         }, "Remove Favorite"));
       }), _react.default.createElement(Link, {
@@ -39594,7 +39619,7 @@ function (_React$Component) {
         variant: "primary"
       }, "Update ALL your profile.")), _react.default.createElement(_Button.default, {
         onClick: function onClick() {
-          return _this3.deleteUser();
+          return _this4.deleteUser();
         }
       }, "Delete account"))))));
     }
@@ -39879,18 +39904,7 @@ function (_React$Component) {
       newUser: null
     };
     return _this;
-  } // componentDidMount() {
-  //   window.addEventListener('hashchange', this.handleNewHash, false);
-  //   this.handleNewHash();
-  //   const accessToken = localStorage.getItem('token');
-  //   if (accessToken !== null) {
-  //     this.setState({
-  //       user: localStorage.getItem('user')
-  //     });
-  //     this.getMovies(accessToken);
-  //   }
-  // }
-
+  }
 
   _createClass(MainView, [{
     key: "componentDidMount",
@@ -39929,9 +39943,7 @@ function (_React$Component) {
     value: function getUser(token) {
       var _this3 = this;
 
-      var username = localStorage.getItem('user');
-
-      _axios.default.get("https://movie-flix-777.herokuapp.com/users/".concat(username), {
+      _axios.default.get('https://movie-flix-777.herokuapp.com/users', {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
@@ -39942,19 +39954,7 @@ function (_React$Component) {
       }).catch(function (error) {
         console.log(error);
       });
-    } // getUser(token) {
-    //   axios
-    //     .get('https://movie-flix-777.herokuapp.com/users/', {
-    //       headers: { Authorization: `Bearer ${token}` }
-    //     })
-    //     .then(response => {
-    //       this.props.setLoggedUser(response.data);
-    //     })
-    //     .catch(error => {
-    //       console.log(error);
-    //     });
-    // }
-
+    }
   }, {
     key: "buttonLogout",
     value: function buttonLogout() {
@@ -39964,14 +39964,8 @@ function (_React$Component) {
         user: false,
         selectedMovie: null
       });
-      window.location.reload(); // window.location.reload();
-    } // onMovieClick(movie) {
-    //   this.setState({
-    //     selectedMovieId: movie._id
-    //   });
-    //   window.location.hash = '#' + movie._id;
-    // }
-
+      window.location.reload();
+    }
   }, {
     key: "resetMainView",
     value: function resetMainView() {
@@ -40048,11 +40042,11 @@ function (_React$Component) {
         className: "back-btn",
         variant: "primary"
       }, "Go back"))), _react.default.createElement(_reactRouterDom.Link, {
-        to: "/users/:username"
+        to: "/users/:Username"
       }, _react.default.createElement(_Button.default, {
         variant: "primary"
       }, "Profile View")), _react.default.createElement(_reactRouterDom.Link, {
-        to: "/update/:username"
+        to: "/update/:Username"
       }, _react.default.createElement(_Button.default, {
         variant: "primary"
       }, "Update Profile")), _react.default.createElement(_Row.default, null, _react.default.createElement(_reactRouterDom.Route, {
@@ -40112,13 +40106,13 @@ function (_React$Component) {
           return _react.default.createElement(DirectorView, null);
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
-        path: "/update/:username",
+        path: "/update/:Username",
         exact: true,
         strict: true,
         component: _updateProfile.UpdateProfile
       }), _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
-        path: "/username/:username",
+        path: "/users/:Username",
         render: function render() {
           return _react.default.createElement(_profileView.ProfileView, {
             movies: movies
