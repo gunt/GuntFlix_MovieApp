@@ -41890,17 +41890,17 @@ function (_React$Component) {
 
       var username = localStorage.getItem('user');
 
-      _axios.default.get("https://movie-flix-777.herokuapp.com/users/".concat(username), {
+      _axios.default.get("https://movie-flix-777.herokuapp.com/users".concat(username), {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
       }).then(function (res) {
         _this2.setState({
-          username: res.data.username,
-          password: res.data.password,
-          email: res.data.email,
-          birthday: res.data.birthday,
-          favoriteMovies: res.data.favoriteMovies
+          Username: res.data.username,
+          Password: res.data.password,
+          Email: res.data.email,
+          Birthday: res.data.birthday,
+          FavoritesMovies: res.data.favoriteMovies
         });
       }).catch(function (err) {
         console.log(err);
