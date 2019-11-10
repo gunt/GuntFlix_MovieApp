@@ -26,6 +26,10 @@ mongoose.connect('mongodb+srv://MaxOctAdmin:vi82R3s2XP5VLL8G@maxoct-didgb.mongod
 });
 
 app.use(express.static('public'));
+// app.use('/client', express.static(path.join(__dirname, 'dist')));
+// app.get("/client/*", (_req, res) => {
+//   res.sendFile(path.join(__dirname, "dist", "index.html"));
+// });
 app.use(morgan('common'));
 app.use(bodyParser.json());
 app.use(cors());
@@ -221,7 +225,7 @@ app.post('/users/:username/movies/:MovieID', function (req, res) {
       Username: req.params.Username
     }, {
       $push: {
-        FavoritesMovies: req.params.MovieID
+        FavoriteMovies: req.params.MovieID
       }
     }, {
       new: true
@@ -242,7 +246,7 @@ app.delete('/users/:Username/Movies/:MovieID', function (req, res) {
       Username: req.params.Username
     }, {
       $pull: {
-        FavoritesMovies: req.params.MovieID
+        FavoriteMovies: req.params.MovieID
       }
     }, {
       new: true

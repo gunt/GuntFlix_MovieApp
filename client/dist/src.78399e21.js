@@ -39519,7 +39519,7 @@ function (_React$Component) {
 
     _classCallCheck(this, ProfileView);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(ProfileView).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ProfileView).call(this));
     _this.state = {
       Username: null,
       Password: null,
@@ -39576,7 +39576,7 @@ function (_React$Component) {
         headers: {
           Authorization: "Bearer ".concat(localStorage.getItem('token'))
         }
-      }).then(function (response) {
+      }).then(function (res) {
         _this3.getUser(localStorage.getItem('token'));
       }).catch(function (event) {
         alert('Something went wrong');
@@ -39586,16 +39586,22 @@ function (_React$Component) {
     key: "handleChange",
     value: function handleChange(e) {
       this.setState(_defineProperty({}, e.target.name, e.target.value));
-    }
+    } //   render() {
+    //     const FavoritesMovieList = this.props.movies.filter(m =>
+    //       this.state.FavoritesMovies.includes(m._id)
+    //     );
+
   }, {
     key: "render",
     value: function render() {
       var _this4 = this;
 
-      var FavoritesMovieList = this.props.movies.filter(function (m) {
-        return _this4.state.FavoritesMovies.includes(m._id);
-      });
-      return _react.default.createElement("div", null, _react.default.createElement(_Container.default, null, _react.default.createElement(_Col.default, null, _react.default.createElement(_Card.default, null, _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, this.state.username), _react.default.createElement(_Card.default.Text, null, "Email: ", this.state.email), _react.default.createElement(_Card.default.Text, null, "Birthday ", this.state.birthday), FavoritesMovies.map(function (m) {
+      var _this$state = this.state,
+          Username = _this$state.Username,
+          Email = _this$state.Email,
+          Birthday = _this$state.Birthday,
+          FavoritesMovies = _this$state.FavoritesMovies;
+      return _react.default.createElement("div", null, _react.default.createElement(_Container.default, null, _react.default.createElement(_Col.default, null, _react.default.createElement(_Card.default, null, _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, this.state.username), _react.default.createElement(_Card.default.Text, null, "Email: ", this.state.email), _react.default.createElement(_Card.default.Text, null, "Birthday ", this.state.birthday), FavoriteMovies.map(function (m) {
         return _react.default.createElement("div", {
           key: m._id,
           className: "fav-movies-button"
@@ -40216,7 +40222,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64979" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65410" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

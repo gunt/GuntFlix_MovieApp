@@ -10,7 +10,7 @@ import './profile-view.scss';
 
 export class ProfileView extends React.Component {
   constructor() {
-    super(props);
+    super();
     this.state = {
       Username: null,
       Password: null,
@@ -61,7 +61,7 @@ export class ProfileView extends React.Component {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         }
       )
-      .then(response => {
+      .then(res => {
         this.getUser(localStorage.getItem('token'));
       })
       .catch(event => {
@@ -73,10 +73,13 @@ export class ProfileView extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  //   render() {
+  //     const FavoritesMovieList = this.props.movies.filter(m =>
+  //       this.state.FavoritesMovies.includes(m._id)
+  //     );
+
   render() {
-    const FavoritesMovieList = this.props.movies.filter(m =>
-      this.state.FavoritesMovies.includes(m._id)
-    );
+    const { Username, Email, Birthday, FavoritesMovies } = this.state;
 
     return (
       <div>
@@ -87,7 +90,7 @@ export class ProfileView extends React.Component {
                 <Card.Title>{this.state.username}</Card.Title>
                 <Card.Text>Email: {this.state.email}</Card.Text>
                 <Card.Text>Birthday {this.state.birthday}</Card.Text>
-                {FavoritesMovies.map(m => (
+                {FavoriteMovies.map(m => (
                   <div key={m._id} className='fav-movies-button'>
                     <Link to={`/movies/${m._id}`}>
                       <Button variant='link'>{m.title}</Button>
