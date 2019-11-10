@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
 import './profile-view.scss';
-import { response } from 'express';
+// import { response } from 'express';
 
 export class ProfileView extends React.Component {
   constructor() {
