@@ -221,7 +221,7 @@ app.post('/users/:username/movies/:MovieID', function (req, res) {
       Username: req.params.Username
     }, {
       $push: {
-        FavoriteMovies: req.params.MovieID
+        FavoritesMovies: req.params.MovieID
       }
     }, {
       new: true
@@ -242,7 +242,7 @@ app.delete('/users/:Username/Movies/:MovieID', function (req, res) {
       Username: req.params.Username
     }, {
       $pull: {
-        FavoriteMovies: req.params.MovieID
+        FavoritesMovies: req.params.MovieID
       }
     }, {
       new: true
