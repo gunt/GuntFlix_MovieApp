@@ -87,7 +87,6 @@ export class ProfileView extends React.Component {
                 <Card.Title>{this.state.username}</Card.Title>
                 <Card.Text>Email: {this.state.email}</Card.Text>
                 <Card.Text>Birthday {this.state.birthday}</Card.Text>
-                Favorite Movies:
                 {FavoritesMovies.map(m => (
                   <div key={m._id} className='fav-movies-button'>
                     <Link to={`/movies/${m._id}`}>
