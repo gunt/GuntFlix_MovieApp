@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const uuid = require("uuid");
 const mongoose = require('mongoose');
 const Models = require('./model.js');
 const Movies = Models.Movie;
@@ -25,6 +26,10 @@ mongoose.connect('mongodb+srv://MaxOctAdmin:vi82R3s2XP5VLL8G@maxoct-didgb.mongod
 });
 
 app.use(express.static('public'));
+app.use('/client', express.static(path.join(__dirname, 'dist')));
+app.get("/client/*", (_req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
 app.use(morgan('common'));
 app.use(bodyParser.json());
 app.use(cors());
@@ -143,7 +148,7 @@ app.post('/users', [
     });
 });
 
-// get specific user
+// get specific user by username 
 app.get('/users/:Username', function (req, res) {
   Users.findOne({
       Username: req.params.Username
@@ -156,6 +161,20 @@ app.get('/users/:Username', function (req, res) {
       res.status(500).send('Error: ' + error);
     });
 });
+
+
+// get all the users to figure it out the error null in get specific username
+app.get('/users', function (_req, res) {
+  Users.find()
+    .then(function (users) {
+      res.status(201).json(users);
+    })
+    .catch(function (err) {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+});
+
 
 //Update Username
 app.put('/users/:Username', [

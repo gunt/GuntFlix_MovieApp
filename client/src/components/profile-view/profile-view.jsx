@@ -1,46 +1,31 @@
 import React from 'react';
 import axios from 'axios';
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
-import { Link } from 'react-router-dom';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+
 import './profile-view.scss';
+import { response } from 'express';
 
-// import React from 'react';
-// import axios from 'axios';
-// // import { withRouter } from 'react-router-dom';
-// import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-// // import Route from 'react-router-dom/Route';
-// import { LoginView } from '../login-view/login-view';
-// import { MovieCard } from '../movie-card/movie-card';
-// import { MovieView } from '../movie-view/movie-view';
-// import { RegistrationView } from '../registration-view/registration-view';
-// //to update user profile page first import component
-// import { ProfileView } from '../profile-view/profile-view';
-// import { UpdateProfile } from '../update-profile/update-profile';
-// import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-// import Col from 'react-bootstrap/Col';
-// import Button from 'react-bootstrap/Button';
-
-class ProfileView extends React.Component {
-  constructor(props) {
+export class ProfileView extends React.Component {
+  constructor() {
     super(props);
-
     this.state = {
       Username: null,
       Password: null,
       Email: null,
       Birthday: null,
-      FavoritesMovies: [],
-      Movies: []
+      userData: null,
+      FavoritesMovies: []
     };
   }
 
   componentDidMount() {
-    const accessToken = localStorage.getItem('token');
-    this.getUser(accessToken);
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.getUser(accessToken);
+    }
   }
 
   getUser(token) {
@@ -51,11 +36,12 @@ class ProfileView extends React.Component {
       })
       .then(res => {
         this.setState({
-          Username: res.data.username,
-          Password: res.data.password,
-          Email: res.data.email,
-          Birthday: res.data.birthday,
-          FavoritesMovies: res.data.favoriteMovies
+          userData: response.data,
+          Username: res.data.Username,
+          Password: res.data.Password,
+          Email: res.data.Email,
+          Birthday: res.data.Birthday,
+          FavoritesMovies: res.data.FavoritesMovies
         });
       })
       .catch(err => {
@@ -65,7 +51,7 @@ class ProfileView extends React.Component {
 
   render() {
     const favoriteMovieList = this.props.movies.filter(m =>
-      this.state.favoriteMovies.includes(m._id)
+      this.state.FavoritesMovies.includes(m._id)
     );
 
     return (
@@ -78,7 +64,7 @@ class ProfileView extends React.Component {
                 <Card.Text>Email: {this.state.email}</Card.Text>
                 <Card.Text>Birthday {this.state.birthday}</Card.Text>
                 Favorite Movies:
-                {favoriteMovieList.map(m => (
+                {FavoritesMovies.map(m => (
                   <div key={m._id} className='fav-movies-button'>
                     <Link to={`/movies/${m._id}`}>
                       <Button variant='link'>{m.title}</Button>
