@@ -1,12 +1,28 @@
+import React from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
-import { connect } from 'react-redux';
 import Container from 'react-bootstrap/Container';
-import React from 'react';
 import { Link } from 'react-router-dom';
 import './profile-view.scss';
+
+// import React from 'react';
+// import axios from 'axios';
+// // import { withRouter } from 'react-router-dom';
+// import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+// // import Route from 'react-router-dom/Route';
+// import { LoginView } from '../login-view/login-view';
+// import { MovieCard } from '../movie-card/movie-card';
+// import { MovieView } from '../movie-view/movie-view';
+// import { RegistrationView } from '../registration-view/registration-view';
+// //to update user profile page first import component
+// import { ProfileView } from '../profile-view/profile-view';
+// import { UpdateProfile } from '../update-profile/update-profile';
+// import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+// import Col from 'react-bootstrap/Col';
+// import Button from 'react-bootstrap/Button';
 
 class ProfileView extends React.Component {
   constructor(props) {
@@ -28,7 +44,7 @@ class ProfileView extends React.Component {
   }
 
   getUser(token) {
-    const username = localStorage.getItem('users');
+    const username = localStorage.getItem('user');
     axios
       .get(`https://movie-flix-777.herokuapp.com/users/${username}`, {
         headers: { Authorization: `Bearer ${token}` }

@@ -144,21 +144,21 @@ app.post('/users', [
 });
 
 // get specific user
-app.get('/users', function (_req, res) {
-  Users.find({
+app.get('/users/:Username', function (req, res) {
+  Users.findOne({
       Username: req.params.Username
     })
-    .then((user) => {
-      res.status(201).json(user)
+    .then(function (user) {
+      res.json(user)
     })
-    .catch((error) => {
+    .catch(function (error) {
       console.error(error);
       res.status(500).send('Error: ' + error);
     });
 });
 
 //Update Username
-app.put('/users/:username', [
+app.put('/users/:Username', [
 
   check('Username').isAlphanumeric(),
   check('Password').isLength({
@@ -201,7 +201,7 @@ app.put('/users/:username', [
 });
 
 // Add a movie to a user's list of favorites
-app.post('/users/:username/movies/:movieID', function (req, res) {
+app.post('/users/:username/movies/:MovieID', function (req, res) {
   Users.findOneAndUpdate({
       Username: req.params.Username
     }, {
@@ -222,7 +222,7 @@ app.post('/users/:username/movies/:movieID', function (req, res) {
 });
 
 // Remove a movie from a user's list of favorites
-app.delete('/users/:username/movies/:movieID', function (req, res) {
+app.delete('/users/:Username/Movies/:MovieID', function (req, res) {
   Users.findOneAndUpdate({
       Username: req.params.Username
     }, {
@@ -244,7 +244,7 @@ app.delete('/users/:username/movies/:movieID', function (req, res) {
 });
 
 // Delete a User Profile
-app.delete('/users/:username', function (req, res) {
+app.delete('/users/:Username', function (req, res) {
   Users.findOneAndUpdate({
       Username: req.params.Username
     })
