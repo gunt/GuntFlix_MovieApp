@@ -41867,12 +41867,12 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ProfileView).call(this, props));
     _this.state = {
-      username: null,
-      password: null,
-      email: null,
-      birthday: null,
-      favoriteMovies: [],
-      movies: []
+      Username: null,
+      Password: null,
+      Email: null,
+      Birthday: null,
+      FavoritesMovies: [],
+      Movies: []
     };
     return _this;
   }
@@ -41888,9 +41888,9 @@ function (_React$Component) {
     value: function getUser(token) {
       var _this2 = this;
 
-      var username = localStorage.getItem('user');
+      var username = localStorage.getItem('users');
 
-      _axios.default.get("https://movie-flix-777.herokuapp.com/users".concat(username), {
+      _axios.default.get("https://movie-flix-777.herokuapp.com/users/".concat(username), {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
@@ -42564,7 +42564,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56279" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56648" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
