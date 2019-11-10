@@ -143,23 +143,9 @@ app.post('/users', [
     });
 });
 
-//Gets user profile by username
-// app.get('/users/:username', function (req, res) {
-//   Users.findOne({
-//       Username: req.params.Username
-//     })
-//     .then(function (user) {
-//       res.json(user)
-//     })
-//     .catch(function (err) {
-//       console.error(err);
-//       res.status(500).send("Error:" + err);
-//     });
-// });
-
 // get specific user
-app.get('/users', (req, res) => {
-  Users.findOne({
+app.get('/users', function (_req, res) {
+  Users.find({
       Username: req.params.Username
     })
     .then((user) => {
@@ -170,7 +156,6 @@ app.get('/users', (req, res) => {
       res.status(500).send('Error: ' + error);
     });
 });
-
 
 //Update Username
 app.put('/users/:username', [
@@ -216,7 +201,7 @@ app.put('/users/:username', [
 });
 
 // Add a movie to a user's list of favorites
-app.post('/users/:username/ovies/:movieID', function (req, res) {
+app.post('/users/:username/movies/:movieID', function (req, res) {
   Users.findOneAndUpdate({
       Username: req.params.Username
     }, {
