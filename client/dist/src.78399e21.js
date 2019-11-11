@@ -41462,7 +41462,7 @@ function (_React$Component) {
           return _react.default.createElement(_registrationView.RegistrationView, null);
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
-        path: "/profile",
+        path: "/users/:Username",
         render: function render() {
           return _react.default.createElement(_profileView.ProfileView, {
             movies: _this4.state.movies
@@ -41479,7 +41479,7 @@ function (_React$Component) {
           }));
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
-        path: "/genres/:Genre",
+        path: "/genre/:name",
         render: function render() {
           return _react.default.createElement(GenreView, null);
         }
@@ -41608,7 +41608,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50228" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56724" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

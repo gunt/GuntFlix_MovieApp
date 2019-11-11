@@ -196,7 +196,7 @@ export class MainView extends React.Component {
             />
             <Route path='/register' render={() => <RegistrationView />} />
             <Route
-              path='/profile'
+              path='/users/:Username'
               render={() => <ProfileView movies={this.state.movies} />}
             />
             <Route
@@ -209,7 +209,7 @@ export class MainView extends React.Component {
                 </Col>
               )}
             />
-            <Route path='/genres/:Genre' render={() => <GenreView />} />
+            <Route path='/genre/:name' render={() => <GenreView />} />
             {/* <Route
               path='/movies/directors/:Name'
               render={() => <DirectorView />}
