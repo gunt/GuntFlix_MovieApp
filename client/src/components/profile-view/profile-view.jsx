@@ -73,38 +73,28 @@ export class ProfileView extends React.Component {
         alert('failed to delete user');
       });
   }
+  deleteMovie(event, favoriteMovie) {
+    event.preventDefault();
+    console.log(favoriteMovie);
 
-  removeMovie() {
-    axios.delete(
-      `https://movie-flix-777.herokuapp.com/users/${this.props.user.Username}/FavoriteMovies/${this.props.movie._id}`,
-      {
+    let userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
+    let usernameLocal = localStorage.getItem('user');
+    let url = `${userEndpoint}${usernameLocal}/FavoriteMovies/${favoriteMovie}`;
+    axios
+      .delete(url, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-      }
-    );
+      })
+      .then(response => {
+        this.getUser(localStorage.getItem('token'));
+      })
+      .catch(event => {
+        alert('Something went wrong...');
+      });
   }
 
-  //   deleteMovie(event, favoriteMovie) {
-  //     event.preventDefault();
-  //     console.log(favoriteMovie);
-
-  //     let userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
-  //     let usernameLocal = localStorage.getItem('user');
-  //     let url = `${userEndpoint}${usernameLocal}/FavoriteMovies/${favoriteMovie}`;
-  //     axios
-  //       .delete(url, {
-  //         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-  //       })
-  //       .then(response => {
-  //         this.getUser(localStorage.getItem('token'));
-  //       })
-  //       .catch(event => {
-  //         alert('Something went wrong...');
-  //       });
-  //   }
-
-  //   handleChange(event) {
-  //     this.setState({ [event.target.name]: event.target.value });
-  //   }
+  handleChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
 
   handleSubmit(event) {
     event.preventDefault();
@@ -176,21 +166,21 @@ export class ProfileView extends React.Component {
           <div className='value'>{email}</div>
         </div>
         <div className='favoritemovies'>
-          <div className='label'>Favorites Movies</div>
-          {FavoritesMovies.length === 0 && (
+          <div className='label'>Favorite Movies</div>
+          {favoriteMovies.length === 0 && (
             <div className='value'>Empty list!</div>
           )}
-          {FavoritesMovies.length > 0 && (
+          {favoriteMovies.length > 0 && (
             <div className='value'>
-              {FavoritesMovies.map(favoriteMovie => (
-                <p key={FavoritesMovies}>
+              {favoriteMovies.map(favoriteMovie => (
+                <p key={favoriteMovie}>
                   {
                     JSON.parse(localStorage.getItem('movies')).find(
-                      movie => movie._id === FavoritesMovies
+                      movie => movie._id === favoriteMovie
                     )._id
                   }
                   <span
-                    onClick={event => this.deleteMovie(event, FavoritesMovies)}
+                    onClick={event => this.deleteMovie(event, favoriteMovie)}
                   >
                     {' '}
                     Delete

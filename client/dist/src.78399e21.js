@@ -39200,9 +39200,11 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 
+require("./movie-view.scss");
+
 var _reactRouterDom = require("react-router-dom");
 
-require("./movie-view.scss");
+var _axios = _interopRequireDefault(require("axios"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -39230,19 +39232,46 @@ function (_React$Component) {
   _inherits(MovieView, _React$Component);
 
   function MovieView() {
+    var _this;
+
     _classCallCheck(this, MovieView);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(MovieView).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(MovieView).call(this));
+    _this.state = {};
+    return _this;
   }
 
   _createClass(MovieView, [{
+    key: "submitLike",
+    value: function submitLike(event) {
+      var _this2 = this;
+
+      event.preventDefault();
+      console.log(this.state.username);
+
+      _axios.default.post("https://movie-flix-777.herokuapp.com/users/".concat(localStorage.getItem('user'), "/FavoriteMovies/").concat(this.props.movie._id), {
+        Username: localStorage.getItem('user')
+      }, {
+        headers: {
+          Authorization: "Bearer ".concat(localStorage.getItem('token'))
+        }
+      }).then(function (response) {
+        console.log(response);
+        alert('Movie has been added to your Favorite List!'); //update localStorage
+
+        localStorage.setItem('user', _this2.state.username);
+      }).catch(function (event) {
+        console.log('error adding movie to list');
+        alert('Something went wrong!');
+      });
+    }
+  }, {
     key: "render",
-    // constructor() {
-    //   super();
-    //   this.state = {};
-    // }
     value: function render() {
-      if (!this.props.movie) return null;
+      var _this3 = this;
+
+      var movie = this.props.movie;
+      if (!movie) return null;
       return _react.default.createElement("div", {
         className: "movie-view"
       }, _react.default.createElement("div", {
@@ -39251,54 +39280,55 @@ function (_React$Component) {
         className: "label"
       }, "Title"), _react.default.createElement("p", {
         className: "value"
-      }, this.props.movie.Title)), _react.default.createElement("div", {
+      }, movie.Title)), _react.default.createElement("div", {
         className: "movie-description"
       }, _react.default.createElement("h3", {
         className: "label"
       }, "Description"), _react.default.createElement("p", {
         className: "value"
-      }, this.props.movie.Description)), _react.default.createElement("div", {
+      }, movie.Description)), _react.default.createElement("img", {
+        alt: "",
+        className: "movie-poster",
+        src: movie.ImageURL
+      }), _react.default.createElement("div", {
         className: "movie-genre"
-      }, _react.default.createElement("h3", {
-        className: "label"
-      }, "Genre"), _react.default.createElement("p", {
-        className: "value"
-      }, this.props.movie.Genre.Name)), _react.default.createElement("div", {
-        className: "movie-director"
-      }, _react.default.createElement("h3", {
-        className: "label"
-      }, "Director"), _react.default.createElement("p", {
-        className: "value"
-      }, this.props.movie.Director.Name)), _react.default.createElement("div", {
-        className: "return-button"
       }, _react.default.createElement(_reactRouterDom.Link, {
+        to: "/genre/".concat(movie.Genre.Name)
+      }, _react.default.createElement("h3", {
+        className: "label"
+      }, "Genre"), _react.default.createElement(_Button.default, {
+        variant: "dark"
+      }, _react.default.createElement("p", {
+        className: "value"
+      }, movie.Genre.Name)))), _react.default.createElement("div", {
+        className: "movie-director"
+      }, _react.default.createElement(_reactRouterDom.Link, {
+        to: "/director/".concat(movie.Director.Name)
+      }, _react.default.createElement("h3", {
+        className: "label"
+      }, "Director")), _react.default.createElement("h4", null, movie.Director.Name)), _react.default.createElement(_reactRouterDom.Link, {
         to: '/'
       }, _react.default.createElement(_Button.default, {
-        variant: "light"
-      }, "Return"))));
+        variant: "dark"
+      }, "Back")), _react.default.createElement(_Button.default, {
+        variant: "dark",
+        onClick: function onClick(event) {
+          return _this3.submitLike(event);
+        }
+      }, "Add to Favorites Movies"));
     }
   }]);
 
   return MovieView;
-}(_react.default.Component); // MovieView.propTypes = {
-//   movie: PropTypes.shape({
-//     Title: PropTypes.string,
-//     ImageUrl: PropTypes.string,
-//     Description: PropTypes.string,
-//     Genre: PropTypes.exact({
-//       _id: PropTypes.string,
-//       Name: PropTypes.string,
-//       Description: PropTypes.string
-//     }),
-//     Director: PropTypes.shape({
-//       Name: PropTypes.string
-//     })
-//   }).isRequired
-// };
-
+}(_react.default.Component);
 
 exports.MovieView = MovieView;
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./movie-view.scss":"components/movie-view/movie-view.scss"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
+MovieView.propTypes = {
+  movie: _propTypes.default.shape({
+    Title: _propTypes.default.string
+  }).isRequired
+};
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","./movie-view.scss":"components/movie-view/movie-view.scss","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","axios":"../node_modules/axios/index.js"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -40679,6 +40709,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -40779,38 +40811,35 @@ function (_React$Component) {
       });
     }
   }, {
-    key: "removeMovie",
-    value: function removeMovie() {
-      _axios.default.delete("https://movie-flix-777.herokuapp.com/users/".concat(this.props.user.Username, "/FavoriteMovies/").concat(this.props.movie._id), {
+    key: "deleteMovie",
+    value: function deleteMovie(event, favoriteMovie) {
+      var _this3 = this;
+
+      event.preventDefault();
+      console.log(favoriteMovie);
+      var userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
+      var usernameLocal = localStorage.getItem('user');
+      var url = "".concat(userEndpoint).concat(usernameLocal, "/FavoriteMovies/").concat(favoriteMovie);
+
+      _axios.default.delete(url, {
         headers: {
           Authorization: "Bearer ".concat(localStorage.getItem('token'))
         }
+      }).then(function (response) {
+        _this3.getUser(localStorage.getItem('token'));
+      }).catch(function (event) {
+        alert('Something went wrong...');
       });
-    } //   deleteMovie(event, favoriteMovie) {
-    //     event.preventDefault();
-    //     console.log(favoriteMovie);
-    //     let userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
-    //     let usernameLocal = localStorage.getItem('user');
-    //     let url = `${userEndpoint}${usernameLocal}/FavoriteMovies/${favoriteMovie}`;
-    //     axios
-    //       .delete(url, {
-    //         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-    //       })
-    //       .then(response => {
-    //         this.getUser(localStorage.getItem('token'));
-    //       })
-    //       .catch(event => {
-    //         alert('Something went wrong...');
-    //       });
-    //   }
-    //   handleChange(event) {
-    //     this.setState({ [event.target.name]: event.target.value });
-    //   }
-
+    }
+  }, {
+    key: "handleChange",
+    value: function handleChange(event) {
+      this.setState(_defineProperty({}, event.target.name, event.target.value));
+    }
   }, {
     key: "handleSubmit",
     value: function handleSubmit(event) {
-      var _this3 = this;
+      var _this4 = this;
 
       event.preventDefault();
       console.log(this.state.username);
@@ -40830,9 +40859,9 @@ function (_React$Component) {
       }).then(function (response) {
         console.log(response);
         alert('Your data has been updated!');
-        localStorage.setItem('user', _this3.state.usernameForm);
+        localStorage.setItem('user', _this4.state.usernameForm);
 
-        _this3.getUser(localStorage.getItem('token')); //reset form after submitting data
+        _this4.getUser(localStorage.getItem('token')); //reset form after submitting data
 
 
         document.getElementsByClassName('changeDataForm')[0].requestFullscreen();
@@ -40857,7 +40886,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this5 = this;
 
       var _this$state = this.state,
           userData = _this$state.userData,
@@ -40898,18 +40927,18 @@ function (_React$Component) {
         className: "favoritemovies"
       }, _react.default.createElement("div", {
         className: "label"
-      }, "Favorites Movies"), FavoritesMovies.length === 0 && _react.default.createElement("div", {
+      }, "Favorite Movies"), favoriteMovies.length === 0 && _react.default.createElement("div", {
         className: "value"
-      }, "Empty list!"), FavoritesMovies.length > 0 && _react.default.createElement("div", {
+      }, "Empty list!"), favoriteMovies.length > 0 && _react.default.createElement("div", {
         className: "value"
-      }, FavoritesMovies.map(function (favoriteMovie) {
+      }, favoriteMovies.map(function (favoriteMovie) {
         return _react.default.createElement("p", {
-          key: FavoritesMovies
+          key: favoriteMovie
         }, JSON.parse(localStorage.getItem('movies')).find(function (movie) {
-          return movie._id === FavoritesMovies;
+          return movie._id === favoriteMovie;
         })._id, _react.default.createElement("span", {
           onClick: function onClick(event) {
-            return _this4.deleteMovie(event, FavoritesMovies);
+            return _this5.deleteMovie(event, favoriteMovie);
           }
         }, ' ', "Delete"));
       }))), _react.default.createElement(_reactRouterDom.Link, {
@@ -40926,7 +40955,7 @@ function (_React$Component) {
         type: "text",
         name: "usernameForm",
         onChange: function onChange(event) {
-          return _this4.handleChange(event);
+          return _this5.handleChange(event);
         },
         placeholder: "Enter Username"
       }), _react.default.createElement(_Form.default.Text, {
@@ -40937,7 +40966,7 @@ function (_React$Component) {
         type: "text",
         name: "passwordForm",
         onChange: function onChange(event) {
-          return _this4.handleChange(event);
+          return _this5.handleChange(event);
         },
         placeholder: "Password"
       })), _react.default.createElement(_Form.default.Group, {
@@ -40946,7 +40975,7 @@ function (_React$Component) {
         type: "text",
         name: "emailForm",
         onChange: function onChange(event) {
-          return _this4.handleChange(event);
+          return _this5.handleChange(event);
         },
         placeholder: "example@email.com"
       })), _react.default.createElement(_Form.default.Group, {
@@ -40955,21 +40984,21 @@ function (_React$Component) {
         type: "text",
         name: "birthdayForm",
         onChange: function onChange(event) {
-          return _this4.handleChange(event);
+          return _this5.handleChange(event);
         },
         placeholder: "example: 01/01/1990"
       })), _react.default.createElement(_Button.default, {
         variant: "light",
         type: "button",
         onClick: function onClick(event) {
-          return _this4.handleSubmit(event);
+          return _this5.handleSubmit(event);
         }
       }, "Update"), _react.default.createElement(_Button.default, {
         className: "view-btn",
         variant: "danger",
         type: "reset",
         onClick: function onClick(event) {
-          return _this4.deleteUser(event);
+          return _this5.deleteUser(event);
         }
       }, "Delete Account")));
     }
@@ -41579,7 +41608,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62842" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50228" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
