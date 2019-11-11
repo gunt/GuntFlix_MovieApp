@@ -32,26 +32,13 @@ export class MovieView extends React.Component {
         </div>
         <div className='return-button'>
           <Link to={'/'}>
-            <Button variant='primary'>Return</Button>
+            <Button variant='light'>Return</Button>
           </Link>
         </div>
       </div>
     );
   }
 }
-
-// MovieView.propTypes = {
-//   movie: PropTypes.shape({
-//     Title: PropTypes.string,
-//     Description: PropTypes.string,
-//     Genre: PropTypes.shape({
-//       Name: PropTypes.string
-//     }),
-//     Director: PropTypes.shape({
-//       Name: PropTypes.string
-//     })
-//   }).isRequired
-// };
 
 MovieView.propTypes = {
   movie: PropTypes.shape({

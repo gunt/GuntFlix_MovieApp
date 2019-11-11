@@ -1,4 +1,4 @@
-$primary-color: rgb(73, 80, 87);
+$primary-color: #353A44;
 $secondary-color: rgb(108, 115, 130);
 
 body {
@@ -11,9 +11,34 @@ body {
     background-color: $primary-color;
     border-radius: 25px;
     color: #fff;
+    width: 80%;
+    height: auto;
     margin-top: 20px;
-    padding: 70px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 25px;
+    color: #EBC17A;
+    opacity: 0.97;
+
 }
+
+// .profile-view {
+//     background-color: #353A44;
+//     border-radius: 25px;
+//     font-family: 'Open Sans Condensed', sans-serif;
+//     width: 77%;
+//     height: auto;
+//     overflow: scroll;
+//     margin-top: 70px;
+//     margin-bottom: 20px;
+//     margin-left: auto;
+//     margin-right: auto;
+//     color: #EBC17A;
+//     padding: 30px;
+//     opacity: 0.98;
+// }
+
+
 
 h1 {
     text-align: center;
