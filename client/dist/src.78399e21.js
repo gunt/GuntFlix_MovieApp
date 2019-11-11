@@ -40768,10 +40768,8 @@ function (_React$Component) {
       var _this2 = this;
 
       var username = localStorage.getItem('user');
-      var userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
-      var url = "".concat(userEndpoint).concat(username);
 
-      _axios.default.get(url, {
+      _axios.default.get("https://movie-flix-777.herokuapp.com/users/".concat(username), {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
@@ -40792,18 +40790,17 @@ function (_React$Component) {
     key: "deleteUser",
     value: function deleteUser(event) {
       event.preventDefault();
-      var userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
-      var usernameLocal = localStorage.getItem('user');
-      var url = "".concat(userEndpoint).concat(usernameLocal);
 
-      _axios.default.delete(url, {
+      _axios.default.delete("https://movie-flix-777.herokuapp.com/users/".concat(localStorage.getItem('user')), {
         headers: {
           Authorization: "Bearer ".concat(localStorage.getItem('token'))
         }
       }).then(function (response) {
-        alert('Your account has been deleted!');
+        alert('Your account has been delted!'); //clears your storage
+
         localStorage.removeItem('token');
-        localStorage.removeItem('user');
+        localStorage.removeItem('user'); //opens login view
+
         window.open('/', '_self');
       }).catch(function (event) {
         alert('failed to delete user');
@@ -40816,11 +40813,8 @@ function (_React$Component) {
 
       event.preventDefault();
       console.log(favoriteMovie);
-      var userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
-      var usernameLocal = localStorage.getItem('user');
-      var url = "".concat(userEndpoint).concat(usernameLocal, "/FavoriteMovies/").concat(favoriteMovie);
 
-      _axios.default.delete(url, {
+      _axios.default.delete("https://movie-flix-777.herokuapp.com/users/".concat(localStorage.getItem('user'), "/FavoriteMovies/").concat(favoriteMovie), {
         headers: {
           Authorization: "Bearer ".concat(localStorage.getItem('token'))
         }
@@ -40842,12 +40836,9 @@ function (_React$Component) {
 
       event.preventDefault();
       console.log(this.state.username);
-      var userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
-      var usernameLocal = localStorage.getItem('user');
-      var url = "".concat(userEndpoint).concat(usernameLocal);
 
-      _axios.default.put(url, {
-        Username: this.state.usernameForm,
+      _axios.default.put("https://movie-flix-777.herokuapp.com/users/".concat(localStorage.getItem('user')), {
+        Username: this.state.UsernameForm,
         Password: this.state.passwordForm,
         Email: this.state.emailForm,
         Birthday: this.state.birthdayForm
@@ -40857,15 +40848,16 @@ function (_React$Component) {
         }
       }).then(function (response) {
         console.log(response);
-        alert('Your data has been updated!');
-        localStorage.setItem('user', _this4.state.usernameForm);
+        alert('Your data has been updated!'); //update localStorage
+
+        localStorage.setItem('user', _this4.state.usernameForm); // call getUser() to display changed userdata after submission
 
         _this4.getUser(localStorage.getItem('token')); //reset form after submitting data
 
 
         document.getElementsByClassName('changeDataForm')[0].requestFullscreen();
       }).catch(function (event) {
-        console.log('error updating');
+        console.log('error updating the userdata');
         alert('Something went wrong!');
       });
     }
@@ -41607,7 +41599,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49683" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50023" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

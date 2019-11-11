@@ -32,11 +32,8 @@ export class ProfileView extends React.Component {
 
   getUser(token) {
     let username = localStorage.getItem('user');
-
-    let userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
-    let url = `${userEndpoint}${username}`;
     axios
-      .get(url, {
+      .get(`https://movie-flix-777.herokuapp.com/users/${username}`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {
@@ -56,34 +53,40 @@ export class ProfileView extends React.Component {
 
   deleteUser(event) {
     event.preventDefault();
-    let userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
-    let usernameLocal = localStorage.getItem('user');
-    let url = `${userEndpoint}${usernameLocal}`;
     axios
-      .delete(url, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-      })
+      .delete(
+        `https://movie-flix-777.herokuapp.com/users/${localStorage.getItem(
+          'user'
+        )}`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+        }
+      )
       .then(response => {
-        alert('Your account has been deleted!');
+        alert('Your account has been delted!');
+        //clears your storage
         localStorage.removeItem('token');
         localStorage.removeItem('user');
+        //opens login view
         window.open('/', '_self');
       })
       .catch(event => {
         alert('failed to delete user');
       });
   }
+
   deleteMovie(event, favoriteMovie) {
     event.preventDefault();
     console.log(favoriteMovie);
-
-    let userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
-    let usernameLocal = localStorage.getItem('user');
-    let url = `${userEndpoint}${usernameLocal}/FavoriteMovies/${favoriteMovie}`;
     axios
-      .delete(url, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-      })
+      .delete(
+        `https://movie-flix-777.herokuapp.com/users/${localStorage.getItem(
+          'user'
+        )}/FavoriteMovies/${favoriteMovie}`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+        }
+      )
       .then(response => {
         this.getUser(localStorage.getItem('token'));
       })
@@ -99,15 +102,13 @@ export class ProfileView extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     console.log(this.state.username);
-
-    let userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
-    let usernameLocal = localStorage.getItem('user');
-    let url = `${userEndpoint}${usernameLocal}`;
     axios
       .put(
-        url,
+        `https://movie-flix-777.herokuapp.com/users/${localStorage.getItem(
+          'user'
+        )}`,
         {
-          Username: this.state.usernameForm,
+          Username: this.state.UsernameForm,
           Password: this.state.passwordForm,
           Email: this.state.emailForm,
           Birthday: this.state.birthdayForm
@@ -119,7 +120,9 @@ export class ProfileView extends React.Component {
       .then(response => {
         console.log(response);
         alert('Your data has been updated!');
+        //update localStorage
         localStorage.setItem('user', this.state.usernameForm);
+        // call getUser() to display changed userdata after submission
         this.getUser(localStorage.getItem('token'));
         //reset form after submitting data
         document
@@ -127,7 +130,7 @@ export class ProfileView extends React.Component {
           .requestFullscreen();
       })
       .catch(event => {
-        console.log('error updating');
+        console.log('error updating the userdata');
         alert('Something went wrong!');
       });
   }
