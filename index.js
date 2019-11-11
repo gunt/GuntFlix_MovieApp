@@ -98,16 +98,16 @@ app.get('/movies/directors/:Name', function (req, res) {
     });
 });
 
-app.get('/directors', function (req, res) {
-  Directors.find()
-    .then(function (directors) {
-      res.status(201).json(users);
-    })
-    .catch(function (err) {
-      console.error(err);
-      res.status(500).send("Error: " + err);
-    });
-});
+// app.get('/directors', function (req, res) {
+//   Directors.find()
+//     .then(function (directors) {
+//       res.status(201).json(users);
+//     })
+//     .catch(function (err) {
+//       console.error(err);
+//       res.status(500).send("Error: " + err);
+//     });
+// });
 
 // app.get('/users', function (_req, res) {
 //   Users.find()

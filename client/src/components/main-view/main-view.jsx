@@ -2,12 +2,12 @@ import React from 'react';
 import axios from 'axios';
 // import { withRouter } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-// import Route from 'react-router-dom/Route';
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { RegistrationView } from '../registration-view/registration-view';
-//to update user profile page first import component
+
+import { DirectorView } from '../director-view/director-view';
 import { ProfileView } from '../profile-view/profile-view';
 import { UpdateProfile } from '../update-profile/update-profile';
 import Container from 'react-bootstrap/Container';
@@ -168,7 +168,7 @@ export class MainView extends React.Component {
             <Button variant='dark'>Profile View</Button>
           </Link>
 
-          <Link to='/directors/:name'>
+          <Link to='/movies/directors/:Name'>
             <Button variant='dark'>Director View</Button>
           </Link>
 
@@ -216,7 +216,7 @@ export class MainView extends React.Component {
             /> */}
             <Route
               exact
-              path='/directors/:name'
+              path='/movies/directors/:Name'
               render={({ match }) => {
                 if (!movies || !movies.length)
                   return <div className='main-view' />;
