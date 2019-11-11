@@ -38904,19 +38904,22 @@ function LoginView(props) {
     }
   })), _react.default.createElement(_Button.default, {
     id: "loginButton",
+    size: "lg",
+    variant: "danger",
     onClick: handleSubmit
   }, "Log in"), _react.default.createElement(_Form.default.Group, {
     controlId: "formNewUser"
-  }, _react.default.createElement(_Form.default.Text, null, "New user? Click", ' ', _react.default.createElement(_Button.default, {
+  }, _react.default.createElement(_Form.default.Text, null, "Sign Up", ' ', _react.default.createElement(_Button.default, {
     id: "login-view__register",
     style: {
       padding: 0
     },
-    variant: "link",
+    size: "lg",
+    variant: "danger",
     onClick: function onClick() {
       return props.newUser();
     }
-  }, ' ', "here", ' '), ' ', "to register"))));
+  }, ' ', "here", ' '), ' '))));
 }
 
 LoginView.propTypes = {
@@ -39163,7 +39166,7 @@ function (_React$Component) {
         to: "/movies/".concat(movie._id)
       }, _react.default.createElement(_Button.default, {
         variant: "link"
-      }, "Open"))));
+      }, "Learn More"))));
     }
   }]);
 
@@ -39271,25 +39274,13 @@ function (_React$Component) {
       }, _react.default.createElement(_reactRouterDom.Link, {
         to: '/'
       }, _react.default.createElement(_Button.default, {
-        variant: "primary"
+        variant: "light"
       }, "Return"))));
     }
   }]);
 
   return MovieView;
-}(_react.default.Component); // MovieView.propTypes = {
-//   movie: PropTypes.shape({
-//     Title: PropTypes.string,
-//     Description: PropTypes.string,
-//     Genre: PropTypes.shape({
-//       Name: PropTypes.string
-//     }),
-//     Director: PropTypes.shape({
-//       Name: PropTypes.string
-//     })
-//   }).isRequired
-// };
-
+}(_react.default.Component);
 
 exports.MovieView = MovieView;
 MovieView.propTypes = {
@@ -39438,13 +39429,13 @@ function RegistrationView(props) {
     type: "checkbox",
     label: "Accept Terms and Conditions"
   })), _react.default.createElement(_Button.default, {
-    variant: "primary",
+    variant: "danger",
     onClick: registerNewUser
   }, "Register"), _react.default.createElement(_Form.default.Text, null, "Already registered? Click", ' ', _react.default.createElement(_Button.default, {
     style: {
       padding: 0
     },
-    variant: "link",
+    variant: "danger",
     onClick: function onClick() {
       return props.userRegistered();
     }
@@ -39459,7 +39450,12 @@ RegistrationView.propTypes = {
   onClick: _propTypes.default.func.isRequired,
   userRegistered: _propTypes.default.func.isRequired
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./registration-view.scss":"components/registration-view/registration-view.scss","axios":"../node_modules/axios/index.js"}],"../node_modules/invariant/browser.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./registration-view.scss":"components/registration-view/registration-view.scss","axios":"../node_modules/axios/index.js"}],"components/profile-view/profile-view.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/invariant/browser.js":[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -40564,12 +40560,7 @@ ListGroup.displayName = 'ListGroup';
 ListGroup.Item = _ListGroupItem.default;
 var _default = ListGroup;
 exports.default = _default;
-},{"@babel/runtime/helpers/esm/extends":"../node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"../node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js","classnames":"../node_modules/classnames/index.js","react":"../node_modules/react/index.js","uncontrollable":"../node_modules/uncontrollable/esm/index.js","./ThemeProvider":"../node_modules/react-bootstrap/esm/ThemeProvider.js","./AbstractNav":"../node_modules/react-bootstrap/esm/AbstractNav.js","./ListGroupItem":"../node_modules/react-bootstrap/esm/ListGroupItem.js"}],"components/profile-view/profile-view.scss":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/profile-view/profile-view.jsx":[function(require,module,exports) {
+},{"@babel/runtime/helpers/esm/extends":"../node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"../node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js","classnames":"../node_modules/classnames/index.js","react":"../node_modules/react/index.js","uncontrollable":"../node_modules/uncontrollable/esm/index.js","./ThemeProvider":"../node_modules/react-bootstrap/esm/ThemeProvider.js","./AbstractNav":"../node_modules/react-bootstrap/esm/AbstractNav.js","./ListGroupItem":"../node_modules/react-bootstrap/esm/ListGroupItem.js"}],"components/profile-view/profile-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -40579,17 +40570,17 @@ exports.ProfileView = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _axios = _interopRequireDefault(require("axios"));
-
-var _Card = _interopRequireDefault(require("react-bootstrap/Card"));
-
-var _ListGroup = _interopRequireDefault(require("react-bootstrap/ListGroup"));
-
 var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 
 require("./profile-view.scss");
 
 var _reactRouterDom = require("react-router-dom");
+
+var _axios = _interopRequireDefault(require("axios"));
+
+var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
+
+var _ListGroup = _interopRequireDefault(require("react-bootstrap/ListGroup"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -40613,6 +40604,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+//import { FORM } from 'dns';
 var ProfileView =
 /*#__PURE__*/
 function (_React$Component) {
@@ -40625,12 +40617,16 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ProfileView).call(this));
     _this.state = {
-      Username: null,
-      Password: null,
-      Email: null,
-      Birthday: null,
+      username: null,
+      password: null,
+      email: null,
+      birthday: null,
       userData: null,
-      FavoritesMovies: []
+      favoriteMovies: [],
+      usernameForm: null,
+      passwordForm: null,
+      emailForm: null,
+      birthdayForm: null
     };
     return _this;
   }
@@ -40650,149 +40646,238 @@ function (_React$Component) {
       var _this2 = this;
 
       var username = localStorage.getItem('user');
+      var userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
+      var url = "".concat(userEndpoint).concat(username);
 
-      _axios.default.get("https://movie-flix-777.herokuapp.com/users/".concat(username), {
+      _axios.default.get(url, {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
-      }).then(function (res) {
+      }).then(function (response) {
         _this2.setState({
           userData: response.data,
-          Username: res.data.Username,
-          Password: res.data.Password,
-          Email: res.data.Email,
-          Birthday: res.data.Birthday,
-          FavoritesMovies: res.data.FavoritesMovies
+          username: response.data.Username,
+          password: response.data.Password,
+          email: response.data.Email,
+          birthday: response.data.Birthday,
+          favoriteMovies: response.data.FavoriteMovies
         });
-      }).catch(function (err) {
-        console.log(err);
+      }).catch(function (error) {
+        console.log(error);
       });
     }
   }, {
-    key: "deleteMovieFromFavs",
-    value: function deleteMovieFromFavs(event, FavoritesMovies) {
-      var _this3 = this;
-
+    key: "deleteUser",
+    value: function deleteUser(event) {
       event.preventDefault();
-      console.log(FavoritesMovie);
+      var userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
+      var usernameLocal = localStorage.getItem('user');
+      var url = "".concat(userEndpoint).concat(usernameLocal);
 
-      _axios.default.delete("https://movie-flix-777.herokuapp.com/users/".concat(localStorage.getItem('user'), "/FavoritesMovies/").concat(FavoritesMovies), {
+      _axios.default.delete(url, {
         headers: {
           Authorization: "Bearer ".concat(localStorage.getItem('token'))
         }
-      }).then(function (_response) {
+      }).then(function (response) {
+        alert('Your account has been deleted!');
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.open('/', '_self');
+      }).catch(function (event) {
+        alert('failed to delete user');
+      });
+    }
+  }, {
+    key: "deleteMovie",
+    value: function deleteMovie(event, favoriteMovie) {
+      var _this3 = this;
+
+      event.preventDefault();
+      console.log(favoriteMovie);
+      var userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
+      var usernameLocal = localStorage.getItem('user');
+      var url = "".concat(userEndpoint).concat(usernameLocal, "/FavoriteMovies/").concat(favoriteMovie);
+
+      _axios.default.delete(url, {
+        headers: {
+          Authorization: "Bearer ".concat(localStorage.getItem('token'))
+        }
+      }).then(function (response) {
         _this3.getUser(localStorage.getItem('token'));
-      }).catch(function (_event) {
-        alert('Something went wrong');
+      }).catch(function (event) {
+        alert('Something went wrong...');
       });
     }
   }, {
     key: "handleChange",
-    value: function handleChange(e) {
-      this.setState(_defineProperty({}, e.target.name, e.target.value));
-    } //   render() {
-    //     const FavoritesMovieList = this.props.movies.filter(m =>
-    //       this.state.FavoritesMovies.includes(m._id)
-    //     );
-    //   render() {
-    //     const { Username, Email, Birthday, FavoritesMovies } = this.state;
-    //     return (
-    //       <div>
-    //         <Container>
-    //           <Col>
-    //             <Card>
-    //               <Card.Body>
-    //                 <Card.Title>{this.state.username}</Card.Title>
-    //                 <Card.Text>Email: {this.state.email}</Card.Text>
-    //                 <Card.Text>Birthday {this.state.birthday}</Card.Text>
-    //                 {FavoritesMovies.map(m => (
-    //                   <div key={m._id} className='fav-movies-button'>
-    //                     <Link to={`/movies/${m._id}`}>
-    //                       <Button variant='link'>{m.title}</Button>
-    //                     </Link>
-    //                     <Button
-    //                       size='sm'
-    //                       onClick={e => this.deleteFavoriteMovie(m._id)}
-    //                     >
-    //                       Remove Favorite
-    //                     </Button>
-    //                   </div>
-    //                 ))}
-    //                 <Link to={`/`}>
-    //                   <Button variant='primary'>Go back</Button>
-    //                 </Link>
-    //                 <Link to={'/user/update'}>
-    //                   <Button variant='primary'>Update ALL your profile.</Button>
-    //                 </Link>
-    //                 <Button onClick={() => this.deleteUser()}>
-    //                   Delete account
-    //                 </Button>
-    //               </Card.Body>
-    //             </Card>
-    //           </Col>
-    //         </Container>
-    //       </div>
-    //     );
-    //   }
-    // }
+    value: function handleChange(event) {
+      this.setState(_defineProperty({}, event.target.name, event.target.value));
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(event) {
+      var _this4 = this;
 
+      event.preventDefault();
+      console.log(this.state.username);
+      var userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
+      var usernameLocal = localStorage.getItem('user');
+      var url = "".concat(userEndpoint).concat(usernameLocal);
+
+      _axios.default.put(url, {
+        Username: this.state.usernameForm,
+        Password: this.state.passwordForm,
+        Email: this.state.emailForm,
+        Birthday: this.state.birthdayForm
+      }, {
+        headers: {
+          Authorization: "Bearer ".concat(localStorage.getItem('token'))
+        }
+      }).then(function (response) {
+        console.log(response);
+        alert('Your data has been updated!');
+        localStorage.setItem('user', _this4.state.usernameForm);
+
+        _this4.getUser(localStorage.getItem('token')); //reset form after submitting data
+
+
+        document.getElementsByClassName('changeDataForm')[0].requestFullscreen();
+      }).catch(function (event) {
+        console.log('error updating');
+        alert('Something went wrong!');
+      });
+    }
+  }, {
+    key: "toggleForm",
+    value: function toggleForm() {
+      var form = document.getElementsByClassName('changeDataForm')[0];
+      var toggleButton = document.getElementById('toggleButton');
+      form.classList.toggle('show-form');
+
+      if (form.classList.contains('show-form')) {
+        toggleButton.innerHTML = 'Change data &uarr;';
+      } else {
+        toggleButton.innerHTML = 'Change data &darr;';
+      }
+    }
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this5 = this;
 
       var _this$state = this.state,
-          Username = _this$state.Username,
-          Email = _this$state.Email,
-          Birthday = _this$state.Birthday,
-          FavoritesMovies = _this$state.FavoritesMovies;
-      return _react.default.createElement(_Card.default, {
-        className: "profile-view",
-        style: {
-          width: '32rem'
-        }
-      }, _react.default.createElement(_Card.default.Img, {
-        className: "profile-logo",
-        variant: "top"
-      }), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, {
-        className: "profile-title"
-      }, "My Profile"), _react.default.createElement(_ListGroup.default, {
-        className: "list-group-flush",
-        variant: "flush"
-      }, _react.default.createElement(_ListGroup.default.Item, null, "Username: ", Username), _react.default.createElement(_ListGroup.default.Item, null, "Password:******* "), _react.default.createElement(_ListGroup.default.Item, null, "Email: ", Email), _react.default.createElement(_ListGroup.default.Item, null, "Birthday: ", Birthday && Birthday.slice(0, 10)), _react.default.createElement(_ListGroup.default.Item, null, "Favorites Movies:", _react.default.createElement("div", null, FavoritesMovies.length === 0 && _react.default.createElement("div", {
+          userData = _this$state.userData,
+          username = _this$state.username,
+          email = _this$state.email,
+          birthday = _this$state.birthday,
+          favoriteMovies = _this$state.favoriteMovies;
+      if (!userData) return null;
+      return _react.default.createElement("div", {
+        className: "profile-view"
+      }, _react.default.createElement("h4", {
+        className: "director"
+      }, "User Profile"), _react.default.createElement("div", {
+        className: "username"
+      }, _react.default.createElement("h4", {
+        className: "label"
+      }, "Name:"), _react.default.createElement("div", {
         className: "value"
-      }, "No Favourite Movies have been added"), FavoritesMovies.length > 0 && _react.default.createElement("ul", null, FavoritesMovies.map(function (FavoritesMovie) {
-        return _react.default.createElement("li", {
-          key: FavoritesMovie
-        }, _react.default.createElement("p", {
-          className: "FavoritesMovies"
+      }, username)), _react.default.createElement("div", {
+        className: "password"
+      }, _react.default.createElement("h4", {
+        className: "label"
+      }, "Password:"), _react.default.createElement("div", {
+        className: "value"
+      }, "********")), _react.default.createElement("div", {
+        className: "birthday"
+      }, _react.default.createElement("h2", {
+        className: "label"
+      }, "Birthday"), _react.default.createElement("div", {
+        className: "value"
+      }, birthday)), _react.default.createElement("div", {
+        className: "email"
+      }, _react.default.createElement("h4", {
+        className: "label"
+      }, "Email:"), _react.default.createElement("div", {
+        className: "value"
+      }, email)), _react.default.createElement("div", {
+        className: "favoritemovies"
+      }, _react.default.createElement("div", {
+        className: "label"
+      }, "Favorite Movies"), favoriteMovies.length === 0 && _react.default.createElement("div", {
+        className: "value"
+      }, "Empty list!"), favoriteMovies.length > 0 && _react.default.createElement("div", {
+        className: "value"
+      }, favoriteMovies.map(function (favoriteMovie) {
+        return _react.default.createElement("p", {
+          key: favoriteMovie
         }, JSON.parse(localStorage.getItem('movies')).find(function (movie) {
-          return movie._id === FavoritesMovie;
-        }).Title), _react.default.createElement(_reactRouterDom.Link, {
-          to: "/movies/".concat(FavoritesMovie)
-        }, _react.default.createElement(_Button.default, {
-          size: "sm",
-          variant: "info"
-        }, "Open")), _react.default.createElement(_Button.default, {
-          variant: "secondary",
-          size: "sm",
+          return movie._id === favoriteMovie;
+        })._id, _react.default.createElement("span", {
           onClick: function onClick(event) {
-            return _this4.deleteMovieFromFavs(event, FavoritesMovie);
+            return _this5.deleteMovie(event, favoriteMovie);
           }
-        }, "Delete"));
-      }))))), _react.default.createElement("div", {
-        className: "text-center"
-      }, _react.default.createElement(_reactRouterDom.Link, {
-        to: "/"
+        }, ' ', "Delete"));
+      }))), _react.default.createElement(_reactRouterDom.Link, {
+        to: '/'
       }, _react.default.createElement(_Button.default, {
-        className: "button-back",
-        variant: "outline-info"
-      }, "Movies")), _react.default.createElement(_reactRouterDom.Link, {
-        to: "/update/:Username"
-      }, _react.default.createElement(_Button.default, {
-        className: "button-update",
-        variant: "outline-secondary"
-      }, "Update profile")))));
+        className: "view-btn",
+        variant: "light",
+        type: "button"
+      }, "Back")), _react.default.createElement(_Form.default, {
+        className: "changeDataForm"
+      }, _react.default.createElement("h2", null, "Update Profile"), _react.default.createElement(_Form.default.Group, {
+        controlId: "formBasicUsername"
+      }, _react.default.createElement(_Form.default.Label, null, "Your Username"), _react.default.createElement(_Form.default.Control, {
+        type: "text",
+        name: "usernameForm",
+        onChange: function onChange(event) {
+          return _this5.handleChange(event);
+        },
+        placeholder: "Enter Username"
+      }), _react.default.createElement(_Form.default.Text, {
+        className: "text-muted"
+      }, "Type username here.")), _react.default.createElement(_Form.default.Group, {
+        controlId: "formBasicPassword"
+      }, _react.default.createElement(_Form.default.Label, null, "Your Password"), _react.default.createElement(_Form.default.Control, {
+        type: "text",
+        name: "passwordForm",
+        onChange: function onChange(event) {
+          return _this5.handleChange(event);
+        },
+        placeholder: "Password"
+      })), _react.default.createElement(_Form.default.Group, {
+        controlId: "formBasicEmail"
+      }, _react.default.createElement(_Form.default.Label, null, "Your Email"), _react.default.createElement(_Form.default.Control, {
+        type: "text",
+        name: "emailForm",
+        onChange: function onChange(event) {
+          return _this5.handleChange(event);
+        },
+        placeholder: "example@email.com"
+      })), _react.default.createElement(_Form.default.Group, {
+        controlId: "formBasicBirthday"
+      }, _react.default.createElement(_Form.default.Label, null, "Your Birthday"), _react.default.createElement(_Form.default.Control, {
+        type: "text",
+        name: "birthdayForm",
+        onChange: function onChange(event) {
+          return _this5.handleChange(event);
+        },
+        placeholder: "example: 01/01/1990"
+      })), _react.default.createElement(_Button.default, {
+        variant: "light",
+        type: "button",
+        onClick: function onClick(event) {
+          return _this5.handleSubmit(event);
+        }
+      }, "Update"), _react.default.createElement(_Button.default, {
+        className: "view-btn",
+        variant: "danger",
+        type: "reset",
+        onClick: function onClick(event) {
+          return _this5.deleteUser(event);
+        }
+      }, "Delete Account")));
     }
   }]);
 
@@ -40800,7 +40885,7 @@ function (_React$Component) {
 }(_react.default.Component);
 
 exports.ProfileView = ProfileView;
-},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-bootstrap/Card":"../node_modules/react-bootstrap/esm/Card.js","react-bootstrap/ListGroup":"../node_modules/react-bootstrap/esm/ListGroup.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","./profile-view.scss":"components/profile-view/profile-view.scss","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/update-profile/update-profile.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","./profile-view.scss":"components/profile-view/profile-view.scss","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","axios":"../node_modules/axios/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/ListGroup":"../node_modules/react-bootstrap/esm/ListGroup.js"}],"components/update-profile/update-profile.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -41204,6 +41289,7 @@ function (_React$Component) {
         className: "upButton"
       }, _react.default.createElement(_Button.default, {
         className: "logoutButton",
+        variant: "dark",
         onClick: function onClick() {
           return _this4.buttonLogout();
         }
@@ -41211,16 +41297,16 @@ function (_React$Component) {
         to: '/'
       }, _react.default.createElement(_Button.default, {
         className: "back-btn",
-        variant: "primary"
+        variant: "dark"
       }, "Go back"))), _react.default.createElement(_reactRouterDom.Link, {
         to: "/users/:Username"
       }, _react.default.createElement(_Button.default, {
-        variant: "primary"
+        variant: "dark"
       }, "Profile View")), _react.default.createElement(_reactRouterDom.Link, {
-        to: "/update/:Username"
+        to: "/directors/:name"
       }, _react.default.createElement(_Button.default, {
-        variant: "primary"
-      }, "Update Profile")), _react.default.createElement(_Row.default, null, _react.default.createElement(_reactRouterDom.Route, {
+        variant: "dark"
+      }, "Director View")), _react.default.createElement(_Row.default, null, _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
         path: "/",
         render: function render() {
@@ -41233,10 +41319,11 @@ function (_React$Component) {
           } else {
             return movies.map(function (movie) {
               return _react.default.createElement(_Col.default, {
-                xl: 3,
-                sm: 3,
-                md: 5,
-                xs: 5
+                key: movie._id,
+                xl: 4,
+                sm: 6,
+                md: 4,
+                xs: 10
               }, _react.default.createElement(_movieCard.MovieCard, {
                 key: movie._id,
                 movie: movie
@@ -41272,16 +41359,25 @@ function (_React$Component) {
           return _react.default.createElement(GenreView, null);
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
-        path: "/directors/:Director",
-        render: function render() {
-          return _react.default.createElement(DirectorView, null);
+        exact: true,
+        path: "/directors/:name",
+        render: function render(_ref2) {
+          var match = _ref2.match;
+          if (!movies || !movies.length) return _react.default.createElement("div", {
+            className: "main-view"
+          });
+          return _react.default.createElement(DirectorView, {
+            director: movies.find(function (m) {
+              return m.Director.Name === match.params.name;
+            })
+          });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/update/:Username",
         exact: true,
         strict: true,
         component: _updateProfile.UpdateProfile
-      }), _react.default.createElement(_reactRouterDom.Route, {
+      }), "/*", ' ', _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
         path: "/users/:Username",
         render: function render() {
@@ -41387,7 +41483,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52072" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50952" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
