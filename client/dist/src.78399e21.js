@@ -40727,7 +40727,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-//import { FORM } from 'dns';
 var ProfileView =
 /*#__PURE__*/
 function (_React$Component) {
@@ -41608,7 +41607,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56724" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49683" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
