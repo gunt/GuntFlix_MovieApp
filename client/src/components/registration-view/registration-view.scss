@@ -1,6 +1,5 @@
-$primary-color: rgb(73, 80, 87);
+$primary-color: #353A44;
 $secondary-color: rgb(108, 115, 130);
-
 
 body {
     background: url('https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1655&q=80');
@@ -11,9 +10,9 @@ body {
 .regContainer {
     background-color: $primary-color;
     border-radius: 25px;
-    color: $secondary-color;
     margin-top: 20px;
     color: #fff;
     padding: 35px;
-    width: 70%;
+    width: 60%;
+    opacity: 0.97;
 }

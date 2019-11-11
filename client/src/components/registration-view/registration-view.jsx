@@ -86,14 +86,14 @@ export function RegistrationView(props) {
         <Form.Group controlId='formBasicCheckbox'>
           <Form.Check type='checkbox' label='Accept Terms and Conditions' />
         </Form.Group>
-        <Button variant='primary' onClick={registerNewUser}>
+        <Button variant='danger' onClick={registerNewUser}>
           Register
         </Button>
         <Form.Text>
           Already registered? Click{' '}
           <Button
             style={{ padding: 0 }}
-            variant='link'
+            variant='danger'
             onClick={() => props.userRegistered()}
           >
             {' '}
