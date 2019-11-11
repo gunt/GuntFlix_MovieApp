@@ -152,24 +152,29 @@ export class MainView extends React.Component {
           <div className='upButton'>
             <Button
               className='logoutButton'
+              variant='dark'
               onClick={() => this.buttonLogout()}
             >
               Log Out
             </Button>
             <Link to={'/'}>
-              <Button className='back-btn' variant='primary'>
+              <Button className='back-btn' variant='dark'>
                 Go back
               </Button>
             </Link>
           </div>
 
           <Link to='/users/:Username'>
-            <Button variant='primary'>Profile View</Button>
+            <Button variant='dark'>Profile View</Button>
           </Link>
 
-          <Link to='/update/:Username'>
-            <Button variant='primary'>Update Profile</Button>
+          <Link to='/directors/:name'>
+            <Button variant='dark'>Director View</Button>
           </Link>
+
+          {/* <Link to='/update/:Username'>
+            <Button variant='dark'>Update Profile</Button>
+          </Link> */}
 
           <Row>
             <Route
@@ -182,7 +187,7 @@ export class MainView extends React.Component {
                   );
                 } else {
                   return movies.map(movie => (
-                    <Col xl={3} sm={3} md={5} xs={5}>
+                    <Col key={movie._id} xl={4} sm={6} md={4} xs={10}>
                       <MovieCard key={movie._id} movie={movie} />
                     </Col>
                   ));
@@ -205,9 +210,24 @@ export class MainView extends React.Component {
               )}
             />
             <Route path='/genres/:Genre' render={() => <GenreView />} />
-            <Route
-              path='/directors/:Director'
+            {/* <Route
+              path='/movies/directors/:Name'
               render={() => <DirectorView />}
+            /> */}
+            <Route
+              exact
+              path='/directors/:name'
+              render={({ match }) => {
+                if (!movies || !movies.length)
+                  return <div className='main-view' />;
+                return (
+                  <DirectorView
+                    director={movies.find(
+                      m => m.Director.Name === match.params.name
+                    )}
+                  />
+                );
+              }}
             />
             {/* update */}
             <Route
@@ -216,12 +236,29 @@ export class MainView extends React.Component {
               strict
               component={UpdateProfile}
             />
-
+            /*{' '}
             <Route
               exact
               path='/users/:Username'
               render={() => <ProfileView movies={movies} />}
             />
+            {/* <Route
+              path='/users/:Username'
+              render={({ match }) => {
+                return <ProfileView userInfo={userInfo} />;
+              }}
+            />
+            <Route
+              path='/update/:Username'
+              render={() => (
+                <UpdateProfile
+                  userInfo={userInfo}
+                  user={user}
+                  token={token}
+                  updateUser={data => this.updateUser(data)}
+                />
+              )}
+            /> */}
           </Row>
         </Container>
       </Router>
