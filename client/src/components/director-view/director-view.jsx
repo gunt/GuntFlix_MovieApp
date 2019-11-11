@@ -118,11 +118,11 @@ export class DirectorView extends React.Component {
   }
 }
 
-DirectorView.propTypes = {
-  Director: PropTypes.shape({
-    Name: PropTypes.string,
-    Bio: PropTypes.string,
-    Death: PropTypes.string
-  }).isRequired
-  //   onClick: PropTypes.func.isRequired
-};
+// DirectorView.propTypes = {
+//   Director: PropTypes.shape({
+//     Name: PropTypes.string,
+//     Bio: PropTypes.string,
+//     Death: PropTypes.string
+//   }).isRequired
+//   //   onClick: PropTypes.func.isRequired
+// };
