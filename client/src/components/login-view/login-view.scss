@@ -1,4 +1,4 @@
-$primary-color: rgb(73, 80, 87);
+$primary-color: #353A44;
 $secondary-color: rgb(108, 115, 130);
 
 
@@ -12,11 +12,11 @@ body {
 .logContainer {
     background-color: $primary-color;
     border-radius: 25px;
-    color: $secondary-color;
     margin-top: 20px;
-    width: 60%;
+    width: 50%;
     color: #fff;
-    padding: 35px
+    padding: 35px;
+    opacity: 0.97;
 }
 
 h1 {

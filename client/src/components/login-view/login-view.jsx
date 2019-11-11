@@ -53,22 +53,28 @@ export function LoginView(props) {
             onChange={e => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Button id='loginButton' onClick={handleSubmit}>
+        <Button
+          id='loginButton'
+          size='lg'
+          variant='danger'
+          onClick={handleSubmit}
+        >
           Log in
         </Button>
         <Form.Group controlId='formNewUser'>
           <Form.Text>
-            New user? Click{' '}
+            Sign Up{' '}
             <Button
               id='login-view__register'
               style={{ padding: 0 }}
-              variant='link'
+              size='lg'
+              variant='danger'
               onClick={() => props.newUser()}
             >
               {' '}
               here{' '}
             </Button>{' '}
-            to register
+            {/* to register */}
           </Form.Text>
         </Form.Group>
       </form>
