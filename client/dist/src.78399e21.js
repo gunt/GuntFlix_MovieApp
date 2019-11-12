@@ -41479,16 +41479,11 @@ function (_React$Component) {
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
-        path: "/movies/directors/:Name",
+        path: "movies/directors/:name",
         render: function render(_ref2) {
           var match = _ref2.match;
-          if (!movies || !movies.length) return _react.default.createElement("div", {
-            className: "main-view"
-          });
           return _react.default.createElement(_directorView.DirectorView, {
-            director: movies.find(function (m) {
-              return m.director.Name === match.params.name;
-            })
+            directorName: match.params.name
           });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
@@ -41496,7 +41491,7 @@ function (_React$Component) {
         exact: true,
         strict: true,
         component: _updateProfile.UpdateProfile
-      }), "/*", ' ')));
+      }))));
     }
   }]);
 
@@ -41594,7 +41589,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51021" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51072" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
