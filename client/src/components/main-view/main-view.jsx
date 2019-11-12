@@ -168,9 +168,9 @@ export class MainView extends React.Component {
             <Button variant='dark'>Profile View</Button>
           </Link>
 
-          <Link to='/movies/directors/:Name'>
+          {/* <Link to='/movies/directors/:Name'>
             <Button variant='dark'>Director View</Button>
-          </Link>
+          </Link> */}
 
           {/* <Link to='/update/:Username'>
             <Button variant='dark'>Update Profile</Button>
@@ -237,11 +237,11 @@ export class MainView extends React.Component {
               component={UpdateProfile}
             />
             /*{' '}
-            <Route
+            {/* <Route
               exact
               path='/users/:Username'
               render={() => <ProfileView movies={movies} />}
-            />
+            /> */}
             {/* <Route
               path='/users/:Username'
               render={({ match }) => {
