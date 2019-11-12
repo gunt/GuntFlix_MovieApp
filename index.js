@@ -52,6 +52,17 @@ app.get('/movies', function (_req, res) {
     });
 });
 
+app.get('/directors', function (req, res) {
+  Directors.find()
+    .then(function (directors) {
+      res.status(201).json(directors)
+    })
+    .catch(function (err) {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+});
+
 // Gets the data about a single movie by Title (Documentation)
 app.get('/movies/:Title', function (req, res) {
   Movies.findOne({
