@@ -169,7 +169,7 @@ export class ProfileView extends React.Component {
         <div className='favoritemovies'>
           <div className='label'>Favorite Movies</div>
           {favoriteMovies.length === 0 && (
-            <div className='value'>Empty list!</div>
+            <div className='value'>You don't have Favorite Movies!</div>
           )}
           {favoriteMovies.length > 0 && (
             <div className='value'>
@@ -177,11 +177,11 @@ export class ProfileView extends React.Component {
                 <p key={favoriteMovie}>
                   {
                     JSON.parse(localStorage.getItem('movies')).find(
-                      movie => movie._id === favoriteMovie
+                      movie => movie._id === FavoriteMovies
                     )._id
                   }
                   <span
-                    onClick={event => this.deleteMovie(event, favoriteMovie)}
+                    onClick={event => this.deleteMovie(event, FavoriteMovies)}
                   >
                     {' '}
                     Delete

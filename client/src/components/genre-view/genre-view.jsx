@@ -1,11 +1,8 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-
 import './genre-view.scss';
-
 import { Link } from 'react-router-dom';
-
 export class GenreView extends React.Component {
   constructor() {
     super();
@@ -24,6 +21,7 @@ export class GenreView extends React.Component {
           <Card.Text>
             Description: <br />
             {genre.Description}
+            <br />
             <br />
           </Card.Text>
           <Link to={`/`}>
