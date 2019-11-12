@@ -103,13 +103,13 @@ export class DirectorView extends React.Component {
 
     return (
       <div className='director-view'>
-        <h1 className='director'>{directors.Name}</h1>
+        <h1 className='director'>{directors.directors.Name}</h1>
         <h2>Biography</h2>
-        <div className='bio'>{directors.Bio}</div>
+        <div className='bio'>{directors.directors.Bio}</div>
         <h2>Born</h2>
-        <div className='birth'>{directors.Birth}</div>
+        <div className='birth'>{directors.directors.Birth}</div>
         <h2>Died</h2>
-        <div className='death'>{directors.Death}</div>
+        <div className='death'>{directors.directors.Death}</div>
         <Link to={'/'}>
           <Button variant='outline-dark'>Back</Button>
         </Link>
