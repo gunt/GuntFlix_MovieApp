@@ -70,6 +70,7 @@ export class MovieView extends React.Component {
     this.state = {};
   }
 
+  // /users/:username/movies/:MovieID
   submitLike(event) {
     event.preventDefault();
     console.log(this.state.username);
@@ -77,7 +78,7 @@ export class MovieView extends React.Component {
       .post(
         `https://movie-flix-777.herokuapp.com/users/${localStorage.getItem(
           'user'
-        )}/FavoriteMovies/${this.props.movie._id}`,
+        )}/:username/movies/${this.props.movie._id}`,
         {
           Username: localStorage.getItem('user')
         },
@@ -122,7 +123,7 @@ export class MovieView extends React.Component {
           </Link>
         </div>
         <div className='movie-director'>
-          <Link to={`/director/${movie.Director.Name}`}>
+          <Link to={`/movies/directors/${movie.Director.Name}`}>
             <h3 className='label'>Director</h3>
           </Link>
           <h4>{movie.Director.Name}</h4>
