@@ -78,7 +78,7 @@ export class MovieView extends React.Component {
       .post(
         `https://movie-flix-777.herokuapp.com/users/${localStorage.getItem(
           'user'
-        )}/:username/movies/${this.props.movie._id}`,
+        )}/movies/${this.props.movie._id}`,
         {
           Username: localStorage.getItem('user')
         },
@@ -115,7 +115,7 @@ export class MovieView extends React.Component {
         </div>
         <img alt='' className='movie-poster' src={movie.ImageURL} />
         <div className='movie-genre'>
-          <Link to={`/genre/${movie.Genre.Name}`}>
+          <Link to={`/genres/${movie.Genre.Name}`}>
             <h3 className='label'>Genre</h3>
             <Button variant='dark'>
               <p className='value'>{movie.Genre.Name}</p>

@@ -39250,7 +39250,7 @@ function (_React$Component) {
       event.preventDefault();
       console.log(this.state.username);
 
-      _axios.default.post("https://movie-flix-777.herokuapp.com/users/".concat(localStorage.getItem('user'), "/:username/movies/").concat(this.props.movie._id), {
+      _axios.default.post("https://movie-flix-777.herokuapp.com/users/".concat(localStorage.getItem('user'), "/movies/").concat(this.props.movie._id), {
         Username: localStorage.getItem('user')
       }, {
         headers: {
@@ -39294,7 +39294,7 @@ function (_React$Component) {
       }), _react.default.createElement("div", {
         className: "movie-genre"
       }, _react.default.createElement(_reactRouterDom.Link, {
-        to: "/genre/".concat(movie.Genre.Name)
+        to: "/genres/".concat(movie.Genre.Name)
       }, _react.default.createElement("h3", {
         className: "label"
       }, "Genre"), _react.default.createElement(_Button.default, {
@@ -39548,13 +39548,13 @@ function (_React$Component) {
         className: "director-view"
       }, _react.default.createElement("h1", {
         className: "director"
-      }, director.Name), _react.default.createElement("h2", null, "Biography"), _react.default.createElement("div", {
+      }, directors.Name), _react.default.createElement("h2", null, "Biography"), _react.default.createElement("div", {
         className: "bio"
-      }, director.Bio), _react.default.createElement("h2", null, "Born"), _react.default.createElement("div", {
+      }, directors.Bio), _react.default.createElement("h2", null, "Born"), _react.default.createElement("div", {
         className: "birth"
-      }, director.Birth), _react.default.createElement("h2", null, "Died"), _react.default.createElement("div", {
+      }, directors.Birth), _react.default.createElement("h2", null, "Died"), _react.default.createElement("div", {
         className: "death"
-      }, director.Death), _react.default.createElement(_reactRouterDom.Link, {
+      }, directors.Death), _react.default.createElement(_reactRouterDom.Link, {
         to: '/'
       }, _react.default.createElement(_Button.default, {
         variant: "outline-dark"
@@ -39563,17 +39563,17 @@ function (_React$Component) {
   }]);
 
   return DirectorView;
-}(_react.default.Component); // DirectorView.propTypes = {
-//   Director: PropTypes.shape({
-//     Name: PropTypes.string,
-//     Bio: PropTypes.string,
-//     Death: PropTypes.string
-//   }).isRequired
-//   //   onClick: PropTypes.func.isRequired
-// };
-
+}(_react.default.Component);
 
 exports.DirectorView = DirectorView;
+DirectorView.propTypes = {
+  Director: _propTypes.default.shape({
+    Name: _propTypes.default.string,
+    Bio: _propTypes.default.string,
+    Death: _propTypes.default.string
+  }).isRequired //   onClick: PropTypes.func.isRequired
+
+};
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","./director-view.scss":"components/director-view/director-view.scss","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/profile-view/profile-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
@@ -41473,7 +41473,7 @@ function (_React$Component) {
           }));
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
-        path: "/genre/:name",
+        path: "/genres/:name",
         render: function render() {
           return _react.default.createElement(GenreView, null);
         }
@@ -41486,8 +41486,8 @@ function (_React$Component) {
             className: "main-view"
           });
           return _react.default.createElement(_directorView.DirectorView, {
-            director: movies.find(function (m) {
-              return m.Director.Name === match.params.name;
+            directors: movies.find(function (m) {
+              return m.directors.Name === match.params.name;
             })
           });
         }
@@ -41594,7 +41594,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55716" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61477" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
