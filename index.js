@@ -285,7 +285,7 @@ app.post('/users/:username/movies/:MovieID', function (req, res) {
       Username: req.params.Username
     }, {
       $push: {
-        FavoriteMovies: req.params.MovieID
+        FavoritesMovies: req.params.MovieID
       }
     }, {
       new: true

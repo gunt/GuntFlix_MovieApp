@@ -40745,7 +40745,7 @@ function (_React$Component) {
       email: null,
       birthday: null,
       userData: null,
-      favoriteMovies: [],
+      favoritesMovies: [],
       usernameForm: null,
       passwordForm: null,
       emailForm: null,
@@ -40779,11 +40779,11 @@ function (_React$Component) {
       }).then(function (response) {
         _this2.setState({
           userData: response.data,
-          username: response.data.Username,
-          password: response.data.Password,
-          email: response.data.Email,
-          birthday: response.data.Birthday,
-          favoriteMovies: response.data.FavoriteMovies
+          username: response.data.username,
+          password: response.data.password,
+          email: response.data.email,
+          birthday: response.data.birthday,
+          favoritesMovies: response.data.favoritesMovies
         });
       }).catch(function (error) {
         console.log(error);
@@ -40812,14 +40812,14 @@ function (_React$Component) {
     }
   }, {
     key: "deleteMovie",
-    value: function deleteMovie(event, favoriteMovie) {
+    value: function deleteMovie(event, favoritesMovies) {
       var _this3 = this;
 
       event.preventDefault();
-      console.log(favoriteMovie);
+      console.log(favoritesMovie);
       var userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
       var usernameLocal = localStorage.getItem('user');
-      var url = "".concat(userEndpoint).concat(usernameLocal, "/FavoriteMovies/").concat(favoriteMovie);
+      var url = "".concat(userEndpoint).concat(usernameLocal, "/favoritesMovies/").concat(favoritesMovies);
 
       _axios.default.delete(url, {
         headers: {
@@ -40847,10 +40847,10 @@ function (_React$Component) {
       var url = "".concat(userEndpoint).concat(usernameLocal);
 
       _axios.default.put(url, {
-        Username: this.state.UsernameForm,
-        Password: this.state.passwordForm,
-        Email: this.state.emailForm,
-        Birthday: this.state.birthdayForm
+        username: this.state.usernameForm,
+        password: this.state.passwordForm,
+        email: this.state.emailForm,
+        birthday: this.state.birthdayForm
       }, {
         headers: {
           Authorization: "Bearer ".concat(localStorage.getItem('token'))
@@ -40891,7 +40891,7 @@ function (_React$Component) {
           username = _this$state.username,
           email = _this$state.email,
           birthday = _this$state.birthday,
-          favoriteMovies = _this$state.favoriteMovies;
+          favoritesMovies = _this$state.favoritesMovies;
       if (!userData) return null;
       return _react.default.createElement("div", {
         className: "profile-view"
@@ -40922,21 +40922,21 @@ function (_React$Component) {
       }, "Email:"), _react.default.createElement("div", {
         className: "value"
       }, email)), _react.default.createElement("div", {
-        className: "favoritemovies"
+        className: "favoritesMovies"
       }, _react.default.createElement("div", {
         className: "label"
-      }, "Favorite Movies"), favoriteMovies.length === 0 && _react.default.createElement("div", {
+      }, "Favorite Movies"), favoritesMovies.length === 0 && _react.default.createElement("div", {
         className: "value"
-      }, "Empty list!"), favoriteMovies.length > 0 && _react.default.createElement("div", {
+      }, "Empty list!"), favoritesMovies.length > 0 && _react.default.createElement("div", {
         className: "value"
-      }, favoriteMovies.map(function (favoriteMovie) {
+      }, favoritesMovies.map(function (favoritesMovies) {
         return _react.default.createElement("p", {
-          key: favoriteMovie
+          key: favoritesMovie
         }, JSON.parse(localStorage.getItem('movies')).find(function (movie) {
-          return movie._id === favoriteMovie;
+          return movie._id === favoritesMovie;
         })._id, _react.default.createElement("span", {
           onClick: function onClick(event) {
-            return _this5.deleteMovie(event, favoriteMovie);
+            return _this5.deleteMovie(event, favoritesMovies);
           }
         }, ' ', "Delete"));
       }))), _react.default.createElement(_reactRouterDom.Link, {

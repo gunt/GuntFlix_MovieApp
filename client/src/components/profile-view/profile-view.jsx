@@ -16,7 +16,7 @@ export class ProfileView extends React.Component {
       email: null,
       birthday: null,
       userData: null,
-      favoriteMovies: [],
+      favoritesMovies: [],
       usernameForm: null,
       passwordForm: null,
       emailForm: null,
@@ -41,11 +41,11 @@ export class ProfileView extends React.Component {
       .then(response => {
         this.setState({
           userData: response.data,
-          username: response.data.Username,
-          password: response.data.Password,
-          email: response.data.Email,
-          birthday: response.data.Birthday,
-          favoriteMovies: response.data.FavoriteMovies
+          username: response.data.username,
+          password: response.data.password,
+          email: response.data.email,
+          birthday: response.data.birthday,
+          favoritesMovies: response.data.favoritesMovies
         });
       })
       .catch(function(error) {
@@ -75,12 +75,12 @@ export class ProfileView extends React.Component {
       });
   }
 
-  deleteMovie(event, favoriteMovie) {
+  deleteMovie(event, favoritesMovies) {
     event.preventDefault();
-    console.log(favoriteMovie);
+    console.log(favoritesMovie);
     let userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
     let usernameLocal = localStorage.getItem('user');
-    let url = `${userEndpoint}${usernameLocal}/FavoriteMovies/${favoriteMovie}`;
+    let url = `${userEndpoint}${usernameLocal}/favoritesMovies/${favoritesMovies}`;
     axios
       .delete(url, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
@@ -106,10 +106,10 @@ export class ProfileView extends React.Component {
       .put(
         url,
         {
-          Username: this.state.UsernameForm,
-          Password: this.state.passwordForm,
-          Email: this.state.emailForm,
-          Birthday: this.state.birthdayForm
+          username: this.state.usernameForm,
+          password: this.state.passwordForm,
+          email: this.state.emailForm,
+          birthday: this.state.birthdayForm
         },
         {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
@@ -145,7 +145,7 @@ export class ProfileView extends React.Component {
   }
 
   render() {
-    const { userData, username, email, birthday, favoriteMovies } = this.state;
+    const { userData, username, email, birthday, favoritesMovies } = this.state;
     if (!userData) return null;
     return (
       <div className='profile-view'>
@@ -166,22 +166,22 @@ export class ProfileView extends React.Component {
           <h4 className='label'>Email:</h4>
           <div className='value'>{email}</div>
         </div>
-        <div className='favoritemovies'>
+        <div className='favoritesMovies'>
           <div className='label'>Favorite Movies</div>
-          {favoriteMovies.length === 0 && (
+          {favoritesMovies.length === 0 && (
             <div className='value'>Empty list!</div>
           )}
-          {favoriteMovies.length > 0 && (
+          {favoritesMovies.length > 0 && (
             <div className='value'>
-              {favoriteMovies.map(favoriteMovie => (
-                <p key={favoriteMovie}>
+              {favoritesMovies.map(favoritesMovies => (
+                <p key={favoritesMovie}>
                   {
                     JSON.parse(localStorage.getItem('movies')).find(
-                      movie => movie._id === favoriteMovie
+                      movie => movie._id === favoritesMovie
                     )._id
                   }
                   <span
-                    onClick={event => this.deleteMovie(event, favoriteMovie)}
+                    onClick={event => this.deleteMovie(event, favoritesMovies)}
                   >
                     {' '}
                     Delete
