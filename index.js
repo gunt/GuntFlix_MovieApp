@@ -52,7 +52,7 @@ app.get('/movies', function (_req, res) {
     });
 });
 
-app.get('/directors', function (req, res) {
+app.get('/directors', function (_req, res) {
   Directors.find()
     .then(function (directors) {
       res.status(201).json(directors)
