@@ -41486,8 +41486,8 @@ function (_React$Component) {
             className: "main-view"
           });
           return _react.default.createElement(_directorView.DirectorView, {
-            directors: movies.find(function (m) {
-              return m.directors.Name === match.params.name;
+            director: movies.find(function (m) {
+              return m.director.Name === match.params.name;
             })
           });
         }
@@ -41594,7 +41594,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50885" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51021" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

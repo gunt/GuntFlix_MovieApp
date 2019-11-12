@@ -222,8 +222,8 @@ export class MainView extends React.Component {
                   return <div className='main-view' />;
                 return (
                   <DirectorView
-                    directors={movies.find(
-                      m => m.directors.Name === match.params.name
+                    director={movies.find(
+                      m => m.director.Name === match.params.name
                     )}
                   />
                 );
