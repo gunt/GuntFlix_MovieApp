@@ -1,128 +1,69 @@
-// // import React from 'react';
-
-// // import Button from 'react-bootstrap/Button';
-// // import Card from 'react-bootstrap/Card';
-// // import './director-view.scss';
-
-// // import { Link } from 'react-router-dom';
-
-// // export class DirectorView extends React.Component {
-// //   constructor() {
-// //     super();
-
-// //     this.state = {};
-// //   }
-
-// //   render() {
-// //     const { director } = this.props;
-
-// //     if (!director) return null;
-
-// //     return (
-// //       <Card className='director-info' style={{ width: '18rem' }}>
-// //         <Card.Body>
-// //           <Card.Title className='director-name'>{director.Name}</Card.Title>
-// //           <Card.Text>
-// //             Biography: <br />
-// //             <br />
-// //             {director.Bio}
-// //             <br />
-// //             <br />
-// //             Birth Year: {director.BirthYear}
-// //           </Card.Text>
-// //           <div className='text-center'>
-// //             <Link to={`/`}>
-// //               <Button className='button-card' variant='info'>
-// //                 Back
-// //               </Button>
-// //             </Link>
-// //           </div>
-// //         </Card.Body>
-// //       </Card>
-// //     );
-// //   }
-// // }
-
-// import React from 'react';
-// import PropTypes from 'prop-types';
-// import Button from 'react-bootstrap/Button';
-// import './director-view.scss';
-// import { Link } from 'react-router-dom';
-
-// function DirectorView(props) {
-//   const { movies, directorName } = props;
-
-//   if (!movies || !movies.length) return null;
-
-//   const director = movies.find(movie => movie.Director.Name === directorName)
-//     .Director;
-
-//   return (
-//     <div className='director-view'>
-//       <h1 className='director'>{director.Name}</h1>
-//       <hr></hr>
-//       <h2 id='info'>Biography</h2>
-//       <div className='bio'>{director.Bio}</div>
-//       <h2 id='info'>Born</h2>
-//       <div className='birth'>{director.Birth}</div>
-//       <h2 id='info'>Died</h2>
-//       <div className='death'>{director.Death}</div>
-//       <Link to={'/'}>
-//         <Button className='backbutton' variant='outline-dark'>
-//           Back
-//         </Button>
-//       </Link>
-//     </div>
-//   );
-// }
-
-// DirectorView.propTypes = {
-//   Director: PropTypes.shape({
-//     Name: PropTypes.string,
-//     Bio: PropTypes.string,
-//     Death: PropTypes.string
-//   }).isRequired
-// };
-
-import React from 'react';
-import PropTypes from 'prop-types';
+import axios from 'axios';
 import Button from 'react-bootstrap/Button';
-import './director-view.scss';
+import Card from 'react-bootstrap/Card';
+import React from 'react';
 import { Link } from 'react-router-dom';
+// import Container from 'react-bootstrap/Container';
+// import Row from 'react-bootstrap/Row';
+import './director-view';
 
 export class DirectorView extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
-    this.state = {};
+    this.state = {
+      username: null,
+      password: null,
+      email: null,
+      birthday: null,
+      favoriteMovies: [],
+      movies: [],
+      favorite: [],
+      director: []
+    };
   }
+
+  getdirector(token) {
+    console.log(this.props);
+    axios
+      .get(
+        `https://movie-flix-777.herokuapp.com/movies/directors/${this.props.director.name}`,
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      )
+      .then(res => {
+        this.setState({
+          date: res.data,
+          name: res.data.name,
+          bio: res.data.bio,
+          birth: res.data.birth,
+          death: res.data.death
+        });
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   render() {
     const { director } = this.props;
 
-    if (!director) return null;
-
     return (
-      <div className='director-view'>
-        <h1 className='director'>{directors.directors.Name}</h1>
-        <h2>Biography</h2>
-        <div className='bio'>{directors.directors.Bio}</div>
-        <h2>Born</h2>
-        <div className='birth'>{directors.directors.Birth}</div>
-        <h2>Died</h2>
-        <div className='death'>{directors.directors.Death}</div>
-        <Link to={'/'}>
-          <Button variant='outline-dark'>Back</Button>
-        </Link>
-      </div>
+      <Card>
+        <Card.Img variant='top' />
+        <Card.Body>
+          <Card.Title>{console.log(this.props)}</Card.Title>
+          <Card.Text>Director: {director.name}</Card.Text>
+          <Card.Text>Director Bio: {director.bio}</Card.Text>
+          <Card.Text>Birth: {director.birth}</Card.Text>
+          <Card.Text>Year of death or alive: {director.death}</Card.Text>
+          <Link to={`/`}>
+            <Button variant='primary'>Go back</Button>
+          </Link>
+        </Card.Body>
+      </Card>
     );
   }
 }
-
-DirectorView.propTypes = {
-  Director: PropTypes.shape({
-    Name: PropTypes.string,
-    Bio: PropTypes.string,
-    Death: PropTypes.string
-  }).isRequired
-  //   onClick: PropTypes.func.isRequired
-};

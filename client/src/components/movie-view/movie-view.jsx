@@ -140,8 +140,8 @@ export class MovieView extends React.Component {
     );
   }
 }
-MovieView.propTypes = {
-  movie: PropTypes.shape({
-    Title: PropTypes.string
-  }).isRequired
-};
+// MovieView.propTypes = {
+//   movie: PropTypes.shape({
+//     Title: PropTypes.string
+//   }).isRequired
+// };

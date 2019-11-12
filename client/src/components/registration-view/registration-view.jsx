@@ -106,11 +106,11 @@ export function RegistrationView(props) {
   );
 }
 
-RegistrationView.propTypes = {
-  username: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  birthday: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
-  userRegistered: PropTypes.func.isRequired
-};
+// RegistrationView.propTypes = {
+//   username: PropTypes.string.isRequired,
+//   password: PropTypes.string.isRequired,
+//   email: PropTypes.string.isRequired,
+//   birthday: PropTypes.string.isRequired,
+//   onClick: PropTypes.func.isRequired,
+//   userRegistered: PropTypes.func.isRequired
+// };
