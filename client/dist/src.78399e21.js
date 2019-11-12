@@ -39548,13 +39548,13 @@ function (_React$Component) {
         className: "director-view"
       }, _react.default.createElement("h1", {
         className: "director"
-      }, directors.Name), _react.default.createElement("h2", null, "Biography"), _react.default.createElement("div", {
+      }, directors.directors.Name), _react.default.createElement("h2", null, "Biography"), _react.default.createElement("div", {
         className: "bio"
-      }, directors.Bio), _react.default.createElement("h2", null, "Born"), _react.default.createElement("div", {
+      }, directors.directors.Bio), _react.default.createElement("h2", null, "Born"), _react.default.createElement("div", {
         className: "birth"
-      }, directors.Birth), _react.default.createElement("h2", null, "Died"), _react.default.createElement("div", {
+      }, directors.directors.Birth), _react.default.createElement("h2", null, "Died"), _react.default.createElement("div", {
         className: "death"
-      }, directors.Death), _react.default.createElement(_reactRouterDom.Link, {
+      }, directors.directors.Death), _react.default.createElement(_reactRouterDom.Link, {
         to: '/'
       }, _react.default.createElement(_Button.default, {
         variant: "outline-dark"
@@ -41594,7 +41594,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61477" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50885" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
