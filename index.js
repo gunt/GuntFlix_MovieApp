@@ -98,6 +98,19 @@ app.get('/movies/directors/:Name', function (req, res) {
     });
 });
 
+app.get('/directors/:Name', function (req, res) {
+  Movies.findOne({
+      'Director.Name': req.params.Name
+    })
+    .then(item => {
+      res.json(item.Director)
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
+});
+
 // app.get('/directors', function (req, res) {
 //   Directors.find()
 //     .then(function (directors) {

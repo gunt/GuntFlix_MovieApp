@@ -39239,7 +39239,8 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(MovieView).call(this));
     _this.state = {};
     return _this;
-  }
+  } // /users/:username/movies/:MovieID
+
 
   _createClass(MovieView, [{
     key: "submitLike",
@@ -39249,7 +39250,7 @@ function (_React$Component) {
       event.preventDefault();
       console.log(this.state.username);
 
-      _axios.default.post("https://movie-flix-777.herokuapp.com/users/".concat(localStorage.getItem('user'), "/FavoriteMovies/").concat(this.props.movie._id), {
+      _axios.default.post("https://movie-flix-777.herokuapp.com/users/".concat(localStorage.getItem('user'), "/:username/movies/").concat(this.props.movie._id), {
         Username: localStorage.getItem('user')
       }, {
         headers: {
@@ -39303,7 +39304,7 @@ function (_React$Component) {
       }, movie.Genre.Name)))), _react.default.createElement("div", {
         className: "movie-director"
       }, _react.default.createElement(_reactRouterDom.Link, {
-        to: "/director/".concat(movie.Director.Name)
+        to: "/movies/directors/".concat(movie.Director.Name)
       }, _react.default.createElement("h3", {
         className: "label"
       }, "Director")), _react.default.createElement("h4", null, movie.Director.Name)), _react.default.createElement(_reactRouterDom.Link, {
@@ -41424,11 +41425,7 @@ function (_React$Component) {
         to: "/users/:Username"
       }, _react.default.createElement(_Button.default, {
         variant: "dark"
-      }, "Profile View")), _react.default.createElement(_reactRouterDom.Link, {
-        to: "/movies/directors/:Name"
-      }, _react.default.createElement(_Button.default, {
-        variant: "dark"
-      }, "Director View")), _react.default.createElement(_Row.default, null, _react.default.createElement(_reactRouterDom.Route, {
+      }, "Profile View")), _react.default.createElement(_Row.default, null, _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
         path: "/",
         render: function render() {
@@ -41499,15 +41496,7 @@ function (_React$Component) {
         exact: true,
         strict: true,
         component: _updateProfile.UpdateProfile
-      }), "/*", ' ', _react.default.createElement(_reactRouterDom.Route, {
-        exact: true,
-        path: "/users/:Username",
-        render: function render() {
-          return _react.default.createElement(_profileView.ProfileView, {
-            movies: movies
-          });
-        }
-      }))));
+      }), "/*", ' ')));
     }
   }]);
 
@@ -41605,7 +41594,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50955" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55716" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
