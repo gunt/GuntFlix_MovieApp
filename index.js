@@ -77,6 +77,20 @@ app.get('/movies/:Title', function (req, res) {
     });
 });
 
+app.get('/genres/:Name', function (req, res) {
+  Movies.findOne({
+      'Genre.Name': req.params.Name
+    })
+    .then(obj => {
+      res.json(obj.Genre)
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).send('Error:' + err);
+    });
+});
+
+
 // Get data data about a movie by Genre_Title (description) // /movies/genres/[Title]
 app.get('/movies/genres/:Title', function (req, res) {
   Movies.findOne({
