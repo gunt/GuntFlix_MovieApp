@@ -1,31 +1,31 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import './movie-view.scss';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
 export class MovieView extends React.Component {
   constructor() {
     super();
-
     this.state = {};
   }
 
-  // /users/:username/movies/:MovieID'
   submitLike(event) {
     event.preventDefault();
-    console.log(this.state.username);
+
+    const { movie } = this.props;
+    let userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
+    let usernameLocal = localStorage.getItem('user');
+    let token = localStorage.getItem('token');
+    let url = `${userEndpoint}${usernameLocal}/movies/${movie._id}`;
     axios
       .post(
-        `https://movie-flix-777.herokuapp.com/users/${localStorage.getItem(
-          'user'
-        )}/movies/${this.props.movie._id}`,
+        url,
         {
-          Username: localStorage.getItem('user')
+          Username: usernameLocal
         },
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+          headers: { Authorization: `Bearer ${token}` }
         }
       )
       .then(response => {
@@ -34,9 +34,10 @@ export class MovieView extends React.Component {
         //update localStorage
         localStorage.setItem('user', this.state.username);
       })
-      .catch(event => {
-        console.log('error adding movie to list');
-        alert('Something went wrong!');
+
+      .catch(error => {
+        console.log(error);
+        alert('Ooooops... Something went wrong!');
       });
   }
 
@@ -57,33 +58,35 @@ export class MovieView extends React.Component {
         </div>
         <img alt='' className='movie-poster' src={movie.ImageURL} />
         <div className='movie-genre'>
-          <Link to={`/genres/${movie.Genre.Name}`}>
+          <Link to={`/genre/${movie.Genre.Name}`}>
             <h3 className='label'>Genre</h3>
-            <Button variant='dark'>
+            <Button variant='outlin-dark'>
               <p className='value'>{movie.Genre.Name}</p>
             </Button>
           </Link>
         </div>
         <div className='movie-director'>
-          <Link to={`/directors/${movie.Director.Name}`}>
+          <Link to={`/director/${movie.Director.Name}`}>
             <h3 className='label'>Director</h3>
           </Link>
           <h4>{movie.Director.Name}</h4>
         </div>
-
         <Link to={'/'}>
-          <Button variant='dark'>Back</Button>
+          <Button variant='outline-dark'>Back</Button>
         </Link>
 
-        <Button variant='dark' onClick={event => this.submitLike(event)}>
-          Add to Favorites Movies
+        <Button
+          variant='outline-dark'
+          onClick={event => this.submitLike(event)}
+        >
+          Like
         </Button>
       </div>
     );
   }
 }
-// MovieView.propTypes = {
-//   movie: PropTypes.shape({
-//     Title: PropTypes.string
-//   }).isRequired
-// };
+MovieView.propTypes = {
+  movie: PropTypes.shape({
+    Title: PropTypes.string
+  }).isRequired
+};

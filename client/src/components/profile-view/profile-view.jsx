@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import ListGroup from 'react-bootstrap/ListGroup';
-
+//import { FORM } from 'dns';
 export class ProfileView extends React.Component {
   constructor() {
     super();
@@ -32,6 +32,7 @@ export class ProfileView extends React.Component {
 
   getUser(token) {
     let username = localStorage.getItem('user');
+
     let userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
     let url = `${userEndpoint}${username}`;
     axios
@@ -41,20 +42,21 @@ export class ProfileView extends React.Component {
       .then(response => {
         this.setState({
           userData: response.data,
-          Username: response.data.Username,
-          Password: response.data.Password,
-          Email: response.data.Email,
-          Birthday: response.data.Birthday,
-          FavoriteMovies: response.data.FavoriteMovies
+          username: response.data.Username,
+          password: response.data.Password,
+          email: response.data.Email,
+          birthday: response.data.Birthday,
+          favoriteMovies: response.data.FavoriteMovies
         });
       })
       .catch(function(error) {
         console.log(error);
       });
   }
-
+  //delete user
   deleteUser(event) {
     event.preventDefault();
+
     let userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
     let usernameLocal = localStorage.getItem('user');
     let url = `${userEndpoint}${usernameLocal}`;
@@ -63,21 +65,21 @@ export class ProfileView extends React.Component {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       })
       .then(response => {
-        alert('Your account has been deleted!');
-
+        alert('Your account has been delted!');
+        //clears your storage
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-
+        //opens login view
         window.open('/', '_self');
       })
       .catch(event => {
         alert('failed to delete user');
       });
   }
-
   deleteMovie(event, favoriteMovie) {
     event.preventDefault();
     console.log(favoriteMovie);
+
     let userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
     let usernameLocal = localStorage.getItem('user');
     let url = `${userEndpoint}${usernameLocal}/FavoriteMovies/${favoriteMovie}`;
@@ -86,10 +88,11 @@ export class ProfileView extends React.Component {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       })
       .then(response => {
+        // update state with current movie data
         this.getUser(localStorage.getItem('token'));
       })
       .catch(event => {
-        alert('Something went wrong...');
+        alert('Oops... something went wrong...');
       });
   }
 
@@ -99,6 +102,7 @@ export class ProfileView extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
     let userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
     let usernameLocal = localStorage.getItem('user');
     let url = `${userEndpoint}${usernameLocal}`;
@@ -106,7 +110,7 @@ export class ProfileView extends React.Component {
       .put(
         url,
         {
-          Username: this.state.UsernameForm,
+          Username: this.state.usernameForm,
           Password: this.state.passwordForm,
           Email: this.state.emailForm,
           Birthday: this.state.birthdayForm
@@ -118,18 +122,18 @@ export class ProfileView extends React.Component {
       .then(response => {
         console.log(response);
         alert('Your data has been updated!');
-
+        //update localStorage
         localStorage.setItem('user', this.state.usernameForm);
-
+        // call getUser() to display changed userdata after submission
         this.getUser(localStorage.getItem('token'));
-
+        //reset form after submitting data
         document
           .getElementsByClassName('changeDataForm')[0]
           .requestFullscreen();
       })
       .catch(event => {
         console.log('error updating the userdata');
-        alert('Something went wrong!');
+        alert('Ooooops... Something went wrong!');
       });
   }
   toggleForm() {
@@ -138,9 +142,9 @@ export class ProfileView extends React.Component {
 
     form.classList.toggle('show-form');
     if (form.classList.contains('show-form')) {
-      toggleButton.innerHTML = 'Change data &uarr;';
+      toggleButton.innerHTML = 'CHANGE DATA &uarr;';
     } else {
-      toggleButton.innerHTML = 'Change data &darr;';
+      toggleButton.innerHTML = 'CHANGE DATA &darr;';
     }
   }
 
@@ -169,7 +173,7 @@ export class ProfileView extends React.Component {
         <div className='favoritemovies'>
           <div className='label'>Favorite Movies</div>
           {favoriteMovies.length === 0 && (
-            <div className='value'>Empty list!</div>
+            <div className='value'>Your Favorite Movie List is empty :-(</div>
           )}
           {favoriteMovies.length > 0 && (
             <div className='value'>
@@ -177,11 +181,11 @@ export class ProfileView extends React.Component {
                 <p key={favoriteMovie}>
                   {
                     JSON.parse(localStorage.getItem('movies')).find(
-                      movie => movie._id === favoriteMovies
+                      movie => movie._id === favoriteMovie
                     )._id
                   }
                   <span
-                    onClick={event => this.deleteMovie(event, favoriteMovies)}
+                    onClick={event => this.deleteMovie(event, favoriteMovie)}
                   >
                     {' '}
                     Delete
@@ -192,13 +196,29 @@ export class ProfileView extends React.Component {
           )}
         </div>
         <Link to={'/'}>
-          <Button className='view-btn' variant='light' type='button'>
+          <Button className='view-btn' variant='outline-dark' type='button'>
             Back
           </Button>
         </Link>
-
+        <Button
+          className='view-btn'
+          variant='outline-dark'
+          type='button'
+          onClick={event => this.deleteUser(event)}
+        >
+          Delete
+        </Button>
+        <Button
+          id='toggleButton'
+          className='vuew-btn'
+          variant='outline-dark'
+          type='button'
+          onClick={() => this.toggleForm()}
+        >
+          Change Data
+        </Button>
         <Form className='changeDataForm'>
-          <h2>Update Profile</h2>
+          <h2>Change Data</h2>
           <Form.Group controlId='formBasicUsername'>
             <Form.Label>Your Username</Form.Label>
             <Form.Control
@@ -237,23 +257,22 @@ export class ProfileView extends React.Component {
             />
           </Form.Group>
           <Button
-            variant='light'
+            variant='outline-dark'
             type='button'
             onClick={event => this.handleSubmit(event)}
           >
-            Update
-          </Button>
-
-          <Button
-            className='view-btn'
-            variant='danger'
-            type='reset'
-            onClick={event => this.deleteUser(event)}
-          >
-            Delete Account
+            Change
           </Button>
         </Form>
       </div>
     );
   }
 }
+//ProfileView.propTypes = {
+//   Director: PropTypes.shape({
+//        Name: PropTypes.string,
+//       Bio: PropTypes.string,
+//       Death: PropTypes.string
+//    }).isRequired,
+// onClick: PropTypes.func.isRequired
+//};
