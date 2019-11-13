@@ -237,6 +237,31 @@ export class MainView extends React.Component {
               strict
               component={UpdateProfile}
             />
+
+            <Route
+              exact
+              path='/users/:Username'
+              render={() => <ProfileView movies={movies} />}
+            />
+
+            {/* <Route
+              exact
+              path='/profile'
+              render={() => <ProfileView movies={movies} />}
+            /> */}
+
+            {/* <Route
+              exact
+              path='/profile'
+              render={() => (
+                <ProfileView
+                  onLoggedIn={this.state.onLoggedIn}
+                  movie={this.state.movies}
+                  thisUser={this.state.user}
+                  user={profileData}
+                />
+              )}
+            /> */}
           </Row>
         </Container>
       </Router>

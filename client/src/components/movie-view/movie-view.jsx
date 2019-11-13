@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import './movie-view.scss';
 import { Link } from 'react-router-dom';
@@ -37,7 +37,7 @@ export class MovieView extends React.Component {
 
       .catch(error => {
         console.log(error);
-        alert('Ooooops... Something went wrong!');
+        alert('Something went wrong!');
       });
   }
 
@@ -58,35 +58,32 @@ export class MovieView extends React.Component {
         </div>
         <img alt='' className='movie-poster' src={movie.ImageURL} />
         <div className='movie-genre'>
-          <Link to={`/genre/${movie.Genre.Name}`}>
+          <Link to={`/genres/${movie.Genre.Name}`}>
             <h3 className='label'>Genre</h3>
-            <Button variant='outlin-dark'>
+            <Button variant='dark'>
               <p className='value'>{movie.Genre.Name}</p>
             </Button>
           </Link>
         </div>
         <div className='movie-director'>
-          <Link to={`/director/${movie.Director.Name}`}>
+          <Link to={`/directors/${movie.Director.Name}`}>
             <h3 className='label'>Director</h3>
           </Link>
           <h4>{movie.Director.Name}</h4>
         </div>
         <Link to={'/'}>
-          <Button variant='outline-dark'>Back</Button>
+          <Button variant='dark'>Back</Button>
         </Link>
 
-        <Button
-          variant='outline-dark'
-          onClick={event => this.submitLike(event)}
-        >
-          Like
+        <Button variant='dark' onClick={event => this.submitLike(event)}>
+          Add to Favorites!
         </Button>
       </div>
     );
   }
 }
-MovieView.propTypes = {
-  movie: PropTypes.shape({
-    Title: PropTypes.string
-  }).isRequired
-};
+// MovieView.propTypes = {
+//   movie: PropTypes.shape({
+//     Title: PropTypes.string
+//   }).isRequired
+// };

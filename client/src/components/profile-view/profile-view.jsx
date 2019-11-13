@@ -1,12 +1,11 @@
 import React from 'react';
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import './profile-view.scss';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
-import ListGroup from 'react-bootstrap/ListGroup';
-//import { FORM } from 'dns';
+// import ListGroup from 'react-bootstrap/ListGroup';
 export class ProfileView extends React.Component {
   constructor() {
     super();
@@ -66,10 +65,10 @@ export class ProfileView extends React.Component {
       })
       .then(response => {
         alert('Your account has been delted!');
-        //clears your storage
+
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        //opens login view
+
         window.open('/', '_self');
       })
       .catch(event => {
@@ -122,11 +121,11 @@ export class ProfileView extends React.Component {
       .then(response => {
         console.log(response);
         alert('Your data has been updated!');
-        //update localStorage
+
         localStorage.setItem('user', this.state.usernameForm);
-        // call getUser() to display changed userdata after submission
+
         this.getUser(localStorage.getItem('token'));
-        //reset form after submitting data
+
         document
           .getElementsByClassName('changeDataForm')[0]
           .requestFullscreen();
@@ -150,7 +149,9 @@ export class ProfileView extends React.Component {
 
   render() {
     const { userData, username, email, birthday, favoriteMovies } = this.state;
+
     if (!userData) return null;
+
     return (
       <div className='profile-view'>
         <h4 className='director'>User Profile</h4>
@@ -210,7 +211,7 @@ export class ProfileView extends React.Component {
         </Button>
         <Button
           id='toggleButton'
-          className='vuew-btn'
+          className='view-btn'
           variant='outline-dark'
           type='button'
           onClick={() => this.toggleForm()}
@@ -268,11 +269,11 @@ export class ProfileView extends React.Component {
     );
   }
 }
-//ProfileView.propTypes = {
+// ProfileView.propTypes = {
 //   Director: PropTypes.shape({
-//        Name: PropTypes.string,
-//       Bio: PropTypes.string,
-//       Death: PropTypes.string
-//    }).isRequired,
-// onClick: PropTypes.func.isRequired
-//};
+//     Name: PropTypes.string,
+//     Bio: PropTypes.string,
+//     Death: PropTypes.string
+//   }).isRequired,
+//   onClick: PropTypes.func.isRequired
+// };
