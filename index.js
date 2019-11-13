@@ -285,7 +285,7 @@ app.post('/users/:username/movies/:MovieID', function (req, res) {
       Username: req.params.Username
     }, {
       $push: {
-        Favorites: req.params.MovieID
+        FavoritesMovies: req.params.MovieID
       }
     }, {
       new: true
@@ -301,7 +301,7 @@ app.post('/users/:username/movies/:MovieID', function (req, res) {
 });
 
 // Remove a movie from a user's list of favorites
-app.delete('/users/:Username/Movies/:MovieID', function (req, res) {
+app.delete('/users/:username/movies/:MovieID', function (req, res) {
   Users.findOneAndUpdate({
       Username: req.params.Username
     }, {

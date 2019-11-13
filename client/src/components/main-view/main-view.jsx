@@ -90,13 +90,13 @@ export class MainView extends React.Component {
     window.location.reload();
   }
 
-  resetMainView() {
-    this.setState({
-      selectedMovieId: null
-    });
+  // resetMainView() {
+  //   this.setState({
+  //     selectedMovieId: null
+  //   });
 
-    window.location.hash = '#';
-  }
+  //   window.location.hash = '#';
+  // }
 
   onLoggedIn = authData => {
     this.setState({

@@ -41,11 +41,11 @@ export class ProfileView extends React.Component {
       .then(response => {
         this.setState({
           userData: response.data,
-          username: response.data.Username,
-          password: response.data.Password,
-          email: response.data.Email,
-          birthday: response.data.Birthday,
-          favoriteMovies: response.data.FavoriteMovies
+          Username: response.data.Username,
+          Password: response.data.Password,
+          Email: response.data.Email,
+          Birthday: response.data.Birthday,
+          FavoritesMovies: response.data.FavoritesMovies
         });
       })
       .catch(function(error) {
@@ -169,7 +169,7 @@ export class ProfileView extends React.Component {
         <div className='favoritemovies'>
           <div className='label'>Favorite Movies</div>
           {favoriteMovies.length === 0 && (
-            <div className='value'>You don't have Favorite Movies!</div>
+            <div className='value'>Empty list!</div>
           )}
           {favoriteMovies.length > 0 && (
             <div className='value'>
@@ -177,11 +177,11 @@ export class ProfileView extends React.Component {
                 <p key={favoriteMovie}>
                   {
                     JSON.parse(localStorage.getItem('movies')).find(
-                      movie => movie._id === FavoriteMovies
+                      movie => movie._id === favoriteMovies
                     )._id
                   }
                   <span
-                    onClick={event => this.deleteMovie(event, FavoriteMovies)}
+                    onClick={event => this.deleteMovie(event, favoriteMovies)}
                   >
                     {' '}
                     Delete
