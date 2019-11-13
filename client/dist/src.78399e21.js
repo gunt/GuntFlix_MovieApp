@@ -39665,8 +39665,6 @@ exports.ProfileView = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 
 require("./profile-view.scss");
@@ -39760,8 +39758,7 @@ function (_React$Component) {
       }).catch(function (error) {
         console.log(error);
       });
-    } //delete user
-
+    }
   }, {
     key: "deleteUser",
     value: function deleteUser(event) {
@@ -39775,7 +39772,7 @@ function (_React$Component) {
           Authorization: "Bearer ".concat(localStorage.getItem('token'))
         }
       }).then(function (response) {
-        alert('Your account has been delted!');
+        alert('Your account has been deleted!');
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         window.open('/', '_self');
@@ -39799,10 +39796,9 @@ function (_React$Component) {
           Authorization: "Bearer ".concat(localStorage.getItem('token'))
         }
       }).then(function (response) {
-        // update state with current movie data
         _this3.getUser(localStorage.getItem('token'));
       }).catch(function (event) {
-        alert('Oops... something went wrong...');
+        alert('Something went wrong...');
       });
     }
   }, {
@@ -39821,7 +39817,7 @@ function (_React$Component) {
       var url = "".concat(userEndpoint).concat(usernameLocal);
 
       _axios.default.put(url, {
-        Username: this.state.usernameForm,
+        Username: this.state.UsernameForm,
         Password: this.state.passwordForm,
         Email: this.state.emailForm,
         Birthday: this.state.birthdayForm
@@ -39850,9 +39846,9 @@ function (_React$Component) {
       form.classList.toggle('show-form');
 
       if (form.classList.contains('show-form')) {
-        toggleButton.innerHTML = 'CHANGE DATA &uarr;';
+        toggleButton.innerHTML = 'Change data &uarr;';
       } else {
-        toggleButton.innerHTML = 'CHANGE DATA &darr;';
+        toggleButton.innerHTML = 'Change data &darr;';
       }
     }
   }, {
@@ -39901,42 +39897,27 @@ function (_React$Component) {
         className: "label"
       }, "Favorite Movies"), favoriteMovies.length === 0 && _react.default.createElement("div", {
         className: "value"
-      }, "Your Favorite Movie List is empty"), favoriteMovies.length > 0 && _react.default.createElement("div", {
+      }, "Empty list!"), favoriteMovies.length > 0 && _react.default.createElement("div", {
         className: "value"
       }, favoriteMovies.map(function (favoriteMovie) {
         return _react.default.createElement("p", {
           key: favoriteMovie
         }, JSON.parse(localStorage.getItem('movies')).find(function (movie) {
-          return movie._id === favoriteMovie;
+          return movie._id === favoriteMovies;
         })._id, _react.default.createElement("span", {
           onClick: function onClick(event) {
-            return _this5.deleteMovie(event, favoriteMovie);
+            return _this5.deleteMovie(event, favoriteMovies);
           }
         }, ' ', "Delete"));
       }))), _react.default.createElement(_reactRouterDom.Link, {
         to: '/'
       }, _react.default.createElement(_Button.default, {
         className: "view-btn",
-        variant: "outline-dark",
+        variant: "light",
         type: "button"
-      }, "Back")), _react.default.createElement(_Button.default, {
-        className: "view-btn",
-        variant: "outline-dark",
-        type: "button",
-        onClick: function onClick(event) {
-          return _this5.deleteUser(event);
-        }
-      }, "Delete"), _react.default.createElement(_Button.default, {
-        id: "toggleButton",
-        className: "view-btn",
-        variant: "outline-dark",
-        type: "button",
-        onClick: function onClick() {
-          return _this5.toggleForm();
-        }
-      }, "Change Data"), _react.default.createElement(_Form.default, {
+      }, "Back")), _react.default.createElement(_Form.default, {
         className: "changeDataForm"
-      }, _react.default.createElement("h2", null, "Change Data"), _react.default.createElement(_Form.default.Group, {
+      }, _react.default.createElement("h2", null, "Update Profile"), _react.default.createElement(_Form.default.Group, {
         controlId: "formBasicUsername"
       }, _react.default.createElement(_Form.default.Label, null, "Your Username"), _react.default.createElement(_Form.default.Control, {
         type: "text",
@@ -39975,28 +39956,27 @@ function (_React$Component) {
         },
         placeholder: "example: 01/01/1990"
       })), _react.default.createElement(_Button.default, {
-        variant: "outline-dark",
+        variant: "light",
         type: "button",
         onClick: function onClick(event) {
           return _this5.handleSubmit(event);
         }
-      }, "Change")));
+      }, "Update"), _react.default.createElement(_Button.default, {
+        className: "view-btn",
+        variant: "danger",
+        type: "reset",
+        onClick: function onClick(event) {
+          return _this5.deleteUser(event);
+        }
+      }, "Delete Account")));
     }
   }]);
 
   return ProfileView;
-}(_react.default.Component); // ProfileView.propTypes = {
-//   Director: PropTypes.shape({
-//     Name: PropTypes.string,
-//     Bio: PropTypes.string,
-//     Death: PropTypes.string
-//   }).isRequired,
-//   onClick: PropTypes.func.isRequired
-// };
-
+}(_react.default.Component);
 
 exports.ProfileView = ProfileView;
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","./profile-view.scss":"components/profile-view/profile-view.scss","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","axios":"../node_modules/axios/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js"}],"components/update-profile/update-profile.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","./profile-view.scss":"components/profile-view/profile-view.scss","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","axios":"../node_modules/axios/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js"}],"components/update-profile/update-profile.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -40599,7 +40579,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53751" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56605" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

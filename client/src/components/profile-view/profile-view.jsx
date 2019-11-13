@@ -1,11 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import './profile-view.scss';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 // import ListGroup from 'react-bootstrap/ListGroup';
+
 export class ProfileView extends React.Component {
   constructor() {
     super();
@@ -31,7 +32,6 @@ export class ProfileView extends React.Component {
 
   getUser(token) {
     let username = localStorage.getItem('user');
-
     let userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
     let url = `${userEndpoint}${username}`;
     axios
@@ -52,10 +52,9 @@ export class ProfileView extends React.Component {
         console.log(error);
       });
   }
-  //delete user
+
   deleteUser(event) {
     event.preventDefault();
-
     let userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
     let usernameLocal = localStorage.getItem('user');
     let url = `${userEndpoint}${usernameLocal}`;
@@ -64,7 +63,7 @@ export class ProfileView extends React.Component {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       })
       .then(response => {
-        alert('Your account has been delted!');
+        alert('Your account has been deleted!');
 
         localStorage.removeItem('token');
         localStorage.removeItem('user');
@@ -75,10 +74,10 @@ export class ProfileView extends React.Component {
         alert('failed to delete user');
       });
   }
+
   deleteMovie(event, favoriteMovie) {
     event.preventDefault();
     console.log(favoriteMovie);
-
     let userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
     let usernameLocal = localStorage.getItem('user');
     let url = `${userEndpoint}${usernameLocal}/FavoriteMovies/${favoriteMovie}`;
@@ -87,11 +86,10 @@ export class ProfileView extends React.Component {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       })
       .then(response => {
-        // update state with current movie data
         this.getUser(localStorage.getItem('token'));
       })
       .catch(event => {
-        alert('Oops... something went wrong...');
+        alert('Something went wrong...');
       });
   }
 
@@ -101,7 +99,6 @@ export class ProfileView extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
     let userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
     let usernameLocal = localStorage.getItem('user');
     let url = `${userEndpoint}${usernameLocal}`;
@@ -109,7 +106,7 @@ export class ProfileView extends React.Component {
       .put(
         url,
         {
-          Username: this.state.usernameForm,
+          Username: this.state.UsernameForm,
           Password: this.state.passwordForm,
           Email: this.state.emailForm,
           Birthday: this.state.birthdayForm
@@ -141,17 +138,15 @@ export class ProfileView extends React.Component {
 
     form.classList.toggle('show-form');
     if (form.classList.contains('show-form')) {
-      toggleButton.innerHTML = 'CHANGE DATA &uarr;';
+      toggleButton.innerHTML = 'Change data &uarr;';
     } else {
-      toggleButton.innerHTML = 'CHANGE DATA &darr;';
+      toggleButton.innerHTML = 'Change data &darr;';
     }
   }
 
   render() {
     const { userData, username, email, birthday, favoriteMovies } = this.state;
-
     if (!userData) return null;
-
     return (
       <div className='profile-view'>
         <h4 className='director'>User Profile</h4>
@@ -174,7 +169,7 @@ export class ProfileView extends React.Component {
         <div className='favoritemovies'>
           <div className='label'>Favorite Movies</div>
           {favoriteMovies.length === 0 && (
-            <div className='value'>Your Favorite Movie List is empty</div>
+            <div className='value'>Empty list!</div>
           )}
           {favoriteMovies.length > 0 && (
             <div className='value'>
@@ -182,11 +177,11 @@ export class ProfileView extends React.Component {
                 <p key={favoriteMovie}>
                   {
                     JSON.parse(localStorage.getItem('movies')).find(
-                      movie => movie._id === favoriteMovie
+                      movie => movie._id === favoriteMovies
                     )._id
                   }
                   <span
-                    onClick={event => this.deleteMovie(event, favoriteMovie)}
+                    onClick={event => this.deleteMovie(event, favoriteMovies)}
                   >
                     {' '}
                     Delete
@@ -197,29 +192,13 @@ export class ProfileView extends React.Component {
           )}
         </div>
         <Link to={'/'}>
-          <Button className='view-btn' variant='outline-dark' type='button'>
+          <Button className='view-btn' variant='light' type='button'>
             Back
           </Button>
         </Link>
-        <Button
-          className='view-btn'
-          variant='outline-dark'
-          type='button'
-          onClick={event => this.deleteUser(event)}
-        >
-          Delete
-        </Button>
-        <Button
-          id='toggleButton'
-          className='view-btn'
-          variant='outline-dark'
-          type='button'
-          onClick={() => this.toggleForm()}
-        >
-          Change Data
-        </Button>
+
         <Form className='changeDataForm'>
-          <h2>Change Data</h2>
+          <h2>Update Profile</h2>
           <Form.Group controlId='formBasicUsername'>
             <Form.Label>Your Username</Form.Label>
             <Form.Control
@@ -258,22 +237,23 @@ export class ProfileView extends React.Component {
             />
           </Form.Group>
           <Button
-            variant='outline-dark'
+            variant='light'
             type='button'
             onClick={event => this.handleSubmit(event)}
           >
-            Change
+            Update
+          </Button>
+
+          <Button
+            className='view-btn'
+            variant='danger'
+            type='reset'
+            onClick={event => this.deleteUser(event)}
+          >
+            Delete Account
           </Button>
         </Form>
       </div>
     );
   }
 }
-// ProfileView.propTypes = {
-//   Director: PropTypes.shape({
-//     Name: PropTypes.string,
-//     Bio: PropTypes.string,
-//     Death: PropTypes.string
-//   }).isRequired,
-//   onClick: PropTypes.func.isRequired
-// };
