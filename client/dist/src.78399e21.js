@@ -40950,7 +40950,7 @@ function (_React$Component) {
         document.getElementsByClassName('changeDataForm')[0].requestFullscreen();
       }).catch(function (event) {
         console.log('error updating the userdata');
-        alert('Ooooops... Something went wrong!');
+        alert('Something went wrong!');
       });
     }
   }, {
@@ -41012,7 +41012,7 @@ function (_React$Component) {
         className: "label"
       }, "Favorite Movies"), favoriteMovies.length === 0 && _react.default.createElement("div", {
         className: "value"
-      }, "Your Favorite Movie List is empty :-("), favoriteMovies.length > 0 && _react.default.createElement("div", {
+      }, "Your Favorite Movie List is empty"), favoriteMovies.length > 0 && _react.default.createElement("div", {
         className: "value"
       }, favoriteMovies.map(function (favoriteMovie) {
         return _react.default.createElement("p", {
@@ -41702,7 +41702,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64010" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59849" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

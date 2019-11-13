@@ -133,7 +133,7 @@ export class ProfileView extends React.Component {
       })
       .catch(event => {
         console.log('error updating the userdata');
-        alert('Ooooops... Something went wrong!');
+        alert('Something went wrong!');
       });
   }
   toggleForm() {
@@ -173,7 +173,7 @@ export class ProfileView extends React.Component {
         <div className='favoritemovies'>
           <div className='label'>Favorite Movies</div>
           {favoriteMovies.length === 0 && (
-            <div className='value'>Your Favorite Movie List is empty :-(</div>
+            <div className='value'>Your Favorite Movie List is empty</div>
           )}
           {favoriteMovies.length > 0 && (
             <div className='value'>
