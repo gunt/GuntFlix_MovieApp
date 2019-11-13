@@ -40856,7 +40856,7 @@ function (_React$Component) {
           Password: response.data.Password,
           Email: response.data.Email,
           Birthday: response.data.Birthday,
-          FavoritesMovies: response.data.FavoritesMovies
+          FavoriteMovies: response.data.FavoriteMovies
         });
       }).catch(function (error) {
         console.log(error);
@@ -41674,7 +41674,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55774" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56380" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
