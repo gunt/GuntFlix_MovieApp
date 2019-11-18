@@ -187,10 +187,10 @@ export class MainView extends React.Component {
               }}
             />
             <Route path='/register' render={() => <RegistrationView />} />
-            <Route
+            {/* <Route
               path='/users/:username'
               render={() => <ProfileView movies={this.state.movies} />}
-            />
+            /> */}
             <Route
               path='/movies/:Id'
               render={({ match }) => (
