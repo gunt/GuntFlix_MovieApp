@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import './login-view.scss';
 
@@ -25,9 +25,8 @@ export function LoginView(props) {
         props.onLoggedIn(data);
       })
       .catch(e => {
-        alert('Welcome to Red 23, Please Register First');
+        console.log('Please Register First');
       });
-    // props.onLoggedIn(username);
   };
 
   return (
@@ -62,19 +61,13 @@ export function LoginView(props) {
           Log in
         </Button>
         <Form.Group controlId='formNewUser'>
-          <Form.Text>
-            Sign Up{' '}
-            <Button
-              id='login-view__register'
-              style={{ padding: 0 }}
-              size='lg'
-              variant='danger'
-              onClick={() => props.newUser()}
-            >
+          <Form.Text className='newUsers'>
+            New user? click{' '}
+            <Link to={'/register'}>
               {' '}
-              here{' '}
-            </Button>{' '}
-            {/* to register */}
+              <span>Here</span>
+            </Link>{' '}
+            to sign up{' '}
           </Form.Text>
         </Form.Group>
       </form>
@@ -84,5 +77,4 @@ export function LoginView(props) {
 
 LoginView.propTypes = {
   onLoggedIn: PropTypes.func.isRequired
-  // onClick: PropTypes.func.isRequired
 };
