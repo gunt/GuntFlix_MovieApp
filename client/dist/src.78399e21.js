@@ -41936,16 +41936,9 @@ function (_React$Component) {
         to: '/'
       }, _react.default.createElement(_Button.default, {
         className: "view-btn",
-        variant: "outline-dark",
+        variant: "dark",
         type: "button"
-      }, "Back")), _react.default.createElement(_Button.default, {
-        className: "view-btn",
-        variant: "outline-dark",
-        type: "button",
-        onClick: function onClick(event) {
-          return _this5.deleteUser(event);
-        }
-      }, "Un-Register"), _react.default.createElement(_Form.default, {
+      }, "Go to Movies")), _react.default.createElement(_Form.default, {
         className: "changeDataForm"
       }, _react.default.createElement("h2", null, "Change Data"), _react.default.createElement("hr", null), _react.default.createElement(_Form.default.Group, {
         controlId: "formBasicUsername"
@@ -41985,12 +41978,19 @@ function (_React$Component) {
         placeholder: "example: 01/01/1990"
       })), _react.default.createElement(_Button.default, {
         className: "change-btn",
-        variant: "outline-dark",
+        variant: "dark",
         type: "button",
         onClick: function onClick(event) {
           return _this5.handleSubmit(event);
         }
-      }, "Change")));
+      }, "Update Profile"), _react.default.createElement(_Button.default, {
+        className: "view-btn",
+        variant: "danger",
+        type: "button",
+        onClick: function onClick(event) {
+          return _this5.deleteUser(event);
+        }
+      }, "Delete Account")));
     }
   }]);
 
@@ -42793,6 +42793,17 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "buttonLogout",
+    value: function buttonLogout() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('username');
+      this.setState({
+        user: false,
+        selectedMovie: null
+      });
+      window.location.reload();
+    }
+  }, {
     key: "logOut",
     value: function logOut() {
       localStorage.removeItem('token');
@@ -42832,17 +42843,23 @@ function (_React$Component) {
       })), _react.default.createElement("ul", {
         className: "menu"
       }, _react.default.createElement("li", null, _react.default.createElement(_reactRouterDom.Link, {
+        to: '/'
+      }, _react.default.createElement(_Button.default, {
+        className: "view-btn",
+        variant: "dark",
+        type: "button"
+      }, "Go to Movies"))), _react.default.createElement("li", null, _react.default.createElement(_reactRouterDom.Link, {
         to: '/profile'
       }, _react.default.createElement(_Button.default, {
         id: "profilebtn",
         variant: "dark"
       }, "My profile"))), _react.default.createElement("li", null, _react.default.createElement(_Button.default, {
-        id: "logoutbtn",
+        className: "logoutButton",
         variant: "dark",
         onClick: function onClick() {
-          return _this4.logOut();
+          return _this4.buttonLogout();
         }
-      }, ' ', "LogOut")))))), _react.default.createElement(_Container.default, {
+      }, "Log Out")))))), _react.default.createElement(_Container.default, {
         className: "main-view"
       }, _react.default.createElement(_Row.default, null, _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
@@ -43096,7 +43113,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49496" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60052" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

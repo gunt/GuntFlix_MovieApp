@@ -238,18 +238,10 @@ class ProfileView extends React.Component {
         {/* // FavoritesMovies //FavoriteMovies  "s" */}
 
         <Link to={'/'}>
-          <Button className='view-btn' variant='outline-dark' type='button'>
-            Back
+          <Button className='view-btn' variant='dark' type='button'>
+            Go to Movies
           </Button>
         </Link>
-        <Button
-          className='view-btn'
-          variant='outline-dark'
-          type='button'
-          onClick={event => this.deleteUser(event)}
-        >
-          Un-Register
-        </Button>
 
         <Form className='changeDataForm'>
           <h2>Change Data</h2>
@@ -296,11 +288,20 @@ class ProfileView extends React.Component {
 
           <Button
             className='change-btn'
-            variant='outline-dark'
+            variant='dark'
             type='button'
             onClick={event => this.handleSubmit(event)}
           >
-            Change
+            Update Profile
+          </Button>
+
+          <Button
+            className='view-btn'
+            variant='danger'
+            type='button'
+            onClick={event => this.deleteUser(event)}
+          >
+            Delete Account
           </Button>
         </Form>
       </div>

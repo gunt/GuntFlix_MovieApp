@@ -92,6 +92,16 @@ export class MainView extends React.Component {
     });
   }
 
+  buttonLogout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    this.setState({
+      user: false,
+      selectedMovie: null
+    });
+    window.location.reload();
+  }
+
   logOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
@@ -124,6 +134,14 @@ export class MainView extends React.Component {
                 </label>
                 <ul className='menu'>
                   <li>
+                    <Link to={'/'}>
+                      <Button className='view-btn' variant='dark' type='button'>
+                        Go to Movies
+                      </Button>
+                    </Link>
+                  </li>
+
+                  <li>
                     <Link to={'/profile'}>
                       <Button id='profilebtn' variant='dark'>
                         My profile
@@ -131,13 +149,21 @@ export class MainView extends React.Component {
                     </Link>
                   </li>
                   <li>
-                    <Button
+                    {/* <Button
                       id='logoutbtn'
                       variant='dark'
                       onClick={() => this.logOut()}
                     >
                       {' '}
                       LogOut
+                    </Button> */}
+
+                    <Button
+                      className='logoutButton'
+                      variant='dark'
+                      onClick={() => this.buttonLogout()}
+                    >
+                      Log Out
                     </Button>
                   </li>
                 </ul>
