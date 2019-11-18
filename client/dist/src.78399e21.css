@@ -1,32 +1,4 @@
 body {
-  background: url("http://clipart-library.com/images/pTqrbEXkc.jpg") no-repeat center center fixed;
-  background-size: cover;
-  height: 100%;
-}
-
-.logContainer {
-  background-color: #353A44;
-  border-radius: 25px;
-  margin-top: 20px;
-  width: 50%;
-  color: #fff;
-  padding: 35px;
-  opacity: 0.97;
-}
-
-h1 {
-  text-align: center;
-  color: #ef6262;
-}
-.card-header {
-  font-family: "Merriweather", serif;
-  font-size: 16px;
-}
-
-.button {
-  max-width: 20%;
-}
-body {
   background: url("https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1655&q=80") no-repeat center center fixed;
   background-size: cover;
   height: 100%;
@@ -58,27 +30,35 @@ div.card-title {
   text-align: center;
 }
 body {
-  background: url("https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1655&q=80");
+  background: url("http://clipart-library.com/images/pTqrbEXkc.jpg") no-repeat center center fixed;
   background-size: cover;
+  height: 100%;
 }
 
-.regContainer {
+.logContainer {
   background-color: #353A44;
   border-radius: 25px;
   margin-top: 20px;
+  width: 50%;
   color: #fff;
   padding: 35px;
-  width: 60%;
   opacity: 0.97;
+}
+
+h1 {
+  text-align: center;
+  color: #ef6262;
 }
 * {
   box-sizing: border-box;
 }
 
-.director-info {
+.director-view {
   justify-content: center;
   margin: auto;
   font-family: "Noto Sans", sans-serif;
+  background-color: azure;
+  padding: 20px;
 }
 
 .button-card {
@@ -172,14 +152,26 @@ h4 {
     box-shadow: 0 2px 10px 0 #868d9b;
   }
 }
-.upContainer {
-  background-color: #495057;
+.genre-view {
+  justify-content: center;
+  margin: auto;
+  font-family: "Noto Sans", sans-serif;
+  background-color: azure;
+  padding: 20px;
+}
+body {
+  background: url("https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1655&q=80");
+  background-size: cover;
+}
+
+.regContainer {
+  background-color: #353A44;
   border-radius: 25px;
-  color: #6c7382;
   margin-top: 20px;
-  width: 80%;
   color: #fff;
   padding: 35px;
+  width: 60%;
+  opacity: 0.97;
 }
 .main-view {
   margin-left: auto;
@@ -190,18 +182,20 @@ h4 {
 
 .card {
   margin-top: 10px;
-  margin-bottom: 10px;
-  margin-left: 5px;
-  margin-right: 5px;
+  margin-bottom: 75px;
   -webkit-box-shadow: 0 2px 10px 0 #868d9b;
   box-shadow: 0 2px 10px 0 #868d9b;
-  width: 100%;
 }
 
 body {
   background: url("https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1655&q=80") no-repeat center center fixed;
   background-size: cover;
   height: 100%;
+}
+
+.nav {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .card:hover {
@@ -226,6 +220,22 @@ body {
 
 .upButton {
   float: right;
+}
+.card-header {
+  font-family: "Merriweather", serif;
+  font-size: 16px;
+  background-color: #bdc0c1;
+}
+
+.button {
+  max-width: 20%;
+}
+
+@media (max-width: 500px) {
+  .card {
+    width: 200px;
+    height: 200px;
+  }
 }
 .my-flix {
   color: steelblue;
