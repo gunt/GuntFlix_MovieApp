@@ -1,13 +1,22 @@
 import React from 'react';
-//import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import './profile-view.scss';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
-// import ListGroup from 'react-bootstrap/ListGroup';
 
-export class ProfileView extends React.Component {
+import { connect } from 'react-redux';
+
+const mapStateToProps = state => {
+  const { movies } = state;
+  return { movies };
+};
+
+//https://reactjs.org/docs/error-boundaries.html
+// * Where to Place Error Boundaries
+// great idea
+
+class ProfileView extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -23,6 +32,7 @@ export class ProfileView extends React.Component {
       birthdayForm: null
     };
   }
+
   componentDidMount() {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
@@ -64,14 +74,13 @@ export class ProfileView extends React.Component {
       })
       .then(response => {
         alert('Your account has been deleted!');
-
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-
         window.open('/', '_self');
       })
+
       .catch(event => {
-        alert('failed to delete user');
+        alert(event, 'failed to delete user');
       });
   }
 
@@ -89,7 +98,7 @@ export class ProfileView extends React.Component {
         this.getUser(localStorage.getItem('token'));
       })
       .catch(event => {
-        alert('Something went wrong...');
+        alert(event, 'Something went wrong...');
       });
   }
 
@@ -118,20 +127,18 @@ export class ProfileView extends React.Component {
       .then(response => {
         console.log(response);
         alert('Your data has been updated!');
-
         localStorage.setItem('user', this.state.usernameForm);
-
         this.getUser(localStorage.getItem('token'));
-
         document
           .getElementsByClassName('changeDataForm')[0]
           .requestFullscreen();
       })
       .catch(event => {
-        console.log('error updating the userdata');
+        console.log(event, 'error updating the userdata');
         alert('Something went wrong!');
       });
   }
+
   toggleForm() {
     let form = document.getElementsByClassName('changeDataForm')[0];
     let toggleButton = document.getElementById('toggleButton');
@@ -146,42 +153,73 @@ export class ProfileView extends React.Component {
 
   render() {
     const { userData, username, email, birthday, favoriteMovies } = this.state;
+    const { movies } = this.props.movies;
+
+    // if (!userData) return null;
+    console.log('fv', favoriteMovies);
+    console.log('log m', movies);
+
+    let filteredFavMovie = [];
+    let filterMoviesByFav = movies.map(m => {
+      for (let i = 0; i < favoriteMovies.length; i++) {
+        const favMov = favoriteMovies[i];
+        if (m._id === favMov) {
+          filteredFavMovie.push(m);
+        }
+      }
+    });
+    console.log(
+      'TCL: ProfileView -> render -> filteredFavMovie',
+      filteredFavMovie
+    );
+
     if (!userData) return null;
+
     return (
       <div className='profile-view'>
         <h4 className='director'>User Profile</h4>
+
+        {/* username */}
         <div className='username'>
           <h4 className='label'>Name:</h4>
           <div className='value'>{username}</div>
         </div>
+
+        {/* password */}
         <div className='password'>
           <h4 className='label'>Password:</h4>
           <div className='value'>********</div>
         </div>
+
+        {/* birthday */}
         <div className='birthday'>
           <h2 className='label'>Birthday</h2>
           <div className='value'>{birthday}</div>
         </div>
+
+        {/* email */}
         <div className='email'>
           <h4 className='label'>Email:</h4>
           <div className='value'>{email}</div>
         </div>
-        <div className='favoritemovies'>
-          <div className='label'>Favorite Movies</div>
-          {favoriteMovies.length === 0 && (
-            <div className='value'>Empty list!</div>
-          )}
-          {favoriteMovies.length > 0 && (
+
+        {/* Then you can use it as a regular component:
+        <ErrorBoundary>
+          <MyWidget />
+        </ErrorBoundary> */}
+
+        {/* favoriteMovies */}
+        <div className='favorite-movies'>
+          <div className='label'>Favorite Movies</div>​
+          {movies && filteredFavMovie ? (
             <div className='value'>
-              {favoriteMovies.map(favoriteMovie => (
-                <p key={favoriteMovie}>
-                  {
-                    JSON.parse(localStorage.getItem('movies')).find(
-                      movie => movie._id === favoriteMovies
-                    )._id
-                  }
+              {filteredFavMovie.map(favoriteMovie => (
+                <p key={favoriteMovie._id}>
+                  {favoriteMovie.Title}
                   <span
-                    onClick={event => this.deleteMovie(event, favoriteMovies)}
+                    onClick={event =>
+                      this.deleteMovie(event, favoriteMovie._id)
+                    }
                   >
                     {' '}
                     Delete
@@ -189,8 +227,13 @@ export class ProfileView extends React.Component {
                 </p>
               ))}
             </div>
+          ) : (
+            <div className='value'>Your Favorite Movie List is empty :-(</div>
           )}
         </div>
+
+        {/* // FavoritesMovies //FavoriteMovies  "s" */}
+
         <Link to={'/'}>
           <Button className='view-btn' variant='light' type='button'>
             Back
@@ -257,3 +300,5 @@ export class ProfileView extends React.Component {
     );
   }
 }
+
+export default connect(mapStateToProps)(ProfileView);
