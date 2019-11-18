@@ -124,8 +124,10 @@ export class MainView extends React.Component {
                 </label>
                 <ul className='menu'>
                   <li>
-                    <Link to='/users/:Username'>
-                      <Button variant='dark'>Profile View</Button>
+                    <Link to={'/profile'}>
+                      <Button id='profilebtn' variant='dark'>
+                        My profile
+                      </Button>
                     </Link>
                   </li>
                   <li>
