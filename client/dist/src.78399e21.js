@@ -40460,8 +40460,6 @@ var _reactRedux = require("react-redux");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function MovieView(props) {
-  var _this = this;
-
   var movies = props.movies,
       movieId = props.movieId;
   if (!movies || !movies.length) return null;
@@ -40474,7 +40472,7 @@ function MovieView(props) {
     var userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
     var usernameLocal = localStorage.getItem('user');
     var token = localStorage.getItem('token');
-    var url = "".concat(userEndpoint).concat(usernameLocal, "/FavoriteMovies/").concat(movie._id);
+    var url = "".concat(userEndpoint).concat(usernameLocal, "/movies/").concat(movie._id);
 
     _axios.default.post(url, {
       Username: usernameLocal
@@ -40530,11 +40528,12 @@ function MovieView(props) {
     }, _react.default.createElement(_Button.default, {
       variant: "dark"
     }, "Back")), _react.default.createElement(_Button.default, {
+      className: "like",
       variant: "dark",
       onClick: function onClick(event) {
-        return _this.submitLike(event);
+        return submitLike(event);
       }
-    }, "Add to Favorites!"))
+    }, "Add to Favorites"))
   );
 }
 
@@ -41872,7 +41871,7 @@ function (_React$Component) {
           email = _this$state.email,
           birthday = _this$state.birthday,
           favoriteMovies = _this$state.favoriteMovies;
-      var movies = this.props.movies.movies; // if (!userData) return null;
+      var movies = this.props.movies; // if (!userData) return null;
 
       console.log('fv', favoriteMovies);
       console.log('log m', movies);
@@ -41918,12 +41917,13 @@ function (_React$Component) {
         className: "value"
       }, email)), _react.default.createElement("div", {
         className: "favorite-movies"
-      }, _react.default.createElement("div", {
+      }, _react.default.createElement("h4", {
+        id: "fav",
         className: "label"
-      }, "Favorite Movies"), "\u200B", movies && filteredFavMovie ? _react.default.createElement("div", {
+      }, "Favorite Movies:"), "\u200B", movies && filteredFavMovie ? _react.default.createElement("div", {
         className: "value"
       }, filteredFavMovie.map(function (favoriteMovie) {
-        return _react.default.createElement("p", {
+        return _react.default.createElement("div", {
           key: favoriteMovie._id
         }, favoriteMovie.Title, _react.default.createElement("span", {
           onClick: function onClick(event) {
@@ -41932,15 +41932,22 @@ function (_React$Component) {
         }, ' ', "Delete"));
       })) : _react.default.createElement("div", {
         className: "value"
-      }, "Your Favorite Movie List is empty :-(")), _react.default.createElement(_reactRouterDom.Link, {
+      }, "Your Favorite Movie List is empty!")), _react.default.createElement(_reactRouterDom.Link, {
         to: '/'
       }, _react.default.createElement(_Button.default, {
         className: "view-btn",
-        variant: "light",
+        variant: "outline-dark",
         type: "button"
-      }, "Back")), _react.default.createElement(_Form.default, {
+      }, "Back")), _react.default.createElement(_Button.default, {
+        className: "view-btn",
+        variant: "outline-dark",
+        type: "button",
+        onClick: function onClick(event) {
+          return _this5.deleteUser(event);
+        }
+      }, "Un-Register"), _react.default.createElement(_Form.default, {
         className: "changeDataForm"
-      }, _react.default.createElement("h2", null, "Update Profile"), _react.default.createElement(_Form.default.Group, {
+      }, _react.default.createElement("h2", null, "Change Data"), _react.default.createElement("hr", null), _react.default.createElement(_Form.default.Group, {
         controlId: "formBasicUsername"
       }, _react.default.createElement(_Form.default.Label, null, "Your Username"), _react.default.createElement(_Form.default.Control, {
         type: "text",
@@ -41949,9 +41956,7 @@ function (_React$Component) {
           return _this5.handleChange(event);
         },
         placeholder: "Enter Username"
-      }), _react.default.createElement(_Form.default.Text, {
-        className: "text-muted"
-      }, "Type username here.")), _react.default.createElement(_Form.default.Group, {
+      })), _react.default.createElement(_Form.default.Group, {
         controlId: "formBasicPassword"
       }, _react.default.createElement(_Form.default.Label, null, "Your Password"), _react.default.createElement(_Form.default.Control, {
         type: "text",
@@ -41979,19 +41984,13 @@ function (_React$Component) {
         },
         placeholder: "example: 01/01/1990"
       })), _react.default.createElement(_Button.default, {
-        variant: "light",
+        className: "change-btn",
+        variant: "outline-dark",
         type: "button",
         onClick: function onClick(event) {
           return _this5.handleSubmit(event);
         }
-      }, "Update"), _react.default.createElement(_Button.default, {
-        className: "view-btn",
-        variant: "danger",
-        type: "reset",
-        onClick: function onClick(event) {
-          return _this5.deleteUser(event);
-        }
-      }, "Delete Account")));
+      }, "Change")));
     }
   }]);
 
@@ -42833,10 +42832,11 @@ function (_React$Component) {
       })), _react.default.createElement("ul", {
         className: "menu"
       }, _react.default.createElement("li", null, _react.default.createElement(_reactRouterDom.Link, {
-        to: "/users/:Username"
+        to: '/profile'
       }, _react.default.createElement(_Button.default, {
+        id: "profilebtn",
         variant: "dark"
-      }, "Profile View"))), _react.default.createElement("li", null, _react.default.createElement(_Button.default, {
+      }, "My profile"))), _react.default.createElement("li", null, _react.default.createElement(_Button.default, {
         id: "logoutbtn",
         variant: "dark",
         onClick: function onClick() {
@@ -43096,7 +43096,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58556" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49496" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

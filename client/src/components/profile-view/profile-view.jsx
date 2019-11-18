@@ -153,7 +153,7 @@ class ProfileView extends React.Component {
 
   render() {
     const { userData, username, email, birthday, favoriteMovies } = this.state;
-    const { movies } = this.props.movies;
+    const { movies } = this.props;
 
     // if (!userData) return null;
     console.log('fv', favoriteMovies);
@@ -210,11 +210,14 @@ class ProfileView extends React.Component {
 
         {/* favoriteMovies */}
         <div className='favorite-movies'>
-          <div className='label'>Favorite Movies</div>​
+          <h4 id='fav' className='label'>
+            Favorite Movies:
+          </h4>
+          ​
           {movies && filteredFavMovie ? (
             <div className='value'>
               {filteredFavMovie.map(favoriteMovie => (
-                <p key={favoriteMovie._id}>
+                <div key={favoriteMovie._id}>
                   {favoriteMovie.Title}
                   <span
                     onClick={event =>
@@ -224,24 +227,33 @@ class ProfileView extends React.Component {
                     {' '}
                     Delete
                   </span>
-                </p>
+                </div>
               ))}
             </div>
           ) : (
-            <div className='value'>Your Favorite Movie List is empty :-(</div>
+            <div className='value'>Your Favorite Movie List is empty!</div>
           )}
         </div>
 
         {/* // FavoritesMovies //FavoriteMovies  "s" */}
 
         <Link to={'/'}>
-          <Button className='view-btn' variant='light' type='button'>
+          <Button className='view-btn' variant='outline-dark' type='button'>
             Back
           </Button>
         </Link>
+        <Button
+          className='view-btn'
+          variant='outline-dark'
+          type='button'
+          onClick={event => this.deleteUser(event)}
+        >
+          Un-Register
+        </Button>
 
         <Form className='changeDataForm'>
-          <h2>Update Profile</h2>
+          <h2>Change Data</h2>
+          <hr></hr>
           <Form.Group controlId='formBasicUsername'>
             <Form.Label>Your Username</Form.Label>
             <Form.Control
@@ -250,8 +262,8 @@ class ProfileView extends React.Component {
               onChange={event => this.handleChange(event)}
               placeholder='Enter Username'
             />
-            <Form.Text className='text-muted'>Type username here.</Form.Text>
           </Form.Group>
+
           <Form.Group controlId='formBasicPassword'>
             <Form.Label>Your Password</Form.Label>
             <Form.Control
@@ -261,6 +273,7 @@ class ProfileView extends React.Component {
               placeholder='Password'
             />
           </Form.Group>
+
           <Form.Group controlId='formBasicEmail'>
             <Form.Label>Your Email</Form.Label>
             <Form.Control
@@ -270,6 +283,7 @@ class ProfileView extends React.Component {
               placeholder='example@email.com'
             />
           </Form.Group>
+
           <Form.Group controlId='formBasicBirthday'>
             <Form.Label>Your Birthday</Form.Label>
             <Form.Control
@@ -279,21 +293,14 @@ class ProfileView extends React.Component {
               placeholder='example: 01/01/1990'
             />
           </Form.Group>
+
           <Button
-            variant='light'
+            className='change-btn'
+            variant='outline-dark'
             type='button'
             onClick={event => this.handleSubmit(event)}
           >
-            Update
-          </Button>
-
-          <Button
-            className='view-btn'
-            variant='danger'
-            type='reset'
-            onClick={event => this.deleteUser(event)}
-          >
-            Delete Account
+            Change
           </Button>
         </Form>
       </div>

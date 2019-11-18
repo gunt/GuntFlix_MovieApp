@@ -20,7 +20,7 @@ function MovieView(props) {
     let userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
     let usernameLocal = localStorage.getItem('user');
     let token = localStorage.getItem('token');
-    let url = `${userEndpoint}${usernameLocal}/FavoriteMovies/${movie._id}`;
+    let url = `${userEndpoint}${usernameLocal}/movies/${movie._id}`;
     axios
       .post(
         url,
@@ -81,8 +81,12 @@ function MovieView(props) {
       </Link>
 
       {/* Add to Favorites Buton */}
-      <Button variant='dark' onClick={event => this.submitLike(event)}>
-        Add to Favorites!
+      <Button
+        className='like'
+        variant='dark'
+        onClick={event => submitLike(event)}
+      >
+        Add to Favorites
       </Button>
     </div>
   );
