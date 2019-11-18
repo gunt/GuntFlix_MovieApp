@@ -41798,7 +41798,7 @@ function (_React$Component) {
       console.log(favoriteMovie);
       var userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
       var usernameLocal = localStorage.getItem('user');
-      var url = "".concat(userEndpoint).concat(usernameLocal, "/FavoriteMovies/").concat(favoriteMovie);
+      var url = "".concat(userEndpoint).concat(usernameLocal, "/movies/").concat(movie._id);
 
       _axios.default.delete(url, {
         headers: {
@@ -43113,7 +43113,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50315" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51795" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
