@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
@@ -26,6 +27,11 @@ mongoose.connect('mongodb+srv://MaxOctAdmin:vi82R3s2XP5VLL8G@maxoct-didgb.mongod
 });
 
 app.use(express.static('public'));
+app.use("/client", express.static(path.join(__dirname, "client", "dist")));
+app.get("/client/*", (_req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
+
 // app.use('/client', express.static(path.join(__dirname, 'dist')));
 // app.get("/client/*", (_req, res) => {
 //   res.sendFile(path.join(__dirname, "dist", "index.html"));
