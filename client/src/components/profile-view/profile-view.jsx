@@ -130,7 +130,6 @@ class ProfileView extends React.Component {
         localStorage.setItem('user', this.state.usernameForm);
         this.getUser(localStorage.getItem('token'));
         document.getElementsByClassName('changeDataForm')[0];
-        // .requestFullscreen();
       })
       .catch(event => {
         console.log(event, 'error updating the userdata');
@@ -293,14 +292,16 @@ class ProfileView extends React.Component {
             Update Profile
           </Button>
 
-          <Button
-            className='view-btn'
-            variant='danger'
-            type='button'
-            onClick={event => this.deleteUser(event)}
-          >
-            Delete Account
-          </Button>
+          <Link to={`/client`}>
+            <Button
+              className='view-btn'
+              variant='danger'
+              type='button'
+              onClick={event => this.deleteUser(event)}
+            >
+              Delete Account
+            </Button>
+          </Link>
         </Form>
       </div>
     );
