@@ -292,16 +292,14 @@ class ProfileView extends React.Component {
             Update Profile
           </Button>
 
-          <Link to={`/client`}>
-            <Button
-              className='view-btn'
-              variant='danger'
-              type='button'
-              onClick={event => this.deleteUser(event)}
-            >
-              Delete Account
-            </Button>
-          </Link>
+          <Button
+            className='view-btn'
+            variant='danger'
+            type='button'
+            onClick={event => this.deleteUser(event)}
+          >
+            Delete Account
+          </Button>
         </Form>
       </div>
     );
