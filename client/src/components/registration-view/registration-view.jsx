@@ -27,7 +27,7 @@ export function RegistrationView(props) {
       .then(response => {
         const data = response.data;
         console.log(data);
-        window.open('/', '_self');
+        window.open('/client', '_self');
       })
       .catch(err => {
         console.error('user already exists: ', err);
@@ -81,7 +81,7 @@ export function RegistrationView(props) {
           Sign Up
         </Button>
 
-        <Link to={`/`}>
+        <Link to={`/client`}>
           <Button id='loginButtonRegistration' variant='dark'>
             Already a member?
           </Button>
