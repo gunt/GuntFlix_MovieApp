@@ -3,7 +3,7 @@
 }
 
 body {
-    background: url('https://images.unsplash.com/photo-1525215351243-2ba501f3442c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80')no-repeat center center fixed;
+    background: url('https://image.tmdb.org/t/p/original/a6cDxdwaQIFjSkXf7uskg78ZyTq.jpg')no-repeat center center fixed;
     background-size: cover;
     height: 100%;
 }
@@ -15,4 +15,8 @@ form-container {
     margin-left: 0;
     border: .0.5rem solid;
     border-radius: 7px;
+}
+
+h1 {
+    text-align: center;
 }

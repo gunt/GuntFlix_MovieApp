@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './registration-view.scss';
 
 import axios from 'axios';
@@ -80,6 +80,12 @@ export function RegistrationView(props) {
         <Button variant='dark' type='submit' onClick={e => handleSubmit(e)}>
           Sign Up
         </Button>
+
+        <Link to={`/`}>
+          <Button id='loginButtonRegistration' variant='dark'>
+            Already a member?
+          </Button>
+        </Link>
       </Form>
     </Container>
   );

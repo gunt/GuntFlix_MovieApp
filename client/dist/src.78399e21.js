@@ -41576,7 +41576,9 @@ function LoginView(props) {
     className: "newUsers"
   }, "New user? click", ' ', _react.default.createElement(_reactRouterDom.Link, {
     to: '/register'
-  }, ' ', _react.default.createElement("span", null, "Here")), ' ', "to sign up", ' '))));
+  }, ' ', _react.default.createElement(_Button.default, {
+    variant: "dark"
+  }, "Here")), ' ', "to sign up", ' '))));
 }
 
 LoginView.propTypes = {
@@ -42073,6 +42075,8 @@ var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 
 var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
 
+var _reactRouterDom = require("react-router-dom");
+
 require("./registration-view.scss");
 
 var _axios = _interopRequireDefault(require("axios"));
@@ -42176,9 +42180,14 @@ function RegistrationView(props) {
     onClick: function onClick(e) {
       return handleSubmit(e);
     }
-  }, "Sign Up")));
+  }, "Sign Up"), _react.default.createElement(_reactRouterDom.Link, {
+    to: "/"
+  }, _react.default.createElement(_Button.default, {
+    id: "loginButtonRegistration",
+    variant: "dark"
+  }, "Already a member?"))));
 }
-},{"react":"../node_modules/react/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","./registration-view.scss":"components/registration-view/registration-view.scss","axios":"../node_modules/axios/index.js"}],"../node_modules/react-bootstrap/esm/Row.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./registration-view.scss":"components/registration-view/registration-view.scss","axios":"../node_modules/axios/index.js"}],"../node_modules/react-bootstrap/esm/Row.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -43101,7 +43110,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59457" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57955" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

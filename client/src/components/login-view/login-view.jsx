@@ -59,7 +59,7 @@ export function LoginView(props) {
             New user? click{' '}
             <Link to={'/register'}>
               {' '}
-              <span>Here</span>
+              <Button variant='dark'>Here</Button>
             </Link>{' '}
             to sign up{' '}
           </Form.Text>
