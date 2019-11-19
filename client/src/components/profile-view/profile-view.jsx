@@ -89,7 +89,7 @@ class ProfileView extends React.Component {
     console.log(favoriteMovie);
     let userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
     let usernameLocal = localStorage.getItem('user');
-    let url = `${userEndpoint}${usernameLocal}/movies/${movie._id}`;
+    let url = `${userEndpoint}${usernameLocal}/FavoriteMovies/${favoriteMovie}`;
     axios
       .delete(url, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
