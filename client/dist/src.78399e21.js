@@ -41826,7 +41826,7 @@ function (_React$Component) {
       var url = "".concat(userEndpoint).concat(usernameLocal);
 
       _axios.default.put(url, {
-        Username: this.state.UsernameForm,
+        Username: this.state.usernameForm,
         Password: this.state.passwordForm,
         Email: this.state.emailForm,
         Birthday: this.state.birthdayForm

@@ -115,7 +115,7 @@ class ProfileView extends React.Component {
       .put(
         url,
         {
-          Username: this.state.UsernameForm,
+          Username: this.state.usernameForm,
           Password: this.state.passwordForm,
           Email: this.state.emailForm,
           Birthday: this.state.birthdayForm

@@ -214,7 +214,7 @@ app.get('/users', function (_req, res) {
 
 
 //Update Username
-app.put('/Users/:Username', [
+app.put('/users/:Username', [
 
   check('Username').isAlphanumeric(),
   check('Password').isLength({
