@@ -21,7 +21,7 @@ function DirectorView(props) {
       <h3>Died</h3>
       <h5 className='death'>{director.Death}</h5>
       <Link to={'/'}>
-        <Button variant='outline-dark'>Back</Button>
+        <Button variant='dark'>Back</Button>
       </Link>
     </div>
   );

@@ -1,18 +1,15 @@
-$primary-color: #353A44;
-$secondary-color: rgb(108, 115, 130);
-
 body {
-    background: url('https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1655&q=80');
+    // background: url('https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1655&q=80');
     background-size: cover;
     // background-repeat: no-repeat;
 }
 
 .regContainer {
-    background-color: $primary-color;
+    background: rgba(0, 0, 0, 0.7);
     border-radius: 25px;
     margin-top: 20px;
     color: #fff;
     padding: 35px;
-    width: 60%;
+    width: 80%;
     opacity: 0.97;
 }

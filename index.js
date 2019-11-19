@@ -214,7 +214,7 @@ app.get('/users', function (_req, res) {
 
 
 //Update Username
-app.put('/users/:Username', [
+app.put('/Users/:Username', [
 
   check('Username').isAlphanumeric(),
   check('Password').isLength({
@@ -280,6 +280,7 @@ app.post('/users/:Username/movies/:MovieID', function (req, res) {
 // https://movie-flix-777.herokuapp.com/users/walter/FavoriteMovies/5d87ccc1fb9613cd73a2bb43
 // app.delete('/users/:username/movies/:MovieID', function (req, res) {
 // Remove a movie from a user's list of favorites
+// the s in Capital Letter was causing the issue to not delete the movie from FavoriteMovies
 app.delete('/users/:Username/FavoriteMovies/:MovieID', function (req, res) {
   Users.findOneAndUpdate({
       Username: req.params.Username

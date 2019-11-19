@@ -77,12 +77,8 @@ export function RegistrationView(props) {
           />
         </Form.Group>
 
-        <Button
-          variant='outline-dark'
-          type='submit'
-          onClick={e => handleSubmit(e)}
-        >
-          Submit
+        <Button variant='dark' type='submit' onClick={e => handleSubmit(e)}>
+          Sign Up
         </Button>
       </Form>
     </Container>

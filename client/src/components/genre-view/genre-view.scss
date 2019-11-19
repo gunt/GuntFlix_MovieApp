@@ -1,7 +1,11 @@
 .genre-view {
     justify-content: center;
+    border-radius: 25px;
     margin: auto;
     font-family: 'Noto Sans', sans-serif;
-    background-color: azure;
-    padding: 20px
+    // background-color: #353A44;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    margin-top: 80px;
+    color: #fff;
 }

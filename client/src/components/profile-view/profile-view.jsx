@@ -129,9 +129,8 @@ class ProfileView extends React.Component {
         alert('Your data has been updated!');
         localStorage.setItem('user', this.state.usernameForm);
         this.getUser(localStorage.getItem('token'));
-        document
-          .getElementsByClassName('changeDataForm')[0]
-          .requestFullscreen();
+        document.getElementsByClassName('changeDataForm')[0];
+        // .requestFullscreen();
       })
       .catch(event => {
         console.log(event, 'error updating the userdata');
@@ -155,7 +154,6 @@ class ProfileView extends React.Component {
     const { userData, username, email, birthday, favoriteMovies } = this.state;
     const { movies } = this.props;
 
-    // if (!userData) return null;
     console.log('fv', favoriteMovies);
     console.log('log m', movies);
 

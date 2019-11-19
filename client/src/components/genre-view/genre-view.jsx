@@ -16,7 +16,7 @@ function GenreView(props) {
       <h1 className='genre'>{genre.Genre.Name}</h1>
       <div className='description'>{genre.Genre.Description}</div>
       <Link to={'/'}>
-        <Button variant='outline-dark'>Back</Button>
+        <Button variant='dark'>Back</Button>
       </Link>
     </div>
   );

@@ -37,8 +37,11 @@ function MoviesList(props) {
       <Container>
         <Row>
           {movies.map(m => (
-            <Col key={m._id} xs={8} sm={8} md={6} lg={4}>
-              <MovieCard key={m.id} movie={m} />
+            // <Col key={m._id} xs={8} sm={8} md={6} lg={'auto'}>
+            //   <MovieCard key={m.id} movie={m} />
+            // </Col>
+            <Col key={m._id} xl={4} sm={6} md={4} xs={10}>
+              <MovieCard key={m._id} movie={m} />
             </Col>
           ))}
         </Row>

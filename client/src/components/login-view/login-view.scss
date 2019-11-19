@@ -1,19 +1,15 @@
-$primary-color: #353A44;
-$secondary-color: rgb(108, 115, 130);
-
-
 body {
-    background: url('http://clipart-library.com/images/pTqrbEXkc.jpg')no-repeat center center fixed;
+    // background: url('http://clipart-library.com/images/pTqrbEXkc.jpg')no-repeat center center fixed;
     background-size: cover;
     height: 100%;
 }
 
 
 .logContainer {
-    background-color: $primary-color;
+    background: rgba(0, 0, 0, 0.7);
     border-radius: 25px;
     margin-top: 20px;
-    width: 50%;
+    width: 60%;
     color: #fff;
     padding: 35px;
     opacity: 0.97;
@@ -21,5 +17,5 @@ body {
 
 h1 {
     text-align: center;
-    color: #ef6262;
+    color: rgb(235, 230, 221);
 }

@@ -22,7 +22,7 @@ export class MovieCard extends React.Component {
             size='sm'
             className='movie-button'
           >
-            Click Here
+            Read More
           </Button>
         </Link>
       </Card>

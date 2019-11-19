@@ -117,62 +117,46 @@ export class MainView extends React.Component {
 
     return (
       <Router>
-        <header className='header'>
-          <Link to={'/'}>
-            <div alt='clap' className='logohme'></div>
-          </Link>
-          <p className='logo' id='hide'>
-            Welcome to Cinema 23
-          </p>
+        <Container className='main-view' fluid='true'>
+          <header className='header'>
+            <Link to={'/'}>
+              <div alt='clap' className='logohme'></div>
+            </Link>
+            <h1>Welcome to Cinema</h1>
 
-          <div className='nav'>
+            {/* <div className='navbar'> */}
             {user && (
               <div>
-                <input className='menu-btn' type='checkbox' id='menu-btn' />
-                <label className='menu-icon' htmlFor='menu-btn'>
-                  <span className='navicon'></span>
-                </label>
-                <ul className='menu'>
-                  <li>
-                    <Link to={'/'}>
-                      <Button className='view-btn' variant='dark' type='button'>
-                        Go to Movies
-                      </Button>
-                    </Link>
-                  </li>
+                <Link to={'/'}>
+                  <Button className='view-btn' variant='dark' type='button'>
+                    Go to Movies
+                  </Button>
+                </Link>
+                {/* </li> */}
 
-                  <li>
-                    <Link to={'/profile'}>
-                      <Button id='profilebtn' variant='dark'>
-                        My profile
-                      </Button>
-                    </Link>
-                  </li>
-                  <li>
-                    {/* <Button
-                      id='logoutbtn'
-                      variant='dark'
-                      onClick={() => this.logOut()}
-                    >
-                      {' '}
-                      LogOut
-                    </Button> */}
-
-                    <Button
-                      className='logoutButton'
-                      variant='dark'
-                      onClick={() => this.buttonLogout()}
-                    >
-                      Log Out
-                    </Button>
-                  </li>
-                </ul>
+                {/* <li> */}
+                <Link to={'/profile'}>
+                  <Button id='profilebtn' variant='dark'>
+                    My profile
+                  </Button>
+                </Link>
+                {/* </li> */}
+                {/* <li> */}
+                <Button
+                  className='logoutButton'
+                  variant='dark'
+                  onClick={() => this.buttonLogout()}
+                >
+                  Log Out
+                </Button>
+                {/* </li> */}
+                {/* </ul> */}
               </div>
             )}
-          </div>
-        </header>
+            {/* </div> */}
+          </header>
 
-        <Container className='main-view'>
+          {/* <Container className='main-view'> */}
           <Row>
             <Route
               exact
