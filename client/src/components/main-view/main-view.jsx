@@ -116,7 +116,7 @@ export class MainView extends React.Component {
     const { user } = this.state;
 
     return (
-      <Router>
+      <Router basename='/client'>
         <Container className='main-view' fluid='true'>
           <header className='header'>
             <Link to={'/'}>
