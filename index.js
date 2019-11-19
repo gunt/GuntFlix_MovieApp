@@ -280,7 +280,7 @@ app.post('/users/:Username/movies/:MovieID', function (req, res) {
 // https://movie-flix-777.herokuapp.com/users/walter/FavoriteMovies/5d87ccc1fb9613cd73a2bb43
 // app.delete('/users/:username/movies/:MovieID', function (req, res) {
 // Remove a movie from a user's list of favorites
-app.delete('/users/:username/FavoriteMovies/:MovieID', function (req, res) {
+app.delete('/users/:Username/FavoriteMovies/:MovieID', function (req, res) {
   Users.findOneAndUpdate({
       Username: req.params.Username
     }, {
