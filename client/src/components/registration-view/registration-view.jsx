@@ -81,7 +81,7 @@ export function RegistrationView(props) {
           Sign Up
         </Button>
 
-        <Link to={`/client`}>
+        <Link to={`/`}>
           <Button id='loginButtonRegistration' variant='dark'>
             Already a member?
           </Button>
