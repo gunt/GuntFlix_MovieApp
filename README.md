@@ -1,4 +1,10 @@
-<h1> Movie Web App - API </h1>
+<!-- Title -->
+<h1 align="center">
+Movie Web App - API
+</h1>
+<h1 align="center">
+Made with love by  -- gunt --
+</h1>
 
 <h3><strong>Project Description:</strong></h3>
 
@@ -9,7 +15,7 @@ Project “Flix MovieApp” web application. The web application will provide us
 1. Return a list of ALL movies to the user
 
 2. Return data (description, genre, director, image URL, whether it’s featured or not) about
-a single movie by title to the user
+   a single movie by title to the user
 
 3. Return data about a genre (description) by name/title (e.g., “Thriller”)
 
@@ -37,13 +43,4 @@ for reading data from requests and morgan for logging.</li>
   <li>The database must be built using MongoDB.</li>
   <li>The business logic must be modeled with Mongoose.k</li>
   <li>The API must provide movie information in JSON format.</li>
-</ul>  
-
-
-
-
-
-
-
-
-
+</ul>
