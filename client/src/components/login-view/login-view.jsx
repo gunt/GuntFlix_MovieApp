@@ -14,9 +14,10 @@ export function LoginView(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
-
+    const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+    
     axios
-      .post('https://movie-flix-777.herokuapp.com/login', {
+      .post(`${API_BASE_URL}/login`, {
         Username: username,
         Password: password
       })

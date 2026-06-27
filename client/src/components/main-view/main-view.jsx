@@ -46,7 +46,8 @@ export class MainView extends React.Component {
 
   getUser(token) {
     let username = localStorage.getItem('user');
-    let userEndpoint = 'https://movie-flix-777.herokuapp.com/users';
+    const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+    let userEndpoint = `${API_BASE_URL}/users`;
     let url = `${userEndpoint}${username}`;
     axios
       .get(url, {
@@ -74,8 +75,9 @@ export class MainView extends React.Component {
   }
 
   getMovies(token) {
+    const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
     axios
-      .get('https://movie-flix-777.herokuapp.com/movies', {
+      .get(`${API_BASE_URL}/movies`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {
