@@ -1,5 +1,6 @@
 const path = require("path");
 const express = require('express');
+require('dotenv').config();
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
@@ -20,11 +21,12 @@ require('./passport');
 // mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true, useUnifiedTopology: true});
 
 // Fixing Mongoose Error DeprecationWarning: current Server Discovery
-//https://github.com/Automattic/mongoose/issues/8156
-mongoose.connect('mongodb+srv://MaxOctAdmin:vi82R3s2XP5VLL8G@maxoct-didgb.mongodb.net/myFlixDB?retryWrites=true&w=majority', {
+// Database connection - uses DATABASE_URL from .env (falls back to MongoDB Atlas URL)
+mongoose.connect(process.env.DATABASE_URL || 'mongodb://localhost:27017/myFlixDB', {
   useNewUrlParser: true,
   useUnifiedTopology: true
-});
+}).then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
 app.use(express.static('public'));
 app.use("/client", express.static(path.join(__dirname, "client", "dist")));
@@ -118,14 +120,18 @@ app.get('/movies/directors/:Name', function (req, res) {
 });
 
 app.get('/directors', function (_req, res) {
-  Directors.find()
-    .then(function (directors) {
-      res.status(201).json(directors)
-    })
-    .catch(function (err) {
-      console.error(err);
-      res.status(500).send("Error: " + err);
-    });
+  // Extract unique directors from all movies (no separate Director model exists)
+  Movies.aggregate([
+    { $unwind: '$Director' },
+    { $group: { _id: '$Director.Name', Name: { $first: '$Director.Name' }, Bio: { $first: '$Director.Bio' } } }
+  ])
+  .then(function (directors) {
+    res.json(directors);
+  })
+  .catch(function (err) {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
 });
 
 app.get('/directors/:Name', function (req, res) {
@@ -310,15 +316,14 @@ app.delete('/users/:Username/FavoriteMovies/:MovieID', function (req, res) {
 
 // Delete a User Profile
 app.delete('/users/:Username', function (req, res) {
-  Users.findOneAndUpdate({
+  Users.findOneAndDelete({
       Username: req.params.Username
     })
     .then(user => {
       if (!user) {
-        res.status(400).send(req.params.Username + ' was not found.');
-      } else {
-        res.status(200).send(req.params.Username + ' was successfully deleted.');
+        return res.status(400).send(req.params.Username + ' was not found.');
       }
+      res.status(200).send(req.params.Username + ' was successfully deleted.');
     })
     .catch(err => {
       console.error(err);
