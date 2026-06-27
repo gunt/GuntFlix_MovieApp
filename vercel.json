@@ -1,0 +1,51 @@
+{
+  "builds": [
+    {
+      "src": "index.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "client/dist/**/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/index.js"
+    },
+    {
+      "src": "/movies(.*)",
+      "dest": "/index.js"
+    },
+    {
+      "src": "/directors(.*)",
+      "dest": "/index.js"
+    },
+    {
+      "src": "/genres(.*)",
+      "dest": "/index.js"
+    },
+    {
+      "src": "/users(.*)",
+      "dest": "/index.js"
+    },
+    {
+      "src": "/login",
+      "dest": "/index.js"
+    },
+    {
+      "src": "/client/(.*)",
+      "dest": "/client/dist/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/client/dist/index.html"
+    }
+  ],
+  "env": {
+    "DATABASE_URL": "mongodb+srv://gunt:***@cluster0.mongodb.net/myFlixDB?retryWrites=true&w=majority",
+    "JWT_SECRET": "guntfl...tion",
+    "PORT": "5000"
+  }
+}
