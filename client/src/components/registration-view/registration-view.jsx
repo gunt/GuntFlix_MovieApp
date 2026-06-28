@@ -16,9 +16,9 @@ export function RegistrationView(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    let userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
+    // Use relative path for Vercel deployment (backend serves at root)
     axios
-      .post(userEndpoint, {
+      .post('/users', {
         Username: username,
         Password: password,
         Email: email,

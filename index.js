@@ -4,8 +4,6 @@ require('dotenv').config();
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-// const uuid = require("uuid");
-const mongoose = require('mongoose');
 const Models = require('./model.js');
 const Movies = Models.Movie;
 const Users = Models.User;
@@ -17,16 +15,7 @@ const {
 } = require('express-validator');
 require('./passport');
 
-//local database connection
-// mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true, useUnifiedTopology: true});
-
-// Fixing Mongoose Error DeprecationWarning: current Server Discovery
-// Database connection - uses DATABASE_URL from .env (falls back to MongoDB Atlas URL)
-mongoose.connect(process.env.DATABASE_URL || 'mongodb://localhost:27017/myFlixDB', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('MongoDB connection error:', err));
+// Supabase client is initialized in model.js via supabase.js
 
 app.use(express.static('public'));
 app.use("/client", express.static(path.join(__dirname, "client", "dist")));
@@ -50,7 +39,7 @@ app.get('/', (_req, res) => {
 });
 
 app.get('/movies', function (_req, res) {
-  Movies.find()
+  Movies.findAll()
     .then(function (movies) {
       res.status(201).json(movies)
     })
@@ -60,12 +49,11 @@ app.get('/movies', function (_req, res) {
     });
 });
 
-// Gets the data about a single movie by Title (Documentation)
+// Gets the data about a single movie by Title
 app.get('/movies/:Title', function (req, res) {
-  Movies.findOne({
-      Title: req.params.Title
-    })
+  Movies.findByTitle(req.params.Title)
     .then(function (movies) {
+      if (!movies) return res.status(404).json({ error: "Movie not found" });
       res.json(movies)
     })
     .catch(function (err) {
@@ -75,11 +63,11 @@ app.get('/movies/:Title', function (req, res) {
 });
 
 app.get('/genres/:Name', function (req, res) {
-  Movies.findOne({
-      'Genre.Name': req.params.Name
-    })
+  Movies.findByGenreName(req.params.Name)
     .then(obj => {
-      res.json(obj.Genre)
+      if (!obj) return res.status(404).json({ error: "Genre not found" });
+      // Return genre info in original format
+      res.json({ Name: obj.genre_name, Description: obj.genre_description });
     })
     .catch(err => {
       console.error(err);
@@ -87,16 +75,14 @@ app.get('/genres/:Name', function (req, res) {
     });
 });
 
-// Get data data about a movie by Genre_Title (description) // /movies/genres/[Title]
+// Get data about a movie by Genre_Title (description) // /movies/genres/[Title]
 app.get('/movies/genres/:Title', function (req, res) {
-  Movies.findOne({
-      Title: req.params.Title
-    })
+  Movies.findByTitle(req.params.Title)
     .then(function (movie) {
-      if (movie) {
-        res.status(201).send("The Genre of the Movie : " + movie.Title + " is " + movie.Genre.Name);
+    if (movie) {
+        res.status(201).send("The Genre of the Movie : " + movie.title + " is " + movie.genre_name);
       } else {
-        res.status(204).send(movie.Title + " is not available");
+        res.status(204).send(movie?.title || req.params.Title + " is not available");
       }
     })
     .catch(function (err) {
@@ -105,13 +91,12 @@ app.get('/movies/genres/:Title', function (req, res) {
     });
 });
 
-//Get data about a director by name // /movies/directors/[name]
+// Get data about a director by name // /movies/directors/[name]
 app.get('/movies/directors/:Name', function (req, res) {
-  Movies.findOne({
-      "Director.Name": req.params.Name
-    })
-    .then(function (movies) {
-      res.json(movies.Director)
+  Movies.findByDirectorName(req.params.Name)
+    .then(function (movie) {
+      if (!movie || !movie.director_name) return res.status(404).json({ error: "Director not found" });
+      res.json({ Name: movie.director_name, Bio: movie.director_bio });
     })
     .catch(function (err) {
       console.error(err);
@@ -119,27 +104,21 @@ app.get('/movies/directors/:Name', function (req, res) {
     });
 });
 
-app.get('/directors', function (_req, res) {
-  // Extract unique directors from all movies (no separate Director model exists)
-  Movies.aggregate([
-    { $unwind: '$Director' },
-    { $group: { _id: '$Director.Name', Name: { $first: '$Director.Name' }, Bio: { $first: '$Director.Bio' } } }
-  ])
-  .then(function (directors) {
+app.get('/directors', async function (_req, res) {
+  try {
+    const directors = await Movies.findAllDirectors();
     res.json(directors);
-  })
-  .catch(function (err) {
+  } catch (err) {
     console.error(err);
-    res.status(500).send("Error: " + err);
-  });
+    res.status(500).send("Error: " + err.message);
+  }
 });
 
 app.get('/directors/:Name', function (req, res) {
-  Movies.findOne({
-      'Director.Name': req.params.Name
-    })
+  Movies.findByDirectorName(req.params.Name)
     .then(item => {
-      res.json(item.Director)
+      if (!item || !item.director_name) return res.status(404).json({ error: "Director not found" });
+      res.json({ Name: item.director_name, Bio: item.director_bio });
     })
     .catch(err => {
       console.error(err);
@@ -148,8 +127,6 @@ app.get('/directors/:Name', function (req, res) {
 });
 
 // Registration New User
-// Fix code according to documentation Validator
-//https://express-validator.github.io/docs/
 app.post('/users', [
   check('Username').isAlphanumeric(),
   check('Password').isLength({
@@ -157,41 +134,27 @@ app.post('/users', [
   }),
   check('Email').normalizeEmail().isEmail()
 ], (req, res) => {
-
-  // check validation object for errors
   const errors = validationResult(req);
 
-  if (!errors.isEmpty) {
+  if (!errors.isEmpty()) {
     return res.status(422).json({
-      errors: errors.array
+      errors: errors.array()
     });
   }
 
-  var hashedPassword = Users.hashPassword(req.body.Password);
-
-  Users.findOne({
-      Username: req.body.Username
-    }) //Search to see if a user with requested username already exists
+  Users.create({
+    Username: req.body.Username,
+    Password: req.body.Password,
+    Email: req.body.Email,
+    Birthday: req.body.Birthday
+  })
     .then(function (user) {
-      if (user) {
-        // If the user is found, send a response that is already exists
-        return res.status(400).send(req.body.Username + 'already exists');
-      } else {
-        Users.create({
-            Username: req.body.Username,
-            Password: hashedPassword,
-            Email: req.body.Email,
-            Birthday: req.body.Birthday
-          })
-          .then(function (user) {
-            res.status(201).json(user)
-          })
-          .catch(function (error) {
-            console.error(error);
-            res.status(500).send('Error: ' + error);
-          })
+      res.status(201).json(user)
+    })
+    .catch(function (error) {
+      if (error.message.includes('duplicate key') || error.message.includes('unique constraint')) {
+        return res.status(409).send(req.body.Username + ' already exists');
       }
-    }).catch(function (error) {
       console.error(error);
       res.status(500).send('Error: ' + error);
     });
@@ -199,10 +162,9 @@ app.post('/users', [
 
 // get specific user by username 
 app.get('/users/:Username', function (req, res) {
-  Users.findOne({
-      Username: req.params.Username
-    })
+  Users.findOne({ Username: req.params.Username })
     .then(function (user) {
+      if (!user) return res.status(404).json({ error: "User not found" });
       res.json(user)
     })
     .catch(function (error) {
@@ -211,10 +173,9 @@ app.get('/users/:Username', function (req, res) {
     });
 });
 
-
-// get all the users to figure it out the error null in get specific username
+// get all the users
 app.get('/users', function (_req, res) {
-  Users.find()
+  Users.findAll()
     .then(function (users) {
       res.status(201).json(users);
     })
@@ -224,105 +185,68 @@ app.get('/users', function (_req, res) {
     });
 });
 
-
-//Update Username
+// Update Username
 app.put('/users/:Username', [
-
   check('Username').isAlphanumeric(),
   check('Password').isLength({
     min: 5
   }),
   check('Email').normalizeEmail().isEmail()
 ], (req, res) => {
-  // check validation object for errors
   const errors = validationResult(req);
 
-  if (!errors.isEmpty) {
+  if (!errors.isEmpty()) {
     return res.status(422).json({
-      errors: errors.array
+      errors: errors.array()
     });
   }
 
-  const hashedPassword = Users.hashPassword(req.body.Password);
-
-  Users.findOneAndUpdate({
-      Username: req.params.Username
-    }, {
-      $set: {
-        Username: req.body.Username,
-        Password: hashedPassword,
-        Email: req.body.Email,
-        Birthday: req.body.Birthday
-
-      }
-    }, {
-      new: true
-    }, //This line makes sure that the updated document is returned
-    function (err, updatedUser) {
-      if (err) {
-        console.error(err);
-        res.status(500).send('Error: ' + err);
-      } else {
-        res.json(updatedUser)
-      }
+  Users.updateByUsername(req.params.Username, {
+    Username: req.body.Username,
+    Password: req.body.Password,
+    Email: req.body.Email,
+    Birthday: req.body.Birthday
+  })
+    .then(function (updatedUser) {
+      res.json(updatedUser);
     })
+    .catch(function (error) {
+      if (error.message.includes('duplicate key') || error.message.includes('unique constraint')) {
+        return res.status(409).send(req.body.Username + ' already exists');
+      }
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    });
 });
 
 // Add a movie to a user's list of favorites
 app.post('/users/:Username/movies/:MovieID', function (req, res) {
-  Users.findOneAndUpdate({
-      Username: req.params.Username
-    }, {
-      $push: {
-        FavoriteMovies: req.params.MovieID
-      }
-    }, {
-      new: true
-    },
-    function (err, updatedUser) {
-      if (err) {
-        console.error(err);
-        res.status(500).send('Error: ' + err);
-      } else {
-        res.json(updatedUser)
-      }
+  Users.addFavoriteMovie(req.params.Username, req.params.MovieID)
+    .then(function (updatedUser) {
+      res.json(updatedUser);
     })
+    .catch(function (err) {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
 
-// https://movie-flix-777.herokuapp.com/users/walter/FavoriteMovies/5d87ccc1fb9613cd73a2bb43
-// app.delete('/users/:username/movies/:MovieID', function (req, res) {
 // Remove a movie from a user's list of favorites
-// the s in Capital Letter was causing the issue to not delete the movie from FavoriteMovies
 app.delete('/users/:Username/FavoriteMovies/:MovieID', function (req, res) {
-  Users.findOneAndUpdate({
-      Username: req.params.Username
-    }, {
-      $pull: {
-        FavoriteMovies: req.params.MovieID
-      }
-    }, {
-      new: true
-    },
-    function (err, updatedUser) {
-      if (err) {
-        console.error(err);
-        res.status(500).send('Error: ' + err);
-      } else {
-        res.json(updatedUser)
-      }
+  Users.removeFavoriteMovie(req.params.Username, req.params.MovieID)
+    .then(function (updatedUser) {
+      res.json(updatedUser);
     })
-
+    .catch(function (err) {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
 
 // Delete a User Profile
 app.delete('/users/:Username', function (req, res) {
-  Users.findOneAndDelete({
-      Username: req.params.Username
-    })
-    .then(user => {
-      if (!user) {
-        return res.status(400).send(req.params.Username + ' was not found.');
-      }
+  Users.deleteByUsername(req.params.Username)
+    .then(function () {
       res.status(200).send(req.params.Username + ' was successfully deleted.');
     })
     .catch(err => {
@@ -331,6 +255,6 @@ app.delete('/users/:Username', function (req, res) {
     });
 });
 
-// Heroku + node.js error (Web process failed to bind to $PORT within 60 seconds of launch)
-// https://stackoverflow.com/questions/15693192/heroku-node-js-error-web-process-failed-to-bind-to-port-within-60-seconds-of
-app.listen(process.env.PORT || 5000);
+app.listen(process.env.PORT || 5000, () => {
+  console.log(`Server running on port ${process.env.PORT || 5000}`);
+});

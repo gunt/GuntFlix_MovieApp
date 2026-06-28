@@ -1,4 +1,8 @@
-var jwtSecret = 'your_jwt_secret'; // This has to be the same key used in the JWTStrategy
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
+
+// Use env variable for consistency; fall back if not set
+var jwtSecret = process.env.JWT_SECRET || 'guntflix_super_secret_2026'; // This has to be the same key used in the JWTStrategy
 var jwt = require('jsonwebtoken');
 const passport = require('passport');
 require('./passport'); // Your local passport file
@@ -47,7 +51,7 @@ module.exports = router => {
             if (error) {
               res.send(error);
             }
-            var token = generateJWTToken(user.toJSON());
+            var token = generateJWTToken(user);
             return res.json({
               user,
               token

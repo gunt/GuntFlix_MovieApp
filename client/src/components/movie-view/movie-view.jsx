@@ -17,10 +17,10 @@ function MovieView(props) {
   function submitLike(event) {
     event.preventDefault();
 
-    let userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
+    // Use relative path for Vercel deployment (backend serves at root)
     let usernameLocal = localStorage.getItem('user');
     let token = localStorage.getItem('token');
-    let url = `${userEndpoint}${usernameLocal}/movies/${movie._id}`;
+    let url = `/users/${usernameLocal}/movies/${movie._id}`;
     axios
       .post(
         url,

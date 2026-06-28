@@ -3,7 +3,7 @@ import React from 'react';
 import axios from 'axios';
 
 import MovieView from '../movie-view/movie-view';
-import { LoginView } from '../login-view/login-view';
+import LoginView from '../login-view/login-view';
 import DirectorView from '../director-view/director-view';
 import ProfileView from '../profile-view/profile-view';
 import GenreView from '../genre-view/genre-view';
@@ -21,6 +21,27 @@ import './main-view.scss';
 import { connect } from 'react-redux';
 import MoviesList from '../movies-list/movies-list';
 import { setMovies, setLoggedInUser } from '../../actions/actions';
+
+// Transform flat snake_case backend movie data into nested camelCase/PascalCase expected by frontend components
+function transformMovie(movie) {
+  if (!movie) return null;
+  return {
+    ...movie,
+    Title: movie.title || movie.Title,
+    Description: movie.description || movie.Description,
+    Genre: {
+      Name: movie.genre_name || movie.Genre?.Name || '',
+      Description: movie.genre_description || movie.Genre?.Description || ''
+    },
+    Director: {
+      Name: movie.director_name || movie.Director?.Name || '',
+      Bio: movie.director_bio || movie.Director?.Bio || '',
+      Birth: movie.director_birth || movie.Director?.Birth || null,
+      Death: movie.director_death || movie.Director?.Death || null
+    },
+    ImagePath: movie.image_path || movie.ImagePath || ''
+  };
+}
 
 export class MainView extends React.Component {
   constructor() {
@@ -46,9 +67,8 @@ export class MainView extends React.Component {
 
   getUser(token) {
     let username = localStorage.getItem('user');
-    const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
-    let userEndpoint = `${API_BASE_URL}/users`;
-    let url = `${userEndpoint}${username}`;
+    // Use relative path for Vercel deployment (backend serves at root)
+    let url = `/users/${username}`;
     axios
       .get(url, {
         headers: { Authorization: `Bearer ${token}` }
@@ -75,13 +95,15 @@ export class MainView extends React.Component {
   }
 
   getMovies(token) {
-    const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+    // Use relative path for Vercel deployment (backend serves at root)
     axios
-      .get(`${API_BASE_URL}/movies`, {
+      .get('/movies', {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {
-        this.props.setMovies(response.data);
+        // Transform flat snake_case backend data into nested camelCase/PascalCase expected by frontend components
+        const transformedMovies = (response.data || []).map(transformMovie);
+        this.props.setMovies(transformedMovies);
       })
       .catch(function(error) {
         console.log(error);
@@ -96,9 +118,9 @@ export class MainView extends React.Component {
 
   buttonLogout() {
     localStorage.removeItem('token');
-    localStorage.removeItem('username');
+    localStorage.removeItem('user');
     this.setState({
-      user: false,
+      user: null,
       selectedMovie: null
     });
     window.location.reload();

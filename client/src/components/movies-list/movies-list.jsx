@@ -40,8 +40,8 @@ function MoviesList(props) {
             // <Col key={m._id} xs={8} sm={8} md={6} lg={'auto'}>
             //   <MovieCard key={m.id} movie={m} />
             // </Col>
-            <Col key={m._id} xl={4} sm={6} md={4} xs={10}>
-              <MovieCard key={m._id} movie={m} />
+            <Col key={m.id} xl={4} sm={6} md={4} xs={10}>
+              <MovieCard key={m.id} movie={m} />
             </Col>
           ))}
         </Row>

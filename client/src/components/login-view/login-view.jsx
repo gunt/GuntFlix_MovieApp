@@ -1,75 +1,89 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Button, Form } from 'react-bootstrap';
 import axios from 'axios';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
-import './login-view.scss';
+class LoginView extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      password: ''
+    };
+  }
 
-export function LoginView(props) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  handleChange = (e) => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  }
 
-  const handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
-    const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
     
-    axios
-      .post(`${API_BASE_URL}/login`, {
-        Username: username,
-        Password: password
-      })
-      .then(response => {
-        const data = response.data;
-        props.onLoggedIn(data);
-      })
-      .catch(e => {
-        console.log('Please Register First');
-      });
-  };
+    // Use environment variable for API endpoint instead of hardcoded Heroku URL
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+    
+    axios.post(`${apiUrl}/login`, {
+      Username: this.state.username,
+      Password: this.state.password
+    })
+    .then(response => {
+      const { data } = response;
+      this.props.onLoggedIn(data);
+    })
+    .catch(error => {
+      console.log("Please Register First");
+      // Handle error appropriately
+    });
+  }
 
-  return (
-    <Container className='logContainer'>
-      <form>
-        <Form.Group controlId='formBasicUsername'>
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Enter username'
-            value={username}
-            onChange={e => setUsername(e.target.value)}
-          />
-        </Form.Group>
-
-        <Form.Group controlId='formBasicPassword'>
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Password'
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
-        </Form.Group>
-        <Button id='loginButton' size='m' variant='dark' onClick={handleSubmit}>
-          Log in
-        </Button>
-        <Form.Group controlId='formNewUser'>
-          <Form.Text className='newUsers'>
-            New user? click{' '}
-            <Link to={'/register'}>
-              {' '}
-              <Button variant='dark'>Here</Button>
-            </Link>{' '}
-            to sign up{' '}
-          </Form.Text>
-        </Form.Group>
-      </form>
-    </Container>
-  );
+  render() {
+    const { username, password } = this.state;
+    
+    return (
+      <div className="login-view">
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Group controlId="formBasicUsername">
+            <Form.Label>Username</Form.Label>
+            <Form.Control 
+              type="text" 
+              placeholder="Enter username"
+              name="username"
+              value={username}
+              onChange={this.handleChange} 
+            />
+          </Form.Group>
+          
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control 
+              type="password" 
+              placeholder="Password"
+              name="password"
+              value={password}
+              onChange={this.handleChange} 
+            />
+          </Form.Group>
+          
+          <Button 
+            id="loginButton" 
+            size="m" 
+            variant="dark" 
+            type="submit"
+          >
+            Log in
+          </Button>
+          
+          <Form.Group controlId="formNewUser">
+            <Form.Text className="newUsers">
+              New user? click 
+              <Button variant="dark" href="/register">Here</Button> 
+              to sign up
+            </Form.Text>
+          </Form.Group>
+        </Form>
+      </div>
+    );
+  }
 }
 
-LoginView.propTypes = {
-  onLoggedIn: PropTypes.func.isRequired
-};
+export default LoginView;

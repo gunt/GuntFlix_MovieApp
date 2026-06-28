@@ -42,8 +42,8 @@ class ProfileView extends React.Component {
 
   getUser(token) {
     let username = localStorage.getItem('user');
-    let userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
-    let url = `${userEndpoint}${username}`;
+    // Use relative path for Vercel deployment (backend serves at root)
+    let url = `/users/${username}`;
     axios
       .get(url, {
         headers: { Authorization: `Bearer ${token}` }
@@ -55,7 +55,7 @@ class ProfileView extends React.Component {
           password: response.data.Password,
           email: response.data.Email,
           birthday: response.data.Birthday,
-          favoriteMovies: response.data.FavoriteMovies
+          favoriteMovies: response.data.favorite_movies
         });
       })
       .catch(function(error) {
@@ -65,9 +65,9 @@ class ProfileView extends React.Component {
 
   deleteUser(event) {
     event.preventDefault();
-    let userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
+    // Use relative path for Vercel deployment (backend serves at root)
     let usernameLocal = localStorage.getItem('user');
-    let url = `${userEndpoint}${usernameLocal}`;
+    let url = `/users/${usernameLocal}`;
     axios
       .delete(url, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
@@ -87,7 +87,8 @@ class ProfileView extends React.Component {
   deleteMovie(event, favoriteMovie) {
     event.preventDefault();
     console.log(favoriteMovie);
-    let userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
+    const API_BASE_URL = process.env.REACT_APP_API_URL || '';
+    let userEndpoint = `${API_BASE_URL}/users/`;
     let usernameLocal = localStorage.getItem('user');
     let url = `${userEndpoint}${usernameLocal}/FavoriteMovies/${favoriteMovie}`;
     axios
@@ -108,9 +109,9 @@ class ProfileView extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    let userEndpoint = 'https://movie-flix-777.herokuapp.com/users/';
+    const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
     let usernameLocal = localStorage.getItem('user');
-    let url = `${userEndpoint}${usernameLocal}`;
+    let url = `${API_BASE_URL}/users/${usernameLocal}`;
     axios
       .put(
         url,
@@ -160,7 +161,7 @@ class ProfileView extends React.Component {
     let filterMoviesByFav = movies.map(m => {
       for (let i = 0; i < favoriteMovies.length; i++) {
         const favMov = favoriteMovies[i];
-        if (m._id === favMov) {
+        if (m.id === favMov) {
           filteredFavMovie.push(m);
         }
       }
@@ -210,7 +211,7 @@ class ProfileView extends React.Component {
           <h4 id='fav' className='label'>
             Favorite Movies:
           </h4>
-          ​
+          
           {movies && filteredFavMovie ? (
             <div className='value'>
               {filteredFavMovie.map(favoriteMovie => (
