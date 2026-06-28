@@ -28,7 +28,7 @@ function MovieView(props) {
           Username: usernameLocal
         },
         {
-          headers: { Authorization: `Bearer ${token}` }
+          headers: { Authorization: `${token}` }
         }
       )
       .then(response => {

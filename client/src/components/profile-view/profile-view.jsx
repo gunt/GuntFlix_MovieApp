@@ -46,7 +46,7 @@ class ProfileView extends React.Component {
     let url = `/users/${username}`;
     axios
       .get(url, {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `${token}` }
       })
       .then(response => {
         this.setState({
@@ -70,7 +70,7 @@ class ProfileView extends React.Component {
     let url = `/users/${usernameLocal}`;
     axios
       .delete(url, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+        headers: { Authorization: `${localStorage.getItem('token')}` }
       })
       .then(response => {
         alert('Your account has been deleted!');
@@ -93,7 +93,7 @@ class ProfileView extends React.Component {
     let url = `${userEndpoint}${usernameLocal}/FavoriteMovies/${favoriteMovie}`;
     axios
       .delete(url, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+        headers: { Authorization: `${localStorage.getItem('token')}` }
       })
       .then(response => {
         this.getUser(localStorage.getItem('token'));
@@ -122,7 +122,7 @@ class ProfileView extends React.Component {
           Birthday: this.state.birthdayForm
         },
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+          headers: { Authorization: `${localStorage.getItem('token')}` }
         }
       )
       .then(response => {
