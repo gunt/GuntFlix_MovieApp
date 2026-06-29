@@ -12,6 +12,19 @@ const mapStateToProps = state => {
   return { movies };
 };
 
+// Transform flat snake_case backend user data into camelCase/PascalCase expected by frontend components
+function transformUser(user) {
+  if (!user) return null;
+  return {
+    ...user,
+    Username: user.username || user.Username,
+    Password: user.password || user.Password,
+    Email: user.email || user.Email,
+    Birthday: user.birthday || user.Birthday,
+    favorite_movies: user.favoriteMovies || user.favorite_movies || []
+  };
+}
+
 //https://reactjs.org/docs/error-boundaries.html
 // * Where to Place Error Boundaries
 // great idea
@@ -46,16 +59,17 @@ class ProfileView extends React.Component {
     let url = `/users/${username}`;
     axios
       .get(url, {
-        headers: { Authorization: `${token}` }
+        headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {
+        const transformedUser = transformUser(response.data);
         this.setState({
           userData: response.data,
-          username: response.data.Username,
-          password: response.data.Password,
-          email: response.data.Email,
-          birthday: response.data.Birthday,
-          favoriteMovies: response.data.favorite_movies
+          username: transformedUser.Username || username,
+          password: '********',
+          email: transformedUser.Email,
+          birthday: transformedUser.Birthday,
+          favoriteMovies: transformedUser.favorite_movies || []
         });
       })
       .catch(function(error) {
@@ -70,7 +84,7 @@ class ProfileView extends React.Component {
     let url = `/users/${usernameLocal}`;
     axios
       .delete(url, {
-        headers: { Authorization: `${localStorage.getItem('token')}` }
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       })
       .then(response => {
         alert('Your account has been deleted!');
@@ -93,7 +107,7 @@ class ProfileView extends React.Component {
     let url = `${userEndpoint}${usernameLocal}/FavoriteMovies/${favoriteMovie}`;
     axios
       .delete(url, {
-        headers: { Authorization: `${localStorage.getItem('token')}` }
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       })
       .then(response => {
         this.getUser(localStorage.getItem('token'));
@@ -122,7 +136,7 @@ class ProfileView extends React.Component {
           Birthday: this.state.birthdayForm
         },
         {
-          headers: { Authorization: `${localStorage.getItem('token')}` }
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         }
       )
       .then(response => {
@@ -158,14 +172,17 @@ class ProfileView extends React.Component {
     console.log('log m', movies);
 
     let filteredFavMovie = [];
-    let filterMoviesByFav = movies.map(m => {
+    if (movies && Array.isArray(movies) && Array.isArray(favoriteMovies)) {
       for (let i = 0; i < favoriteMovies.length; i++) {
-        const favMov = favoriteMovies[i];
-        if (m.id === favMov) {
-          filteredFavMovie.push(m);
-        }
+        const favMovId = String(favoriteMovies[i]); // normalize to string comparison
+        movies.forEach(movie => {
+          if (String(movie._id || movie.id) === favMovId) {
+            filteredFavMovie.push(movie);
+          }
+        });
       }
-    });
+    }
+
     console.log(
       'TCL: ProfileView -> render -> filteredFavMovie',
       filteredFavMovie
@@ -215,11 +232,11 @@ class ProfileView extends React.Component {
           {movies && filteredFavMovie ? (
             <div className='value'>
               {filteredFavMovie.map(favoriteMovie => (
-                <div key={favoriteMovie._id}>
+                <div key={favoriteMovie._id || favoriteMovie.id}>
                   {favoriteMovie.Title}
                   <span
                     onClick={event =>
-                      this.deleteMovie(event, favoriteMovie._id)
+                      this.deleteMovie(event, favoriteMovie._id || favoriteMovie.id)
                     }
                   >
                     {' '}

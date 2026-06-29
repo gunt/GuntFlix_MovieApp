@@ -11,8 +11,8 @@ function MovieView(props) {
   const { movies, movieId } = props;
 
   if (!movies || !movies.length) return null;
-
-  const movie = movies.find(movie => movie._id == movieId);
+  const movie = movies.find(m => m._id === movieId);
+  if (!movie) return <div className='main-view'>Movie not found</div>;
 
   function submitLike(event) {
     event.preventDefault();
@@ -28,7 +28,7 @@ function MovieView(props) {
           Username: usernameLocal
         },
         {
-          headers: { Authorization: `${token}` }
+          headers: { Authorization: `Bearer ${token}` }
         }
       )
       .then(response => {

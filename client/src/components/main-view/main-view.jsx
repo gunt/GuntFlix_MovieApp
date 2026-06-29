@@ -71,7 +71,7 @@ export class MainView extends React.Component {
     let url = `/users/${username}`;
     axios
       .get(url, {
-        headers: { Authorization: `${token}` }
+        headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {
         this.props.setLoggedInUser(response.data);
@@ -98,7 +98,7 @@ export class MainView extends React.Component {
     // Use relative path for Vercel deployment (backend serves at root)
     axios
       .get('/movies', {
-        headers: { Authorization: `${token}` }
+        headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {
         // Transform flat snake_case backend data into nested camelCase/PascalCase expected by frontend components
