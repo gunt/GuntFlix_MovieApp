@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
 import axios from 'axios';
 
@@ -19,10 +20,8 @@ class LoginView extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     
-    // Use environment variable for API endpoint instead of hardcoded Heroku URL
-    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
-    
-    axios.post(`${apiUrl}/login`, {
+    // Use relative path for API (same server on Render)
+    axios.post('/login', {
       Username: this.state.username,
       Password: this.state.password
     })
@@ -76,7 +75,7 @@ class LoginView extends React.Component {
           <Form.Group controlId="formNewUser">
             <Form.Text className="newUsers">
               New user? click 
-              <Button variant="dark" href="/register">Here</Button> 
+              <Link to="/register">Here</Link> 
               to sign up
             </Form.Text>
           </Form.Group>
