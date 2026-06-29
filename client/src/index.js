@@ -20,5 +20,5 @@ class MyFlixApplication extends React.Component {
   }
 }
 
-const container = document.getElementsByClassName('app-container')[0];
+const container = document.getElementById('root');
 ReactDOM.render(React.createElement(MyFlixApplication), container);
