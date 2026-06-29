@@ -8,7 +8,7 @@ services:
     startCommand: node index.js
     envVars:
       - key: SUPABASE_URL
-        value: https://db.jknpkcxirqikdujhgcdl.supabase.co
+        value: https://jknpkcxirqikdujhgcdl.supabase.co
       - key: SUPABASE_KEY
         sync: false
       - key: JWT_SECRET
