@@ -9,12 +9,6 @@ if (!SUPABASE_URL || !SUPABASE_KEY) {
   process.exit(1);
 }
 
-// Disable realtime (realtime subscriptions not used — REST API only)
-// Avoids WebSocket dependency issues on Node < 22
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
-  realtime: {
-    enabled: false
-  }
-});
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 module.exports = { supabase };
